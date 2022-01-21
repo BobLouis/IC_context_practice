@@ -295,12 +295,12 @@ module LCD_CTRL(clk,
     end
     
     //busy
-    always @(negedge out_flag or posedge reset or cmd) begin
+    always @(negedge out_flag or posedge reset or posedge cmd_valid) begin
         if (reset)begin
             busy <= 0;
         end
         else begin
-            if ((cmd == 3'd0 || cmd == 3'd1 || cmd == 3'd4 || cmd == 3'd5 || cmd == 3'd6 || cmd == 3'd7) && cmd_valid)
+            if (cmd_valid)
             begin
                 busy <= 1;
             end
@@ -348,6 +348,7 @@ endmodule
     
     
     
+
 
 
 
