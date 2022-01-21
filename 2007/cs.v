@@ -29,7 +29,7 @@ module LCD_CTRL(clk,
     reg [7:0]out_buf[0:15];
     integer i;
     
-    always @(posedge clk or posedge reset or posedge cmd_valid) begin
+    always @(posedge clk or posedge reset) begin
         if (reset)begin
             state <= RST;
         end

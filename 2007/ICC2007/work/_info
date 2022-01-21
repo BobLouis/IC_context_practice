@@ -9,13 +9,13 @@ z2
 cModel Technology
 Z0 dC:/Users/bob90/verilog/IC_context_practice/2007/ICC2007
 vLCD_CTRL
-!s110 1642757766
+!s110 1642776891
 !i10b 1
-!s100 RhPknb@F42EL^:<kFJDgl0
-I4aMh19Xc6n25RNcc3=JP11
+!s100 :k9G3nV=`hYWb[Zc5co[m0
+IOoGjeDO3gjeGUi<^^GTXC2
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 R0
-w1642756752
+w1642776888
 8C:/Users/bob90/verilog/IC_context_practice/2007/cs.v
 FC:/Users/bob90/verilog/IC_context_practice/2007/cs.v
 L0 1
@@ -23,7 +23,7 @@ Z2 OV;L;10.6d;65
 r1
 !s85 0
 31
-!s108 1642757766.000000
+!s108 1642776891.000000
 !s107 C:/Users/bob90/verilog/IC_context_practice/2007/cs.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2007/cs.v|
 !i113 1

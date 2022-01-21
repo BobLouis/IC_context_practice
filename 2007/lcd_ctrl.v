@@ -160,4 +160,3 @@ module LCD_CTRL(clk,
             end
             
             endmodule
-
