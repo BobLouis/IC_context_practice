@@ -9,7 +9,7 @@ z2
 cModel Technology
 Z0 dC:/Users/bob90/verilog/IC_context_practice/2007/ICC2007
 vLCD_CTRL
-!s110 1642756764
+!s110 1642757766
 !i10b 1
 !s100 RhPknb@F42EL^:<kFJDgl0
 I4aMh19Xc6n25RNcc3=JP11
@@ -23,7 +23,7 @@ Z2 OV;L;10.6d;65
 r1
 !s85 0
 31
-!s108 1642756762.000000
+!s108 1642757766.000000
 !s107 C:/Users/bob90/verilog/IC_context_practice/2007/cs.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2007/cs.v|
 !i113 1
@@ -31,13 +31,13 @@ Z3 o-work work
 Z4 tCvgOpt 0
 n@l@c@d_@c@t@r@l
 vtest
-!s110 1642643655
+!s110 1642757767
 !i10b 1
-!s100 >HB<XXA?Y=OLT>5e9NBPL2
-IS5M3GIUzo[V3Jbogjok:V2
+!s100 `;41[kn[3F=Wj[Lf^4=6:2
+IV30<7@H8ZO@mY^eGd8ja23
 R1
 R0
-w1175484952
+w1642757755
 8C:/Users/bob90/verilog/IC_context_practice/2007/testfixture.v
 FC:/Users/bob90/verilog/IC_context_practice/2007/testfixture.v
 L0 8
@@ -45,7 +45,7 @@ R2
 r1
 !s85 0
 31
-!s108 1642643655.000000
+!s108 1642757767.000000
 !s107 C:/Users/bob90/verilog/IC_context_practice/2007/testfixture.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2007/testfixture.v|
 !i113 1
