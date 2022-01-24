@@ -9,13 +9,13 @@ z2
 cModel Technology
 dC:/intelFPGA_pro/18.1
 vLCD_CTRL
-!s110 1643008300
+!s110 1643010611
 !i10b 1
-!s100 7AJ=Zie:QV^JhYobTklX`0
-I__MN?GBF;MWAQc8oAc?ZH1
+!s100 oQTUjL]VV8k`>]0gCn;dO2
+In`R5<lbTB4UPWDf^MXaYH0
 Z0 VDg1SIo80bB@j0V0VzS_@n1
 Z1 dC:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008
-w1643008287
+w1643010608
 8C:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008/cs.v
 FC:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008/cs.v
 L0 1
@@ -23,7 +23,7 @@ Z2 OV;L;10.6d;65
 r1
 !s85 0
 31
-!s108 1643008300.000000
+!s108 1643010611.000000
 !s107 C:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008/cs.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008/cs.v|
 !i113 1
@@ -31,7 +31,7 @@ Z3 o-work work
 Z4 tCvgOpt 0
 n@l@c@d_@c@t@r@l
 vtest
-!s110 1643008294
+!s110 1643010166
 !i10b 1
 !s100 Jj2oF:4Wi4<`lSVRZ_cdV2
 ICZcjTPgN`i>LP8aKfH5_S3
@@ -45,7 +45,7 @@ R2
 r1
 !s85 0
 31
-!s108 1643008294.000000
+!s108 1643010166.000000
 !s107 C:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008/testfixture.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008/testfixture.v|
 !i113 1

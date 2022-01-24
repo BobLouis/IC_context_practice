@@ -14,7 +14,7 @@ module LCD_CTRL(clk,
     output  [7:0]   dataout;
     output  reg        output_valid;
     output  reg        busy;
-    
+    reg [10:0]output_count;
     reg [2:0] state; //4 states for "idle", "load", "prepare display", "display"
     reg zoom; //0 for fit 1 for zoom in
     reg [7:0] img_buf[107:0];
@@ -24,13 +24,11 @@ module LCD_CTRL(clk,
     reg [1:0] offsetx,offsety;
     reg [1:0] rotate;
     //0 => no rotate    1 => rotate right   2 => rotate 180  3 => rotate left  
-    wire [3:0] fitmap;
     wire [7:0] fitxy;
     wire  [7:0] zoomxy;
     
     assign dataout = (zoom == 0) ? img_buf[fitxy] : img_buf[zoomxy];
-    assign fitmap  = offsetx + offsety*4;
-    assign fitxy   = fitIndex[fitmap];
+    assign fitxy   = fitIndex[offsetx + offsety*4];
     assign zoomxy  = l + offsetx + (w+offsety)*12;
     
     always @(negedge reset) begin
@@ -60,6 +58,7 @@ module LCD_CTRL(clk,
             zoom   <= 0;
             busy   <= 0;
             rotate <= 0;
+            output_count <= 0;
         end
         else
         begin
@@ -148,7 +147,7 @@ module LCD_CTRL(clk,
                                     l <= l + 1;
                             end
                         end
-                        else if(cmd == 4'd7 && zoom == 1) //shift down
+                        else if(cmd == 4'd8 && zoom == 1) //shift down
                         begin
                             if(rotate == 0)
                             begin
@@ -211,6 +210,7 @@ module LCD_CTRL(clk,
             end
             else if(state == 3) //display 
             begin
+                output_count <= output_count + 1;
                 if(rotate == 0)
                 begin
                     if(offsetx == 3)

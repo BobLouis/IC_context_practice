@@ -1,0 +1,28 @@
+Mon Jan 24 15:49:55 CST 2022
+Trace back: invalid command name "::AbstractDataset::simDataset4"
+    while executing
+"$nameSpace fullname $id"
+    (procedure "ObjectsTreeView::fullname" line 6)
+    invoked from within
+"ObjectsTreeView::fullname $id"
+    (procedure "QObjects::FormatGet" line 39)
+    invoked from within
+"QObjects::FormatGet .main_pane.objects Wc7pD4 0"
+    ("eval" body line 1)
+    invoked from within
+"eval $itk_option(-fmtgetcommand) $raw"
+    (object "::.main_pane.objects.interior.cs.body.tree" method "::vsimwidgets::Hierarchy::get" body line 10)
+    invoked from within
+"$tree get $idx"
+    (procedure "QObjects::BalloonText" line 9)
+    invoked from within
+"QObjects::BalloonText .main_pane.objects.interior.cs.body.tree .main_pane.objects.interior.cs.body.tree.lwchildsite.clipper.canvas.sfchildsite.col2 15..."
+    ("eval" body line 1)
+    invoked from within
+"eval $_d($w,getmsgcb) $w $x $y $X $Y"
+    (procedure "mtiBalloon::_popUp" line 21)
+    invoked from within
+"mtiBalloon::_popUp .main_pane.objects.interior.cs.body.tree.lwchildsite.clipper.canvas.sfchildsite.col2 15 375 985 594"
+    ("after" script)
+  <2:C:/intelFPGA_pro/18.1/modelsim_ase/win32aloem/tk8.6/bgerror.tcl:106: ::tkerror {invalid command name "::AbstractDataset::simDataset4"}
+  <1:eval:1: ::tk::dialog::error::bgerror {invalid command name "::AbstractDataset::simDataset4"}
