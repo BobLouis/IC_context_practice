@@ -1,0 +1,52 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008
+vhuffman
+!s110 1643128576
+!i10b 1
+!s100 Fc^>dIMFnleIk1_1Pb4VZ2
+Iz[bUcD;UAVcQQHia3>kK?3
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 dC:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based
+w1643128573
+8C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/sol.v
+FC:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/sol.v
+L0 1
+Z2 OV;L;10.6d;65
+r1
+!s85 0
+31
+!s108 1643128576.000000
+!s107 C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/sol.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/sol.v|
+!i113 1
+Z3 o-work work
+Z4 tCvgOpt 0
+vtb
+!s110 1643124320
+!i10b 1
+!s100 E9CI9g:TZQSm[h@c95ehK0
+I3[96]Z3;Q013bK;I8dj190
+R0
+R1
+w1643124311
+8C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/tb.v
+FC:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/tb.v
+L0 35
+R2
+r1
+!s85 0
+31
+!s108 1643124320.000000
+!s107 C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/tb.v|
+!i113 1
+R3
+R4
