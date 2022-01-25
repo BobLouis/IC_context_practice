@@ -73,17 +73,17 @@ module LCD_CTRL(clk,
                         3'd2:
                         begin
                             out_flag <= 1'b1;
-                            mag    <= 1'b1;
-                            x_addr <= 3'd2;
-                            y_addr <= 3'd2;
+                            mag      <= 1'b1;
+                            x_addr   <= 3'd2;
+                            y_addr   <= 3'd2;
                         end
                         
                         3'd3:
                         begin
                             out_flag <= 1'b1;
-                            mag    <= 1'b0;
-                            x_addr <= 3'd0;
-                            y_addr <= 3'd0;
+                            mag      <= 1'b0;
+                            x_addr   <= 3'd0;
+                            y_addr   <= 3'd0;
                         end
                         3'd4://right shift
                         begin
@@ -146,10 +146,10 @@ module LCD_CTRL(clk,
                         begin
                             out_flag <= 1'b1;
                         end
-                        if (out_flag && out_pc == 7'd17)
-                        begin
-                            out_flag <= 0;
-                        end
+                            if (out_flag && out_pc == 7'd17)
+                            begin
+                                out_flag <= 0;
+                            end
                     end
                     3'd2://zoom in
                     begin
@@ -236,7 +236,7 @@ module LCD_CTRL(clk,
                 else
                 begin
                     output_valid <= 0;
-                    out_pc <= 1;
+                    out_pc       <= 1;
                 end
             end
         endcase
@@ -348,9 +348,9 @@ endmodule
     
     
     
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    

@@ -5,4 +5,11 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 2
 Top level modules:
 	test
 
+} {} {}} C:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008/cs.v {1 {vlog -work work -stats=none C:/Users/bob90/verilog/IC_context_practice/2008/ICC2008_priliminary_grad_cell_data/icc2008/cs.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module LCD_CTRL
+
+Top level modules:
+	LCD_CTRL
+
 } {} {}}
