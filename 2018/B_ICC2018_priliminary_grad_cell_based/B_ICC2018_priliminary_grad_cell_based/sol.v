@@ -18,7 +18,9 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
     reg [2:0] tmp_rnk;
     reg [7:0] arr [1:6];
     reg [2:0] rnk[1:6];
-    integer i, j;
+    reg [5:0] rnk_flag;
+    reg [7:0] pc;
+    integer i, j, k;
 
     always @(posedge clk) begin
         if(reset)
@@ -38,6 +40,7 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
             HC4  <= 0;
             HC5  <= 0;
             HC6  <= 0;
+            rnk_flag <= 0;
         end
         else
         begin
@@ -66,10 +69,42 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
             begin
                 CNT_valid <= 1'b1;
                 state <= 3'd2;
+                pc <= 1;
             end
             else if(state == 3'd2)//calcualte tree
             begin
                 CNT_valid <= 0;
+                if(arr[pc] == CNT1 && !rnk_flag[0])
+                begin
+                    rnk[pc] <= 1;
+                    rnk_flag[0] <= 1;
+                end
+                else if(arr[pc] == CNT2 && !rnk_flag[1])
+                begin
+                    rnk[pc] <= 2;
+                    rnk_flag[1] <= 1;
+                end
+                else if(arr[pc] == CNT3 && !rnk_flag[2])
+                begin
+                    rnk[pc] <= 3;
+                    rnk_flag[2] <= 1;
+                end
+                else if(arr[pc] == CNT4 && !rnk_flag[3])
+                begin
+                    rnk[pc] <= 4;
+                    rnk_flag[3] <= 1;
+                end
+                else if(arr[pc] == CNT5 && !rnk_flag[4])
+                begin
+                    rnk[pc] <= 5;
+                    rnk_flag[4] <= 1;
+                end
+                else if(arr[pc] == CNT6 && !rnk_flag[5])
+                begin
+                    rnk[pc] <= 6;
+                    rnk_flag[5] <= 1;
+                end
+                pc <= pc + 1;
             end
         end
     end
@@ -78,15 +113,6 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
     
     always @* begin
 
-        if(reset)
-        begin
-            rnk[1] = 1;
-            rnk[2] = 2;
-            rnk[3] = 3;
-            rnk[4] = 4;
-            rnk[5] = 5;
-            rnk[6] = 6;
-        end
         arr[1] = CNT1;
         arr[2] = CNT2;
         arr[3] = CNT3;
@@ -100,14 +126,9 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
                     tmp_arr       = arr[j];
                     arr[j]     = arr[j + 1];
                     arr[j + 1] = tmp_arr;
-
-                    tmp_rnk = rnk[j];
-                    rnk[j] = rnk[j+1];
-                    rnk[j+1] = tmp_rnk;
                 end 
             end
         end
-
     end
 endmodule
 

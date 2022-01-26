@@ -1,11 +1,4 @@
-C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/sol.v {1 {vlog -work work -stats=none C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/sol.v
-Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
--- Compiling module huffman
-
-Top level modules:
-	huffman
-
-} {} {}} C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/tb.v {1 {vlog -work work -stats=none C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/tb.v
+C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/tb.v {1 {vlog -work work -stats=none C:/Users/bob90/verilog/IC_context_practice/2018/B_ICC2018_priliminary_grad_cell_based/B_ICC2018_priliminary_grad_cell_based/tb.v
 Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
 -- Compiling module tb
 
