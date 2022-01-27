@@ -156,6 +156,10 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
                     if(arr[pc] < stk - arr[pc])
                     begin
                         code[rnk[pc]] <= code[rnk[pc]]<<1 | 1;
+                        for(k = pc + 1;k < 7;k = k + 1)
+                        begin
+                            code[rnk[k]] <= code[rnk[k]]<<1;
+                        end
                     end
                     else
                     begin
@@ -180,6 +184,10 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
                     if(arr[pc] < stk - arr[pc])
                     begin
                         code[rnk[pc]] <= code[rnk[pc]]<<1 | 1;
+                        for(k = pc + 1;k < 7;k = k + 1)
+                        begin
+                            code[rnk[k]] <= code[rnk[k]]<<1;
+                        end
                     end
                     else
                     begin
@@ -204,6 +212,10 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
                     if(arr[pc] < stk - arr[pc])
                     begin
                         code[rnk[pc]] <= code[rnk[pc]]<<1 | 1;
+                        for(k = pc + 1;k < 7;k = k + 1)
+                        begin
+                            code[rnk[k]] <= code[rnk[k]]<<1;
+                        end
                     end
                     else
                     begin
