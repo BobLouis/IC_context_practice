@@ -20,6 +20,8 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
     reg [2:0] rnk[1:6];
     reg [5:0] rnk_flag;
     reg [7:0] pc;
+    reg [4:0] code[1:6];
+    reg [6:0] stk;
     integer i, j, k;
 
     always @(posedge clk) begin
@@ -41,6 +43,11 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
             HC5  <= 0;
             HC6  <= 0;
             rnk_flag <= 0;
+            stk <= 7'd100;
+            for(k = 1;k < 7;k = k + 1)
+            begin
+                code[k] <= 0;
+            end
         end
         else
         begin
@@ -108,8 +115,145 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
                 if(pc == 7)
                 begin
                     state <= state + 1;
-                    pc <= 0;
+                    pc <= 1;
                 end
+            end
+            else if(state == 3'd3) //decoding tree
+            begin
+                if(pc == 1)
+                begin
+                    case (rnk[pc])
+                        1:M1 <= 8'b00000001;
+                        2:M2 <= 8'b00000001;
+                        3:M3 <= 8'b00000001;
+                        4:M4 <= 8'b00000001;
+                        5:M5 <= 8'b00000001;
+                        6:M6 <= 8'b00000001;
+                    endcase
+                    if(arr[pc] < stk - arr[pc])
+                    begin
+                        code[rnk[pc]] <= 1;
+                    end
+                    else
+                    begin
+                        for(k = pc + 1;k < 7;k = k + 1)
+                        begin
+                            code[rnk[k]] <= 1;
+                        end
+                    end
+                    stk <= stk - arr[pc];
+                end
+                else if(pc == 2)
+                begin
+                    case (rnk[pc])
+                        1:M1 <= 8'b00000011;
+                        2:M2 <= 8'b00000011;
+                        3:M3 <= 8'b00000011;
+                        4:M4 <= 8'b00000011;
+                        5:M5 <= 8'b00000011;
+                        6:M6 <= 8'b00000011;
+                    endcase
+                    if(arr[pc] < stk - arr[pc])
+                    begin
+                        code[rnk[pc]] <= code[rnk[pc]]<<1 | 1;
+                    end
+                    else
+                    begin
+                        code[rnk[pc]] <= code[rnk[pc]]<<1;
+                        for(k = pc + 1;k < 7;k = k + 1)
+                        begin
+                            code[rnk[k]] <= code[rnk[k]]<<1 | 1;
+                        end
+                    end
+                    stk <= stk - arr[pc];
+                end
+                else if(pc == 3)
+                begin
+                    case (rnk[pc])
+                        1:M1 <= 8'b00000111;
+                        2:M2 <= 8'b00000111;
+                        3:M3 <= 8'b00000111;
+                        4:M4 <= 8'b00000111;
+                        5:M5 <= 8'b00000111;
+                        6:M6 <= 8'b00000111;
+                    endcase
+                    if(arr[pc] < stk - arr[pc])
+                    begin
+                        code[rnk[pc]] <= code[rnk[pc]]<<1 | 1;
+                    end
+                    else
+                    begin
+                        code[rnk[pc]] <= code[rnk[pc]]<<1;
+                        for(k = pc + 1;k < 7;k = k + 1)
+                        begin
+                            code[rnk[k]] <= code[rnk[k]]<<1 | 1;
+                        end
+                    end
+                    stk <= stk - arr[pc];
+                end
+                else if(pc == 4)
+                begin
+                    case (rnk[pc])
+                        1:M1 <= 8'b00001111;
+                        2:M2 <= 8'b00001111;
+                        3:M3 <= 8'b00001111;
+                        4:M4 <= 8'b00001111;
+                        5:M5 <= 8'b00001111;
+                        6:M6 <= 8'b00001111;
+                    endcase
+                    if(arr[pc] < stk - arr[pc])
+                    begin
+                        code[rnk[pc]] <= code[rnk[pc]]<<1 | 1;
+                    end
+                    else
+                    begin
+                        code[rnk[pc]] <= code[rnk[pc]]<<1;
+                        for(k = pc + 1;k < 7;k = k + 1)
+                        begin
+                            code[rnk[k]] <= code[rnk[k]]<<1 | 1;
+                        end
+                    end
+                    stk <= stk - arr[pc];
+                end
+                else if(pc == 5)
+                begin
+                    case (rnk[pc])
+                        1:M1 <= 8'b00011111;
+                        2:M2 <= 8'b00011111;
+                        3:M3 <= 8'b00011111;
+                        4:M4 <= 8'b00011111;
+                        5:M5 <= 8'b00011111;
+                        6:M6 <= 8'b00011111;
+                    endcase
+                    case (rnk[pc+1])
+                        1:M1 <= 8'b00011111;
+                        2:M2 <= 8'b00011111;
+                        3:M3 <= 8'b00011111;
+                        4:M4 <= 8'b00011111;
+                        5:M5 <= 8'b00011111;
+                        6:M6 <= 8'b00011111;
+                    endcase
+                    
+                    code[rnk[pc]] <= code[rnk[pc]]<<1;
+                    code[rnk[pc+1]] <= code[rnk[pc+1]]<<1 | 1;
+                    state <= state + 1;
+                end
+                pc <= pc + 1;
+            end
+            else if(state == 3'd4)//output code
+            begin
+                HC1 <= code[1];
+                HC2 <= code[2];
+                HC3 <= code[3];
+                HC4 <= code[4];
+                HC5 <= code[5];
+                HC6 <= code[6];
+                code_valid <= 1;
+                state <= state + 1;
+            end
+            else if(state == 3'd5)
+            begin
+                code_valid <= 0;
             end
         end
     end
@@ -135,5 +279,9 @@ module huffman(clk, reset, gray_valid, gray_data, CNT_valid, CNT1, CNT2, CNT3, C
             end
         end
     end
+
+    
 endmodule
+
+
 
