@@ -4,7 +4,7 @@
 `define CLK_period 10                // CLK period. DO NOT modify period
 `define SDFFILE "./huffman_syn.sdf"  // Modify your sdf file name
 
-`define tb2
+`define tb3
 
 `ifdef tb1
   `define PAT "./pattern1.dat"
