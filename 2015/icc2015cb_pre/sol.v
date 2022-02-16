@@ -1,7 +1,6 @@
 `define abs(a,b) ((a>b)? a-b:b-a)
 `define is_in_circle(c) \
 ({1'b0,square[`abs(x,cx[c])]}+{1'b0,square[`abs(y,cy[c])]} <= square[cr[c]])
- ==  ==  ==  = 
 `define abs(a,b) ((a>b) ? (a-b) : (b-a))
 `define in_circle(k) (`abs(x,cx[k])*`abs(x,cx[k]) + `abs(y,cy[k])*`abs(y,cy[k]) <= cr[k]*cr[k])
 module SET (clk,
