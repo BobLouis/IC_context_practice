@@ -1,7 +1,7 @@
 `timescale 1ns/10ps
-`define SDFFILE    "SET_syn.sdf"    // Modify your sdf file name here
-`define cycle 10.0
-`define terminate_cycle 2000000 // Modify your terminate ycle here
+`define SDFFILE    "../SYN/SET_syn.sdf"    // Modify your sdf file name here
+`define cycle 25.0
+`define terminate_cycle 400000 // Modify your terminate cycle here
 
 
 module testfixture1;
@@ -33,26 +33,22 @@ reg [7:0] expected_mem [0:63];
 initial $sdf_annotate(`SDFFILE, u_set);
 `endif
 
-initial begin
-	$fsdbDumpfile("SET.fsdb");
-	$fsdbDumpvars;
-end
 
 initial begin
 	$timeformat(-9, 1, " ns", 9); //Display time in nanoseconds
 	$readmemh(`central_pattern, central_pat_mem);
 	$readmemh(`radius_pattern, radius_pat_mem);
-`ifdef MD1
-	$display("--------------------------- [ Function 1. Simulation START !! ] ---------------------------");
+`ifdef MD0
+	$display("--------------------------- [ Mode=2'b00 Simulation START !! ] ---------------------------");
 	$readmemh(`candidate_result_Length, expected_mem);
-`elsif MD2
-	$display("--------------------------- [ Function 2. Simulation START !! ] ---------------------------");
+`elsif MD1
+	$display("--------------------------- [ Mode=2'b01 Simulation START !! ] ---------------------------");
 	$readmemh(`candidate_united_result_Length, expected_mem);
-`elsif MD3
-	$display("--------------------------- [ Function 3. Simulation START !! ] ---------------------------");
+`elsif MD2
+	$display("--------------------------- [ Mode=2'b10 Simulation START !! ] ---------------------------");
 	$readmemh(`candidate_diff_result_Length, expected_mem);
-`elsif MD4
-	$display("--------------------------- [ Function 4. Simulation START !! ] ---------------------------");
+`elsif MD3
+	$display("--------------------------- [ MODE 4. Simulation START !! ] ---------------------------");
 	$readmemh(`candidate_intersect_result_Length, expected_mem);
 `else
 	$display("============================================================================");
@@ -61,7 +57,7 @@ initial begin
 	$display("|  Simulation can't be initialized !!                                      |");
 	$display("|                                                                          |");
 	$display("============================================================================");
-	#1 $finish;
+	#1 $stop;
 `endif
 end
 
@@ -73,13 +69,13 @@ always #(`cycle/2) clk = ~clk;
 
 
 initial begin
-`ifdef MD1
+`ifdef MD0
 	mode = 2'b00;
-`elsif MD2
+`elsif MD1
 	mode = 2'b01;
-`elsif MD3
+`elsif MD2
 	mode = 2'b10;
-`elsif MD4
+`elsif MD3
 	mode = 2'b11;
 `else
 	mode = 2'bx;
@@ -106,15 +102,17 @@ for (k = 0; k<=63; k = k+1) begin
 			central = central_pat_mem[k];                
       			radius = radius_pat_mem[k];
 			#(`cycle) en = 0;
-			wait (valid == 1);
-          	//Wait for signal output
-          	@(negedge clk);
+			
+				wait (valid == 1);
+          		//Wait for signal output
+          		@(negedge clk); begin
 				if (candidate === expected_mem[k])
 					$display(" Pattern %d at Mode %d is PASS !", k, mode);
 				else begin
 					$display(" Pattern %d at Mode %d is FAIL !. Expected candidate = %d, but the Response candidate = %d !! ", k, mode, expected_mem[k], candidate);
 					err_cnt = err_cnt + 1;
 				end
+			end
 end
 #(`cycle*2); 
      $display("--------------------------- Simulation FINISH !!---------------------------");
@@ -128,7 +126,7 @@ end
 	$display("\n \\(^o^)/ CONGRATULATIONS!!  The simulation result is PASS!!!\n");
 	$display("============================================================================");
 	end
-$finish;
+$stop;
 end
 
 
@@ -137,7 +135,7 @@ always@(err_cnt) begin
 	$display("============================================================================");
      	$display("\n (>_<) FAIL!! The simulation FAIL result is too many ! Please check your code @@ \n");
 	$display("============================================================================");
-	$finish;
+	$stop;
 	end
 end
 
@@ -147,7 +145,7 @@ initial begin
 	$display("--------------------------- (/`n`)/ ~#  There was something wrong with your code !! ---------------------------"); 
 	$display("--------------------------- The simulation can't finished!!, Please check it !!! ---------------------------"); 
 	$display("================================================================================================================");
-	$finish;
+	$stop;
 end
 
 
