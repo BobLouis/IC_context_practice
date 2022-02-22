@@ -7,47 +7,46 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-dC:/intelFPGA_pro/18.1
+Z0 dC:/Users/bob90/verilog/IC_context_practice/2015/testbench
 vSET
-Z0 !s110 1645370678
+!s110 1645532126
 !i10b 1
-!s100 DmA>d6G8hMjZTe_W3cP5n2
-I;m1V^nBdd1U;`LH^^nBl43
+!s100 ^=K?aLOJ;De5T216DBg[T0
+I9VO5zN`6]OMXbT[F^RZn_0
 Z1 VDg1SIo80bB@j0V0VzS_@n1
-Z2 dC:/Users/bob90/verilog/IC_context_practice/2015/testbench
-w1645370664
-8C:/Users/bob90/verilog/IC_context_practice/2015/testbench/SET.v
-FC:/Users/bob90/verilog/IC_context_practice/2015/testbench/SET.v
-L0 4
-Z3 OV;L;10.6d;65
+R0
+w1645532109
+8SET.v
+FSET.v
+L0 5
+Z2 OV;L;10.6d;65
 r1
 !s85 0
 31
-Z4 !s108 1645370678.000000
-!s107 C:/Users/bob90/verilog/IC_context_practice/2015/testbench/SET.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2015/testbench/SET.v|
+!s108 1645532126.000000
+!s107 SET.v|
+!s90 -reportprogress|300|SET.v|
 !i113 1
-Z5 o-work work
-Z6 tCvgOpt 0
+Z3 tCvgOpt 0
 n@s@e@t
 vtestfixture1
-R0
+!s110 1645532192
 !i10b 1
-!s100 Td;EM8oZT[>UC]o[_M<Fi1
-I3T38l<`^:e6R?8goGBKZU0
+!s100 Fm>omX<:BX_n4N4P]3FGM0
+I=M`foSz3A7an90dRQbi_E0
 R1
-R2
-w1645370325
-8C:/Users/bob90/verilog/IC_context_practice/2015/testbench/testfixture.v
-FC:/Users/bob90/verilog/IC_context_practice/2015/testbench/testfixture.v
+R0
+w1645528100
+8testfixture.v
+Ftestfixture.v
 L0 7
-R3
+R2
 r1
 !s85 0
 31
-R4
-!s107 C:/Users/bob90/verilog/IC_context_practice/2015/testbench/testfixture.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2015/testbench/testfixture.v|
+!s108 1645532192.000000
+!s107 testfixture.v|
+!s90 -reportprogress|300|testfixture.v|+define+MD2|
 !i113 1
-R5
-R6
+!s92 +define+MD2
+R3
