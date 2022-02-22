@@ -1,5 +1,6 @@
 `define abs(a,b) ((a>b) ? (a-b) : (b-a))
-`define is_in_circle(j) ((`abs(x,cx[j]) * `abs(x,cx[j]) + `abs(y,cy[j]) * `abs(y,cy[j])) <= cr[j] * cr[j])
+`define is_in_circle(j) ({1'b0, {3'd0,`abs(x,cx[j])}*abs(x,cx[j]) + {1'b0, {3'd0,`abs(y,cy[j])}*`abs(y,cy[j])}} <= {3'd0,cr[j]}*cr[j])
+
 
 module SET ( clk , rst, en, central, radius, mode, busy, valid, candidate );
 
