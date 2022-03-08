@@ -31,7 +31,7 @@ module  CONV(
 
 	reg [3:0] current_state;   		
 	reg [3:0] next_state;
-	reg [3:0] counter_rd;
+	reg [3:0] counterRead;
 	reg [5:0] col,row;
 
 	reg signed [43:0] convTemp, resultTemp; //2^20 * 2^20 * 2^4 = 2^44  2^4 > 9 pixel
@@ -63,6 +63,79 @@ module  CONV(
 	end
 
 
+	//col row
+	always @(posedge clk or posedge reset) begin
+		if(reset) {row,col} <= 12'd0;
+		else if(current_state == WRITE_L0)begin
+			if(col == 6'd63)begin
+				col <= 6'd0;
+				row <= row + 1;
+			end
+			else col <= + 6'd1;
+		end
+		else if(current_state == WRITE_L1)begin
+			if(col == 62) begin
+				col <= 0;
+				row <= row + 2;
+			end
+			else col <= col + 6'd2;
+		end
+	end
+
+	//state 
+	always @(posedge clk or posedge reset) begin
+		if(reset) current_state <= IDLE;
+		else current_state <= next_state;
+	end
+
+	always @(*) begin
+		case(current_state)
+			IDLE:
+				begin
+					if(ready == 1) next_state = READ_CONV;
+					else next_state = IDLE;
+				end
+			READ_CONV:
+				begin
+					if(counterRead == 12) next_state = WRITE_L0;
+					else next_state = READ_CONV;
+				end
+			WRITE_L0:
+				begin
+					if(col == 63 && row == 63) next_state = READ_L0;
+					else next_state = READ_CONV;
+				end
+			READ_L0:
+				begin
+					if(counterRead == 5) next_state = WRITE_L1;
+					else next_state = READ_L0;
+				end
+			WRITE_L1:
+				begin
+					if(col == 62 && row == 62) next_state = FINISH;
+					else next_state = READ_L0; 
+				end
+			FINISH:
+				begin
+					next_state = FINISH;
+				end
+		endcase
+	end
+
+	//counter
+	always @(posedge clk posedge reset) begin
+		if(reset) counterRead <= 4'd0;
+		else if(counterRead == 4'd13) counterRead <= 0;
+		else if(counterRead == 5 && (current_state == READ_L0)) counterRead <= 0;
+		else if(current_state == READ_CONV || current_state == READ_L0) counterRead <= counterRead + 1;
+	end
+
+	//Busy
+	always @(posedge clk or posedge reset) begin
+		if(reset) busy <= 0;
+		else if(ready == 1) busy <= 1;
+		else if(current_state == FINISH) busy <= 0;
+	end
 endmodule
 
 
