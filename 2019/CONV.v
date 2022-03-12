@@ -35,7 +35,7 @@ module  CONV(
 	reg [5:0] col,row;
 
 	reg signed [43:0] convTemp, resultTemp; //2^20 * 2^20 * 2^4 = 2^44  2^4 > 9 pixel
-	reg signed [20:0]roundTemp;
+	reg signed [20:0] roundTemp;
 
 	reg signed [19:0] kernelTemp;
 	reg signed [19:0] BiasTemp;
@@ -136,6 +136,64 @@ module  CONV(
 		else if(ready == 1) busy <= 1;
 		else if(current_state == FINISH) busy <= 0;
 	end
+
+	//cwr 
+	always @(posedge clk or posedge reset) begin
+		if(reset) cwr <= 0;
+		else if(next_state == WRITE_L0) cwr <= 1;
+		else if(next_state == WRITE_L1) cwr <= 1;
+		else cer <= 0 ;
+	end
+	//crd
+	always @(posedge clk or posedge reset) begin
+		if(reset) crd <= 0;
+		else if(current_state == READ_L0) crd <= 1;
+		else crd <= 0;
+	end
+
+	//csel
+	always @(posedge clk or posedge reset) begin
+		if(reset) csel <= 0;
+		else if(current_state == WRITE_L1) csel <= 3'b011;
+		else if(current_state == WRITE_L0) csel <= 3'b001;
+		else if(current_state == READ_L0) csel <=  3'b001;
+	end
+
+	//iaddr
+	always @(posedge clk or posedge reset) begin
+		if(reset) iaddr <= 0;
+		else if(current_state == READ_CONV)
+		begin
+			case (counterRead)
+				4'd0: iaddr <= {row-6'd1,col-6'd1}; 
+				4'd1: iaddr <= {row-6'd1,col}; 
+				4'd2: iaddr <= {row-6'd1,col+6'd1}; 
+				4'd3: iaddr <= {row,col-6'd1}; 
+				4'd4: iaddr <= {row,col}; 
+				4'd5: iaddr <= {row,col+6'd1}; 
+				4'd6: iaddr <= {row+6'd1,col-6'd1}; 
+				4'd7: iaddr <= {row+6'd1,col}; 
+				4'd8: iaddr <= {row-6'd1,col+6'd1}; 
+				default: iaddr <= 0;
+			endcase
+		end
+	end
+	//caddr_rd
+	always @(posedge clk or posedge reset) begin
+		if(reset) caddr_rd <= 0;
+		else if(current_state == READ_L0)
+		begin
+			case(counterRead)
+			4'd0: caddr_rd <= {row,col};
+			4'd1: caddr_rd <= {row,col+1};
+			4'd2: caddr_rd <= {row+1,col};
+			4'd3: caddr_rd <= {row+1,col+1};
+			default : caddr_rd <= 0;
+			endcase
+		end
+	end
+
+
 endmodule
 
 
