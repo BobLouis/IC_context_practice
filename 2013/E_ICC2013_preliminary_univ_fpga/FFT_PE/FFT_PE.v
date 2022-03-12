@@ -72,7 +72,6 @@ output reg fft_pe_valid;
 			fft_pe_valid <= 1;
 			fft_a <= {a_tmp_real[15:0],a_tmp_img[15:0]};
 			fft_b <= {b_tmp_real[31:16],b_tmp_img[31:16]};
-
 		end
 		else fft_pe_valid<= 0;
 	end
