@@ -9,45 +9,45 @@ z2
 cModel Technology
 dC:/Users/bob90/verilog/IC_design_Homework/HW1
 vCONV
-!s110 1647270830
+Z0 !s110 1647342072
 !i10b 1
 !s100 Z9@]NjA`f8KjhWdUi]TF;2
 I[5?l0_^kjHEYSe_QIN^c]3
-Z0 VDg1SIo80bB@j0V0VzS_@n1
-Z1 dC:/Users/bob90/verilog/IC_context_practice/2019
-w1647270166
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/bob90/verilog/IC_context_practice/2019
+Z3 w1647341962
 8C:/Users/bob90/verilog/IC_context_practice/2019/CONV.v
 FC:/Users/bob90/verilog/IC_context_practice/2019/CONV.v
 L0 4
-Z2 OV;L;10.6d;65
+Z4 OV;L;10.6d;65
 r1
 !s85 0
 31
-Z3 !s108 1647270830.000000
+Z5 !s108 1647342072.000000
 !s107 C:/Users/bob90/verilog/IC_context_practice/2019/CONV.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2019/CONV.v|
 !i113 1
-Z4 o-work work
-Z5 tCvgOpt 0
+Z6 o-work work
+Z7 tCvgOpt 0
 n@c@o@n@v
 vtestfixture
-!s110 1647270831
+R0
 !i10b 1
 !s100 iazSm7L_nQh@X=:FFj>d_3
 I<Y8NSah[oA6nAHoF`Dz;;2
-R0
 R1
-w1647230399
+R2
+R3
 8C:/Users/bob90/verilog/IC_context_practice/2019/testfixture.v
 FC:/Users/bob90/verilog/IC_context_practice/2019/testfixture.v
 L0 11
-R2
+R4
 r1
 !s85 0
 31
-R3
+R5
 !s107 C:/Users/bob90/verilog/IC_context_practice/2019/testfixture.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2019/testfixture.v|
 !i113 1
-R4
-R5
+R6
+R7
