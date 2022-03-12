@@ -4,30 +4,30 @@
 module  CONV(
 	input		clk,
 	input		reset,
-	output		busy,	
+	output reg  busy,	
 	input		ready,	
 			
-	output		iaddr,
+	output reg [11:0]	iaddr,
 	input		idata,	
 	
-	output	 	cwr,
-	output	 	caddr_wr,
-	output	 	cdata_wr,
+	output reg cwr,
+	output reg [11:0]caddr_wr,
+	output reg [19:0]cdata_wr,
 	
-	output	 	crd,
-	output	 	caddr_rd,
+	output reg  crd,
+	output reg	[11:0]caddr_rd,
 	input	 	cdata_rd,
 	
-	output	 	csel
+	output	reg [2:0] 	csel
 	);
-	reg busy;
-	reg [11:0] iaddr;   		//read L0 data
-	reg crd;					//enable caddr rd
-	reg [11:0] caddr_rd; 		//read L1 data
-	reg cwr;					//enable cdata write
-	reg signed [19:0] cdata_wr; 
-	reg [11:0] caddr_wr;		//write L1 data
-	reg [2:0] csel;				//cell select 0=> no 1=>L0 3=>L1
+	// reg busy;
+	//reg [11:0] iaddr;   		//read L0 data
+	// reg crd;					//enable caddr rd
+	// reg [11:0] caddr_rd; 		//read L1 data
+	// reg cwr;					//enable cdata write
+	// reg signed [19:0] cdata_wr; 
+	// reg [11:0] caddr_wr;		//write L1 data
+	// reg [2:0] csel;				//cell select 0=> no 1=>L0 3=>L1
 
 	reg [3:0] current_state;   		
 	reg [3:0] next_state;
@@ -35,10 +35,10 @@ module  CONV(
 	reg [5:0] col,row;
 
 	reg signed [43:0] convTemp, resultTemp; //2^20 * 2^20 * 2^4 = 2^44  2^4 > 9 pixel
-	reg signed [20:0] roundTemp;
+	wire signed [20:0] roundTemp;
 
 	reg signed [19:0] kernelTemp;
-	reg signed [19:0] BiasTemp;
+	//reg signed [19:0] BiasTemp;
 
 	parameter IDLE = 4'd0;
 	parameter READ_CONV = 4'd1;
@@ -123,7 +123,7 @@ module  CONV(
 	end
 
 	//counter
-	always @(posedge clk posedge reset) begin
+	always @(posedge clk or posedge reset) begin
 		if(reset) counterRead <= 4'd0;
 		else if(counterRead == 4'd13) counterRead <= 0;
 		else if(counterRead == 5 && (current_state == READ_L0)) counterRead <= 0;
@@ -142,7 +142,7 @@ module  CONV(
 		if(reset) cwr <= 0;
 		else if(next_state == WRITE_L0) cwr <= 1;
 		else if(next_state == WRITE_L1) cwr <= 1;
-		else cer <= 0 ;
+		else cwr <= 0 ;
 	end
 	//crd
 	always @(posedge clk or posedge reset) begin
@@ -185,15 +185,70 @@ module  CONV(
 		begin
 			case(counterRead)
 			4'd0: caddr_rd <= {row,col};
-			4'd1: caddr_rd <= {row,col+1};
-			4'd2: caddr_rd <= {row+1,col};
-			4'd3: caddr_rd <= {row+1,col+1};
+			4'd1: caddr_rd <= {row,col+6'd1};
+			4'd2: caddr_rd <= {row+6'd1,col};
+			4'd3: caddr_rd <= {row+6'd1,col+6'd1};
 			default : caddr_rd <= 0;
 			endcase
 		end
 	end
 
+	always @(posedge clk or posedge reset) begin
+		if(reset) caddr_wr <= 0;
+		else if(next_state == WRITE_L0) caddr_wr <= {row,col};
+		else if(next_state == WRITE_L1) caddr_wr <= {row[5:1],col[5:1]};//divide by 2
+	end
 
+	assign roundTemp = resultTemp[35:15]+resultTemp[15];
+
+	//cdata_wr
+	always @(posedge clk or posedge reset) begin
+		if(reset) cdata_wr <= 0;
+		else if(next_state == WRITE_L0)
+		begin
+			if(roundTemp[20]) cdata_wr <= 0; //negative Relu
+			else cdata_wr <= roundTemp[20:1];
+		end
+		else if(current_state == READ_L0) //find the max data dugin READ_L0
+		begin
+			if(counterRead == 1) cdata_wr <= cdata_rd;
+			else
+			begin
+				if(cdata_rd > cdata_wr) cdata_wr <= cdata_rd;
+				else cdata_wr <= cdata_wr;
+			end
+		end
+	end
+
+	reg signed [19:0] idataTemp;
+	wire signed [43:0] mulTemp;
+	assign mulTemp = kernelTemp * idataTemp;
+
+	//conv && bias
+	always @(posedge clk or posedge reset) begin
+		idataTemp <= (reset) ? 0:idata;
+	end
+
+	always @(posedge clk or posedge reset) begin
+		if(reset) convTemp <= 0;
+		else if(current_state == READ_CONV)
+		begin
+			case(counterRead)
+				4'd0: convTemp <= 0;
+				4'd2: if(col != 0 && row != 0) convTemp <= mulTemp;
+				4'd3: if(row != 0) convTemp <= convTemp + mulTemp;
+				4'd4: if(row != 0 && col != 63) convTemp <= convTemp + mulTemp;
+
+				4'd5: if(col != 0) convTemp <= convTemp + mulTemp;
+				4'd6: convTemp <= convTemp + mulTemp;
+				4'd7: if(col != 63) convTemp <= convTemp + mulTemp;
+				4'd8: if(row != 0 && col != 63) convTemp <= convTemp + mulTemp;
+				4'd9: if(row != 63) convTemp <= convTemp + mulTemp;
+				4'd10: if(row != 63 && col != 63) convTemp <= convTemp + mulTemp;
+				4'd11: resultTemp <= convTemp + $signed({20'h01310,16'hd0});
+			endcase
+		end
+	end
 endmodule
 
 
