@@ -8,18 +8,40 @@ z2
 !i10f 100
 cModel Technology
 dC:/Users/bob90/verilog/IC_context_practice/2019
+vFFT_PE
+!s110 1647345335
+!i10b 1
+!s100 kRojVoCBM4JD8mIGhg@Al2
+I9a[700Cm^gSn>K5z;Cde^2
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 dC:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE
+w1647345330
+8C:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/FFT_PE.v
+FC:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/FFT_PE.v
+L0 1
+Z2 OV;L;10.6d;65
+r1
+!s85 0
+31
+!s108 1647345335.000000
+!s107 C:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/FFT_PE.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/FFT_PE.v|
+!i113 1
+Z3 o-work work
+Z4 tCvgOpt 0
+n@f@f@t_@p@e
 vtestfixture0
 !s110 1647342319
 !i10b 1
 !s100 o6kY0Pm7`SO[I=c1zUZUI3
 I<]e3AR:@DZ];boELjgRTN1
-VDg1SIo80bB@j0V0VzS_@n1
-dC:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE
+R0
+R1
 w1647230398
 8C:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/testfixture0.v
 FC:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/testfixture0.v
 L0 11
-OV;L;10.6d;65
+R2
 r1
 !s85 0
 31
@@ -27,5 +49,5 @@ r1
 !s107 C:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/testfixture0.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/testfixture0.v|
 !i113 1
-o-work work
-tCvgOpt 0
+R3
+R4

@@ -1,0 +1,8 @@
+C:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/testfixture0.v {1 {vlog -work work -stats=none C:/Users/bob90/verilog/IC_context_practice/2013/E_ICC2013_preliminary_univ_fpga/FFT_PE/testfixture0.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module testfixture0
+
+Top level modules:
+	testfixture0
+
+} {} {}}
