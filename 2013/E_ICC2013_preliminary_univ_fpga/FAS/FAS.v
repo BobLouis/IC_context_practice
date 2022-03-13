@@ -15,7 +15,7 @@ module FAS(
        input	rst;
        input	data_valid;
        input signed [15:0] data;
-       output reg[31:0] fft_d0,fft_d1,fft_d2,fft_d3,fft_d4,fft_d5,fft_d6,fft_d7, 
+       output [31:0] fft_d0,fft_d1,fft_d2,fft_d3,fft_d4,fft_d5,fft_d6,fft_d7, 
                      fft_d8,fft_d9,fft_d10,fft_d11,fft_d12,fft_d13,fft_d14,fft_d15;
        output reg fft_valid;
        output reg done;                      
@@ -49,6 +49,231 @@ module FAS(
        reg [15:0]buf_13;
        reg [15:0]buf_14;
        reg [15:0]buf_15;
+
+       wire [15:0]pe_1_0_a;
+       wire [15:0]pe_1_0_b;
+       wire [15:0]pe_1_1_a;
+       wire [15:0]pe_1_1_b;
+       wire [15:0]pe_1_2_a;
+       wire [15:0]pe_1_2_b;
+       wire [15:0]pe_1_3_a;
+       wire [15:0]pe_1_3_b;
+       wire [15:0]pe_1_4_a;
+       wire [15:0]pe_1_4_b;
+       wire [15:0]pe_1_5_a;
+       wire [15:0]pe_1_5_b;
+       wire [15:0]pe_1_6_a;
+       wire [15:0]pe_1_6_b;
+       wire [15:0]pe_1_7_a;
+       wire [15:0]pe_1_7_b;
+
+       wire [15:0]pe_2_0_a;
+       wire [15:0]pe_2_0_b;
+       wire [15:0]pe_2_1_a;
+       wire [15:0]pe_2_1_b;
+       wire [15:0]pe_2_2_a;
+       wire [15:0]pe_2_2_b;
+       wire [15:0]pe_2_3_a;
+       wire [15:0]pe_2_3_b;
+       wire [15:0]pe_2_4_a;
+       wire [15:0]pe_2_4_b;
+       wire [15:0]pe_2_5_a;
+       wire [15:0]pe_2_5_b;
+       wire [15:0]pe_2_6_a;
+       wire [15:0]pe_2_6_b;
+       wire [15:0]pe_2_7_a;
+       wire [15:0]pe_2_7_b;
+
+       wire [15:0]pe_3_0_a;
+       wire [15:0]pe_3_0_b;
+       wire [15:0]pe_3_1_a;
+       wire [15:0]pe_3_1_b;
+       wire [15:0]pe_3_2_a;
+       wire [15:0]pe_3_2_b;
+       wire [15:0]pe_3_3_a;
+       wire [15:0]pe_3_3_b;
+       wire [15:0]pe_3_4_a;
+       wire [15:0]pe_3_4_b;
+       wire [15:0]pe_3_5_a;
+       wire [15:0]pe_3_5_b;
+       wire [15:0]pe_3_6_a;
+       wire [15:0]pe_3_6_b;
+       wire [15:0]pe_3_7_a;
+       wire [15:0]pe_3_7_b;
+
+       wire [15:0]pe_4_0_a;
+       wire [15:0]pe_4_0_b;
+       wire [15:0]pe_4_1_a;
+       wire [15:0]pe_4_1_b;
+       wire [15:0]pe_4_2_a;
+       wire [15:0]pe_4_2_b;
+       wire [15:0]pe_4_3_a;
+       wire [15:0]pe_4_3_b;
+       wire [15:0]pe_4_4_a;
+       wire [15:0]pe_4_4_b;
+       wire [15:0]pe_4_5_a;
+       wire [15:0]pe_4_5_b;
+       wire [15:0]pe_4_6_a;
+       wire [15:0]pe_4_6_b;
+       wire [15:0]pe_4_7_a;
+       wire [15:0]pe_4_7_b;
+
+
+       assign fft_d0 = {}
+
+
+       FFT_PE pe_1_1(.clk(clk), .rst(rst), .a(buff_0), .b(buff_8), .power(0), .ab_valid(1)
+                     , .fft_a(pe_1_0_a), .fft_b(pe_1_0_b), .fft_pe_valid());
+
+       FFT_PE pe_1_2(.clk(clk), .rst(rst), .a(buff_1), .b(buff_9), .power(1), .ab_valid(1)
+                     , .fft_a(pe_1_1_a), .fft_b(pe_1_1_b), .fft_pe_valid());
+
+       FFT_PE pe_1_3(.clk(clk), .rst(rst), .a(buff_2), .b(buff_10), .power(2), .ab_valid(1)
+                     , .fft_a(pe_1_2_a), .fft_b(pe_1_2_b), .fft_pe_valid());
+
+       FFT_PE pe_1_4(.clk(clk), .rst(rst), .a(buff_3), .b(buff_11), .power(3), .ab_valid(1)
+                     , .fft_a(pe_1_3_a), .fft_b(pe_1_3_b), .fft_pe_valid());
+
+       FFT_PE pe_1_5(.clk(clk), .rst(rst), .a(buff_4), .b(buff_12), .power(4), .ab_valid(1)
+                     , .fft_a(pe_1_4_a), .fft_b(pe_1_4_b), .fft_pe_valid());
+
+       FFT_PE pe_1_6(.clk(clk), .rst(rst), .a(buff_5), .b(buff_13), .power(5), .ab_valid(1)
+                     , .fft_a(pe_1_5_a), .fft_b(pe_1_5_b), .fft_pe_valid());
+
+       FFT_PE pe_1_7(.clk(clk), .rst(rst), .a(buff_6), .b(buff_14), .power(6), .ab_valid(1)
+                     , .fft_a(pe_1_6_a), .fft_b(pe_1_6_b), .fft_pe_valid());
+
+       FFT_PE pe_1_8(.clk(clk), .rst(rst), .a(buff_7), .b(buff_15), .power(7), .ab_valid(1)
+                     , .fft_a(pe_1_7_a), .fft_b(pe_1_7_b), .fft_pe_valid());
+
+
+       FFT_PE pe_2_1(.clk(clk), .rst(rst), .a(pe_1_0_a), .b(pe_1_4_a), .power(0), .ab_valid(1)
+                     , .fft_a(pe_2_0_a), .fft_b(pe_2_0_b), .fft_pe_valid());
+
+       FFT_PE pe_2_2(.clk(clk), .rst(rst), .a(pe_1_1_a), .b(pe_1_5_a), .power(2), .ab_valid(1)
+                     , .fft_a(pe_2_1_a), .fft_b(pe_2_1_b), .fft_pe_valid());
+
+       FFT_PE pe_2_3(.clk(clk), .rst(rst), .a(pe_1_2_a), .b(pe_1_6_a), .power(4), .ab_valid(1)
+                     , .fft_a(pe_2_2_a), .fft_b(pe_2_2_b), .fft_pe_valid());
+
+       FFT_PE pe_2_4(.clk(clk), .rst(rst), .a(pe_1_3_a), .b(pe_1_7_a), .power(6), .ab_valid(1)
+                     , .fft_a(pe_2_3_a), .fft_b(pe_2_3_b), .fft_pe_valid());
+
+       FFT_PE pe_2_5(.clk(clk), .rst(rst), .a(pe_1_0_b), .b(pe_1_4_b), .power(0), .ab_valid(1)
+                     , .fft_a(pe_2_4_a), .fft_b(pe_2_4_b), .fft_pe_valid());
+
+       FFT_PE pe_2_6(.clk(clk), .rst(rst), .a(pe_1_1_b), .b(pe_1_5_b), .power(2), .ab_valid(1)
+                     , .fft_a(pe_2_5_a), .fft_b(pe_2_5_b), .fft_pe_valid());
+
+       FFT_PE pe_2_7(.clk(clk), .rst(rst), .a(pe_1_2_b), .b(pe_1_6_b), .power(4), .ab_valid(1)
+                     , .fft_a(pe_2_6_a), .fft_b(pe_2_6_b), .fft_pe_valid());
+
+       FFT_PE pe_2_8(.clk(clk), .rst(rst), .a(pe_1_3_b), .b(pe_1_7_b), .power(6), .ab_valid(1)
+                     , .fft_a(pe_2_7_a), .fft_b(pe_2_7_b), .fft_pe_valid());
+
+
+       FFT_PE pe_3_1(.clk(clk), .rst(rst), .a(pe_2_0_a), .b(pe_2_2_a), .power(0), .ab_valid(1)
+                     , .fft_a(pe_3_0_a), .fft_b(pe_3_0_b), .fft_pe_valid());
+
+       FFT_PE pe_3_2(.clk(clk), .rst(rst), .a(pe_2_1_a), .b(pe_2_3_a), .power(4), .ab_valid(1)
+                     , .fft_a(pe_3_1_a), .fft_b(pe_3_1_b), .fft_pe_valid());
+
+       FFT_PE pe_3_3(.clk(clk), .rst(rst), .a(pe_2_0_b), .b(pe_2_2_b), .power(0), .ab_valid(1)
+                     , .fft_a(pe_3_2_a), .fft_b(pe_3_2_b), .fft_pe_valid());
+
+       FFT_PE pe_3_4(.clk(clk), .rst(rst), .a(pe_2_1_b), .b(pe_2_3_b), .power(4), .ab_valid(1)
+                     , .fft_a(pe_3_3_a), .fft_b(pe_3_3_b), .fft_pe_valid());
+                     
+       FFT_PE pe_3_5(.clk(clk), .rst(rst), .a(pe_2_4_a), .b(pe_2_6_a), .power(0), .ab_valid(1)
+                     , .fft_a(pe_3_4_a), .fft_b(pe_3_4_b), .fft_pe_valid());
+
+       FFT_PE pe_3_6(.clk(clk), .rst(rst), .a(pe_2_5_a), .b(pe_2_7_a), .power(4), .ab_valid(1)
+                     , .fft_a(pe_3_5_a), .fft_b(pe_3_5_b), .fft_pe_valid());
+
+       FFT_PE pe_3_7(.clk(clk), .rst(rst), .a(pe_2_4_b), .b(pe_2_6_b), .power(0), .ab_valid(1)
+                     , .fft_a(pe_3_6_a), .fft_b(pe_3_6_b), .fft_pe_valid());
+
+       FFT_PE pe_3_8(.clk(clk), .rst(rst), .a(pe_2_5_b), .b(pe_2_7_b), .power(4), .ab_valid(1)
+                     , .fft_a(pe_3_7_a), .fft_b(pe_3_7_b), .fft_pe_valid());
+
+
+       FFT_PE pe_4_1(.clk(clk), .rst(rst), .a(pe_3_0_a), .b(pe_3_1_a), .power(0), .ab_valid(1)
+                     , .fft_a(pe_4_0_a), .fft_b(pe_4_0_b), .fft_pe_valid());
+
+       FFT_PE pe_4_2(.clk(clk), .rst(rst), .a(pe_3_0_b), .b(pe_3_1_b), .power(0), .ab_valid(1)
+                     , .fft_a(pe_4_1_a), .fft_b(pe_4_1_b), .fft_pe_valid());
+
+       FFT_PE pe_4_3(.clk(clk), .rst(rst), .a(pe_3_2_a), .b(pe_3_3_a), .power(0), .ab_valid(1)
+                     , .fft_a(pe_4_2_a), .fft_b(pe_4_2_b), .fft_pe_valid());
+
+       FFT_PE pe_4_4(.clk(clk), .rst(rst), .a(pe_3_2_b), .b(pe_3_3_b), .power(0), .ab_valid(1)
+                     , .fft_a(pe_4_3_a), .fft_b(pe_4_3_b), .fft_pe_valid());
+                     
+       FFT_PE pe_4_5(.clk(clk), .rst(rst), .a(pe_3_4_a), .b(pe_3_5_a), .power(0), .ab_valid(1)
+                     , .fft_a(pe_4_4_a), .fft_b(pe_4_4_b), .fft_pe_valid());
+
+       FFT_PE pe_4_6(.clk(clk), .rst(rst), .a(pe_3_4_b), .b(pe_3_5_b), .power(0), .ab_valid(1)
+                     , .fft_a(pe_4_5_a), .fft_b(pe_4_5_b), .fft_pe_valid());
+
+       FFT_PE pe_4_7(.clk(clk), .rst(rst), .a(pe_3_6_a), .b(pe_3_7_a), .power(0), .ab_valid(1)
+                     , .fft_a(pe_4_6_a), .fft_b(pe_4_6_b), .fft_pe_valid());
+
+       FFT_PE pe_4_8(.clk(clk), .rst(rst), .a(pe_3_6_b), .b(pe_3_7_b), .power(0), .ab_valid(1)
+                     , .fft_a(pe_4_7_a), .fft_b(pe_4_7_b), .fft_pe_valid());
+
+       assign fft_d0 = pe_4_0_a;
+       assign fft_d1 = pe_4_4_a;
+       assign fft_d2 = pe_4_2_a;
+       assign fft_d3 = pe_4_6_a;
+       assign fft_d4 = pe_4_1_a;
+       assign fft_d5 = pe_4_5_a;
+       assign fft_d6 = pe_4_3_a;
+       assign fft_d7 = pe_4_7_a;
+       assign fft_d8 = pe_4_0_b;
+       assign fft_d9 = pe_4_4_b;
+       assign fft_d10 = pe_4_2_b;
+       assign fft_d11 = pe_4_6_b;
+       assign fft_d12 = pe_4_1_b;
+       assign fft_d13 = pe_4_5_b;
+       assign fft_d14 = pe_4_3_b;
+       assign fft_d15 = pe_4_7_b;
+       wire  [32:0]abs[0:15];  
+       wire  [32:0]abs[0] =  fft_0[31:16]  * fft_0[31:16]  + fft_d0[15:0]  * fft_d0[15:0]  ;
+       wire  [32:0]abs[1] =  fft_1[31:16]  * fft_1[31:16]  + fft_d1[15:0]  * fft_d1[15:0]  ;
+       wire  [32:0]abs[2] =  fft_2[31:16]  * fft_2[31:16]  + fft_d2[15:0]  * fft_d2[15:0]  ;
+       wire  [32:0]abs[3] =  fft_3[31:16]  * fft_3[31:16]  + fft_d3[15:0]  * fft_d3[15:0]  ;
+       wire  [32:0]abs[4] =  fft_4[31:16]  * fft_4[31:16]  + fft_d4[15:0]  * fft_d4[15:0]  ;
+       wire  [32:0]abs[5] =  fft_5[31:16]  * fft_5[31:16]  + fft_d5[15:0]  * fft_d5[15:0]  ;
+       wire  [32:0]abs[6] =  fft_6[31:16]  * fft_6[31:16]  + fft_d6[15:0]  * fft_d6[15:0]  ;
+       wire  [32:0]abs[7] =  fft_7[31:16]  * fft_7[31:16]  + fft_d7[15:0]  * fft_d7[15:0]  ;
+       wire  [32:0]abs[8] =  fft_8[31:16]  * fft_8[31:16]  + fft_d8[15:0]  * fft_d8[15:0]  ;
+       wire  [32:0]abs[9] =  fft_9[31:16]  * fft_9[31:16]  + fft_d9[15:0]  * fft_d9[15:0]  ;
+       wire  [32:0]abs[10] = fft_10[31:16] * fft_10[31:16] + fft_d10[15:0] * fft_d10[15:0] ;
+       wire  [32:0]abs[11] = fft_11[31:16] * fft_11[31:16] + fft_d11[15:0] * fft_d11[15:0] ;
+       wire  [32:0]abs[12] = fft_12[31:16] * fft_12[31:16] + fft_d12[15:0] * fft_d12[15:0] ;
+       wire  [32:0]abs[13] = fft_13[31:16] * fft_13[31:16] + fft_d13[15:0] * fft_d13[15:0] ;
+       wire  [32:0]abs[14] = fft_14[31:16] * fft_14[31:16] + fft_d14[15:0] * fft_d14[15:0] ;
+       wire  [32:0]abs[15] = fft_15[31:16] * fft_15[31:16] + fft_d15[15:0] * fft_d15[15:0] ;
+       
+       wire [3:0]ana_1_1 = (abs_0 > abs_1) ? 0 : 1;
+       wire [3:0]ana_1_2 = (abs_2 > abs_3) ? 2 : 3;
+       wire [3:0]ana_1_3 = (abs_4 > abs_5) ? 4 : 5;
+       wire [3:0]ana_1_4 = (abs_6 > abs_7) ? 6 : 7;
+       wire [3:0]ana_1_5 = (abs_8 > abs_9) ? 8 : 9;
+       wire [3:0]ana_1_6 = (abs_10 > abs_11) ? 10 : 11;
+       wire [3:0]ana_1_7 = (abs_12 > abs_13) ? 12 : 13;
+       wire [3:0]ana_1_8 = (abs_14 > abs_15) ? 14 : 15;
+
+       wire [3:0]ana_2_1 = (abs[ana_1_1] > abs[ana_1_2]) ? ana_1_1 : ana_1_2;
+       wire [3:0]ana_2_2 = (abs[ana_1_3] > abs[ana_1_4]) ? ana_1_3 : ana_1_4;
+       wire [3:0]ana_2_3 = (abs[ana_1_5] > abs[ana_1_6]) ? ana_1_5 : ana_1_6;
+       wire [3:0]ana_2_4 = (abs[ana_1_7] > abs[ana_1_8]) ? ana_1_7 : ana_1_8;
+       
+       wire [3:0]ana_3_1 = (abs[ana_2_1] > abs[ana_2_2]) ? ana_2_1 : ana_2_2;
+       wire [3:0]ana_3_2 = (abs[ana_2_3] > abs[ana_2_4]) ? ana_2_3 : ana_2_4;
+
+       wire [3:0]ana_4 = (ana_3_1 > ana_3_2) ? ana_3_1 : ana_3_2;
+
 
        always @(posedge clk or posedge rst) begin
               if(rst == 1) state <= IDLE;
