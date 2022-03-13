@@ -154,8 +154,8 @@ module  CONV(
 	//csel
 	always @(posedge clk or posedge reset) begin
 		if(reset) csel <= 0;
-		else if(current_state == WRITE_L1) csel <= 3'b011;
-		else if(current_state == WRITE_L0) csel <= 3'b001;
+		else if(next_state == WRITE_L1) csel <= 3'b011;
+		else if(next_state == WRITE_L0) csel <= 3'b001;
 		else if(current_state == READ_L0) csel <=  3'b001;
 	end
 
