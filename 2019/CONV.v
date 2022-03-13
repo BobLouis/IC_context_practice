@@ -8,7 +8,7 @@ module  CONV(
 	input		ready,	
 			
 	output reg [11:0]	iaddr,
-	input		idata,	
+	input	[19:0]	idata,	
 	
 	output reg cwr,
 	output reg [11:0]caddr_wr,
@@ -16,7 +16,7 @@ module  CONV(
 	
 	output reg  crd,
 	output reg	[11:0]caddr_rd,
-	input	 	cdata_rd,
+	input	[19:0] 	cdata_rd,
 	
 	output	reg [2:0] 	csel
 	);
@@ -71,7 +71,7 @@ module  CONV(
 				col <= 6'd0;
 				row <= row + 1;
 			end
-			else col <= + 6'd1;
+			else col <= col+ 6'd1;
 		end
 		else if(current_state == WRITE_L1)begin
 			if(col == 62) begin
@@ -242,7 +242,8 @@ module  CONV(
 				4'd5: if(col != 0) convTemp <= convTemp + mulTemp;
 				4'd6: convTemp <= convTemp + mulTemp;
 				4'd7: if(col != 63) convTemp <= convTemp + mulTemp;
-				4'd8: if(row != 0 && col != 63) convTemp <= convTemp + mulTemp;
+
+				4'd8: if(row != 63 && col != 0) convTemp <= convTemp + mulTemp;
 				4'd9: if(row != 63) convTemp <= convTemp + mulTemp;
 				4'd10: if(row != 63 && col != 63) convTemp <= convTemp + mulTemp;
 				4'd11: resultTemp <= convTemp + $signed({20'h01310,16'hd0});
