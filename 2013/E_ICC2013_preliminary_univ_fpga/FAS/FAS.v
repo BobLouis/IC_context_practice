@@ -33,192 +33,190 @@ module FAS(
        reg [15:0] buff[0:159];
 
 
-       reg [15:0]buf_0;
-       reg [15:0]buf_1;
-       reg [15:0]buf_2;
-       reg [15:0]buf_3;
-       reg [15:0]buf_4;
-       reg [15:0]buf_5;
-       reg [15:0]buf_6;
-       reg [15:0]buf_7;
-       reg [15:0]buf_8;
-       reg [15:0]buf_9;
-       reg [15:0]buf_10;
-       reg [15:0]buf_11;
-       reg [15:0]buf_12;
-       reg [15:0]buf_13;
-       reg [15:0]buf_14;
-       reg [15:0]buf_15;
+       reg [31:0]buf_0;
+       reg [31:0]buf_1;
+       reg [31:0]buf_2;
+       reg [31:0]buf_3;
+       reg [31:0]buf_4;
+       reg [31:0]buf_5;
+       reg [31:0]buf_6;
+       reg [31:0]buf_7;
+       reg [31:0]buf_8;
+       reg [31:0]buf_9;
+       reg [31:0]buf_10;
+       reg [31:0]buf_11;
+       reg [31:0]buf_12;
+       reg [31:0]buf_13;
+       reg [31:0]buf_14;
+       reg [31:0]buf_15;
 
-       wire [15:0]pe_1_0_a;
-       wire [15:0]pe_1_0_b;
-       wire [15:0]pe_1_1_a;
-       wire [15:0]pe_1_1_b;
-       wire [15:0]pe_1_2_a;
-       wire [15:0]pe_1_2_b;
-       wire [15:0]pe_1_3_a;
-       wire [15:0]pe_1_3_b;
-       wire [15:0]pe_1_4_a;
-       wire [15:0]pe_1_4_b;
-       wire [15:0]pe_1_5_a;
-       wire [15:0]pe_1_5_b;
-       wire [15:0]pe_1_6_a;
-       wire [15:0]pe_1_6_b;
-       wire [15:0]pe_1_7_a;
-       wire [15:0]pe_1_7_b;
+       wire [31:0]pe_1_0_a;
+       wire [31:0]pe_1_0_b;
+       wire [31:0]pe_1_1_a;
+       wire [31:0]pe_1_1_b;
+       wire [31:0]pe_1_2_a;
+       wire [31:0]pe_1_2_b;
+       wire [31:0]pe_1_3_a;
+       wire [31:0]pe_1_3_b;
+       wire [31:0]pe_1_4_a;
+       wire [31:0]pe_1_4_b;
+       wire [31:0]pe_1_5_a;
+       wire [31:0]pe_1_5_b;
+       wire [31:0]pe_1_6_a;
+       wire [31:0]pe_1_6_b;
+       wire [31:0]pe_1_7_a;
+       wire [31:0]pe_1_7_b;
 
-       wire [15:0]pe_2_0_a;
-       wire [15:0]pe_2_0_b;
-       wire [15:0]pe_2_1_a;
-       wire [15:0]pe_2_1_b;
-       wire [15:0]pe_2_2_a;
-       wire [15:0]pe_2_2_b;
-       wire [15:0]pe_2_3_a;
-       wire [15:0]pe_2_3_b;
-       wire [15:0]pe_2_4_a;
-       wire [15:0]pe_2_4_b;
-       wire [15:0]pe_2_5_a;
-       wire [15:0]pe_2_5_b;
-       wire [15:0]pe_2_6_a;
-       wire [15:0]pe_2_6_b;
-       wire [15:0]pe_2_7_a;
-       wire [15:0]pe_2_7_b;
+       wire [31:0]pe_2_0_a;
+       wire [31:0]pe_2_0_b;
+       wire [31:0]pe_2_1_a;
+       wire [31:0]pe_2_1_b;
+       wire [31:0]pe_2_2_a;
+       wire [31:0]pe_2_2_b;
+       wire [31:0]pe_2_3_a;
+       wire [31:0]pe_2_3_b;
+       wire [31:0]pe_2_4_a;
+       wire [31:0]pe_2_4_b;
+       wire [31:0]pe_2_5_a;
+       wire [31:0]pe_2_5_b;
+       wire [31:0]pe_2_6_a;
+       wire [31:0]pe_2_6_b;
+       wire [31:0]pe_2_7_a;
+       wire [31:0]pe_2_7_b;
 
-       wire [15:0]pe_3_0_a;
-       wire [15:0]pe_3_0_b;
-       wire [15:0]pe_3_1_a;
-       wire [15:0]pe_3_1_b;
-       wire [15:0]pe_3_2_a;
-       wire [15:0]pe_3_2_b;
-       wire [15:0]pe_3_3_a;
-       wire [15:0]pe_3_3_b;
-       wire [15:0]pe_3_4_a;
-       wire [15:0]pe_3_4_b;
-       wire [15:0]pe_3_5_a;
-       wire [15:0]pe_3_5_b;
-       wire [15:0]pe_3_6_a;
-       wire [15:0]pe_3_6_b;
-       wire [15:0]pe_3_7_a;
-       wire [15:0]pe_3_7_b;
+       wire [31:0]pe_3_0_a;
+       wire [31:0]pe_3_0_b;
+       wire [31:0]pe_3_1_a;
+       wire [31:0]pe_3_1_b;
+       wire [31:0]pe_3_2_a;
+       wire [31:0]pe_3_2_b;
+       wire [31:0]pe_3_3_a;
+       wire [31:0]pe_3_3_b;
+       wire [31:0]pe_3_4_a;
+       wire [31:0]pe_3_4_b;
+       wire [31:0]pe_3_5_a;
+       wire [31:0]pe_3_5_b;
+       wire [31:0]pe_3_6_a;
+       wire [31:0]pe_3_6_b;
+       wire [31:0]pe_3_7_a;
+       wire [31:0]pe_3_7_b;
 
-       wire [15:0]pe_4_0_a;
-       wire [15:0]pe_4_0_b;
-       wire [15:0]pe_4_1_a;
-       wire [15:0]pe_4_1_b;
-       wire [15:0]pe_4_2_a;
-       wire [15:0]pe_4_2_b;
-       wire [15:0]pe_4_3_a;
-       wire [15:0]pe_4_3_b;
-       wire [15:0]pe_4_4_a;
-       wire [15:0]pe_4_4_b;
-       wire [15:0]pe_4_5_a;
-       wire [15:0]pe_4_5_b;
-       wire [15:0]pe_4_6_a;
-       wire [15:0]pe_4_6_b;
-       wire [15:0]pe_4_7_a;
-       wire [15:0]pe_4_7_b;
-
-
-       assign fft_d0 = {}
+       wire [31:0]pe_4_0_a;
+       wire [31:0]pe_4_0_b;
+       wire [31:0]pe_4_1_a;
+       wire [31:0]pe_4_1_b;
+       wire [31:0]pe_4_2_a;
+       wire [31:0]pe_4_2_b;
+       wire [31:0]pe_4_3_a;
+       wire [31:0]pe_4_3_b;
+       wire [31:0]pe_4_4_a;
+       wire [31:0]pe_4_4_b;
+       wire [31:0]pe_4_5_a;
+       wire [31:0]pe_4_5_b;
+       wire [31:0]pe_4_6_a;
+       wire [31:0]pe_4_6_b;
+       wire [31:0]pe_4_7_a;
+       wire [31:0]pe_4_7_b;
 
 
-       FFT_PE pe_1_1(.clk(clk), .rst(rst), .a(buff_0), .b(buff_8), .power(0), .ab_valid(1)
+
+       FFT_PE pe_1_1(.clk(clk), .rst(rst), .a(buf_0), .b(buf_8), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_1_0_a), .fft_b(pe_1_0_b), .fft_pe_valid());
 
-       FFT_PE pe_1_2(.clk(clk), .rst(rst), .a(buff_1), .b(buff_9), .power(1), .ab_valid(1)
+       FFT_PE pe_1_2(.clk(clk), .rst(rst), .a(buf_1), .b(buf_9), .power(3'd1), .ab_valid(1'd1)
                      , .fft_a(pe_1_1_a), .fft_b(pe_1_1_b), .fft_pe_valid());
 
-       FFT_PE pe_1_3(.clk(clk), .rst(rst), .a(buff_2), .b(buff_10), .power(2), .ab_valid(1)
+       FFT_PE pe_1_3(.clk(clk), .rst(rst), .a(buf_2), .b(buf_10), .power(3'd2), .ab_valid(1'd1)
                      , .fft_a(pe_1_2_a), .fft_b(pe_1_2_b), .fft_pe_valid());
 
-       FFT_PE pe_1_4(.clk(clk), .rst(rst), .a(buff_3), .b(buff_11), .power(3), .ab_valid(1)
+       FFT_PE pe_1_4(.clk(clk), .rst(rst), .a(buf_3), .b(buf_11), .power(3'd3), .ab_valid(1'd1)
                      , .fft_a(pe_1_3_a), .fft_b(pe_1_3_b), .fft_pe_valid());
 
-       FFT_PE pe_1_5(.clk(clk), .rst(rst), .a(buff_4), .b(buff_12), .power(4), .ab_valid(1)
+       FFT_PE pe_1_5(.clk(clk), .rst(rst), .a(buf_4), .b(buf_12), .power(3'd4), .ab_valid(1'd1)
                      , .fft_a(pe_1_4_a), .fft_b(pe_1_4_b), .fft_pe_valid());
 
-       FFT_PE pe_1_6(.clk(clk), .rst(rst), .a(buff_5), .b(buff_13), .power(5), .ab_valid(1)
+       FFT_PE pe_1_6(.clk(clk), .rst(rst), .a(buf_5), .b(buf_13), .power(3'd5), .ab_valid(1'd1)
                      , .fft_a(pe_1_5_a), .fft_b(pe_1_5_b), .fft_pe_valid());
 
-       FFT_PE pe_1_7(.clk(clk), .rst(rst), .a(buff_6), .b(buff_14), .power(6), .ab_valid(1)
+       FFT_PE pe_1_7(.clk(clk), .rst(rst), .a(buf_6), .b(buf_14), .power(3'd6), .ab_valid(1'd1)
                      , .fft_a(pe_1_6_a), .fft_b(pe_1_6_b), .fft_pe_valid());
 
-       FFT_PE pe_1_8(.clk(clk), .rst(rst), .a(buff_7), .b(buff_15), .power(7), .ab_valid(1)
+       FFT_PE pe_1_8(.clk(clk), .rst(rst), .a(buf_7), .b(buf_15), .power(3'd7), .ab_valid(1'd1)
                      , .fft_a(pe_1_7_a), .fft_b(pe_1_7_b), .fft_pe_valid());
 
 
-       FFT_PE pe_2_1(.clk(clk), .rst(rst), .a(pe_1_0_a), .b(pe_1_4_a), .power(0), .ab_valid(1)
+       FFT_PE pe_2_1(.clk(clk), .rst(rst), .a(pe_1_0_a), .b(pe_1_4_a), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_2_0_a), .fft_b(pe_2_0_b), .fft_pe_valid());
 
-       FFT_PE pe_2_2(.clk(clk), .rst(rst), .a(pe_1_1_a), .b(pe_1_5_a), .power(2), .ab_valid(1)
+       FFT_PE pe_2_2(.clk(clk), .rst(rst), .a(pe_1_1_a), .b(pe_1_5_a), .power(3'd2), .ab_valid(1'd1)
                      , .fft_a(pe_2_1_a), .fft_b(pe_2_1_b), .fft_pe_valid());
 
-       FFT_PE pe_2_3(.clk(clk), .rst(rst), .a(pe_1_2_a), .b(pe_1_6_a), .power(4), .ab_valid(1)
+       FFT_PE pe_2_3(.clk(clk), .rst(rst), .a(pe_1_2_a), .b(pe_1_6_a), .power(3'd4), .ab_valid(1'd1)
                      , .fft_a(pe_2_2_a), .fft_b(pe_2_2_b), .fft_pe_valid());
 
-       FFT_PE pe_2_4(.clk(clk), .rst(rst), .a(pe_1_3_a), .b(pe_1_7_a), .power(6), .ab_valid(1)
+       FFT_PE pe_2_4(.clk(clk), .rst(rst), .a(pe_1_3_a), .b(pe_1_7_a), .power(3'd6), .ab_valid(1'd1)
                      , .fft_a(pe_2_3_a), .fft_b(pe_2_3_b), .fft_pe_valid());
 
-       FFT_PE pe_2_5(.clk(clk), .rst(rst), .a(pe_1_0_b), .b(pe_1_4_b), .power(0), .ab_valid(1)
+       FFT_PE pe_2_5(.clk(clk), .rst(rst), .a(pe_1_0_b), .b(pe_1_4_b), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_2_4_a), .fft_b(pe_2_4_b), .fft_pe_valid());
 
-       FFT_PE pe_2_6(.clk(clk), .rst(rst), .a(pe_1_1_b), .b(pe_1_5_b), .power(2), .ab_valid(1)
+       FFT_PE pe_2_6(.clk(clk), .rst(rst), .a(pe_1_1_b), .b(pe_1_5_b), .power(3'd2), .ab_valid(1'd1)
                      , .fft_a(pe_2_5_a), .fft_b(pe_2_5_b), .fft_pe_valid());
 
-       FFT_PE pe_2_7(.clk(clk), .rst(rst), .a(pe_1_2_b), .b(pe_1_6_b), .power(4), .ab_valid(1)
+       FFT_PE pe_2_7(.clk(clk), .rst(rst), .a(pe_1_2_b), .b(pe_1_6_b), .power(3'd4), .ab_valid(1'd1)
                      , .fft_a(pe_2_6_a), .fft_b(pe_2_6_b), .fft_pe_valid());
 
-       FFT_PE pe_2_8(.clk(clk), .rst(rst), .a(pe_1_3_b), .b(pe_1_7_b), .power(6), .ab_valid(1)
+       FFT_PE pe_2_8(.clk(clk), .rst(rst), .a(pe_1_3_b), .b(pe_1_7_b), .power(3'd6), .ab_valid(1'd1)
                      , .fft_a(pe_2_7_a), .fft_b(pe_2_7_b), .fft_pe_valid());
 
 
-       FFT_PE pe_3_1(.clk(clk), .rst(rst), .a(pe_2_0_a), .b(pe_2_2_a), .power(0), .ab_valid(1)
+       FFT_PE pe_3_1(.clk(clk), .rst(rst), .a(pe_2_0_a), .b(pe_2_2_a), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_3_0_a), .fft_b(pe_3_0_b), .fft_pe_valid());
 
-       FFT_PE pe_3_2(.clk(clk), .rst(rst), .a(pe_2_1_a), .b(pe_2_3_a), .power(4), .ab_valid(1)
+       FFT_PE pe_3_2(.clk(clk), .rst(rst), .a(pe_2_1_a), .b(pe_2_3_a), .power(3'd4), .ab_valid(1'd1)
                      , .fft_a(pe_3_1_a), .fft_b(pe_3_1_b), .fft_pe_valid());
 
-       FFT_PE pe_3_3(.clk(clk), .rst(rst), .a(pe_2_0_b), .b(pe_2_2_b), .power(0), .ab_valid(1)
+       FFT_PE pe_3_3(.clk(clk), .rst(rst), .a(pe_2_0_b), .b(pe_2_2_b), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_3_2_a), .fft_b(pe_3_2_b), .fft_pe_valid());
 
-       FFT_PE pe_3_4(.clk(clk), .rst(rst), .a(pe_2_1_b), .b(pe_2_3_b), .power(4), .ab_valid(1)
+       FFT_PE pe_3_4(.clk(clk), .rst(rst), .a(pe_2_1_b), .b(pe_2_3_b), .power(3'd4), .ab_valid(1'd1)
                      , .fft_a(pe_3_3_a), .fft_b(pe_3_3_b), .fft_pe_valid());
                      
-       FFT_PE pe_3_5(.clk(clk), .rst(rst), .a(pe_2_4_a), .b(pe_2_6_a), .power(0), .ab_valid(1)
+       FFT_PE pe_3_5(.clk(clk), .rst(rst), .a(pe_2_4_a), .b(pe_2_6_a), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_3_4_a), .fft_b(pe_3_4_b), .fft_pe_valid());
 
-       FFT_PE pe_3_6(.clk(clk), .rst(rst), .a(pe_2_5_a), .b(pe_2_7_a), .power(4), .ab_valid(1)
+       FFT_PE pe_3_6(.clk(clk), .rst(rst), .a(pe_2_5_a), .b(pe_2_7_a), .power(3'd4), .ab_valid(1'd1)
                      , .fft_a(pe_3_5_a), .fft_b(pe_3_5_b), .fft_pe_valid());
 
-       FFT_PE pe_3_7(.clk(clk), .rst(rst), .a(pe_2_4_b), .b(pe_2_6_b), .power(0), .ab_valid(1)
+       FFT_PE pe_3_7(.clk(clk), .rst(rst), .a(pe_2_4_b), .b(pe_2_6_b), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_3_6_a), .fft_b(pe_3_6_b), .fft_pe_valid());
 
-       FFT_PE pe_3_8(.clk(clk), .rst(rst), .a(pe_2_5_b), .b(pe_2_7_b), .power(4), .ab_valid(1)
+       FFT_PE pe_3_8(.clk(clk), .rst(rst), .a(pe_2_5_b), .b(pe_2_7_b), .power(3'd4), .ab_valid(1'd1)
                      , .fft_a(pe_3_7_a), .fft_b(pe_3_7_b), .fft_pe_valid());
 
 
-       FFT_PE pe_4_1(.clk(clk), .rst(rst), .a(pe_3_0_a), .b(pe_3_1_a), .power(0), .ab_valid(1)
+       FFT_PE pe_4_1(.clk(clk), .rst(rst), .a(pe_3_0_a), .b(pe_3_1_a), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_0_a), .fft_b(pe_4_0_b), .fft_pe_valid());
 
-       FFT_PE pe_4_2(.clk(clk), .rst(rst), .a(pe_3_0_b), .b(pe_3_1_b), .power(0), .ab_valid(1)
+       FFT_PE pe_4_2(.clk(clk), .rst(rst), .a(pe_3_0_b), .b(pe_3_1_b), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_1_a), .fft_b(pe_4_1_b), .fft_pe_valid());
 
-       FFT_PE pe_4_3(.clk(clk), .rst(rst), .a(pe_3_2_a), .b(pe_3_3_a), .power(0), .ab_valid(1)
+       FFT_PE pe_4_3(.clk(clk), .rst(rst), .a(pe_3_2_a), .b(pe_3_3_a), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_2_a), .fft_b(pe_4_2_b), .fft_pe_valid());
 
-       FFT_PE pe_4_4(.clk(clk), .rst(rst), .a(pe_3_2_b), .b(pe_3_3_b), .power(0), .ab_valid(1)
+       FFT_PE pe_4_4(.clk(clk), .rst(rst), .a(pe_3_2_b), .b(pe_3_3_b), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_3_a), .fft_b(pe_4_3_b), .fft_pe_valid());
                      
-       FFT_PE pe_4_5(.clk(clk), .rst(rst), .a(pe_3_4_a), .b(pe_3_5_a), .power(0), .ab_valid(1)
+       FFT_PE pe_4_5(.clk(clk), .rst(rst), .a(pe_3_4_a), .b(pe_3_5_a), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_4_a), .fft_b(pe_4_4_b), .fft_pe_valid());
 
-       FFT_PE pe_4_6(.clk(clk), .rst(rst), .a(pe_3_4_b), .b(pe_3_5_b), .power(0), .ab_valid(1)
+       FFT_PE pe_4_6(.clk(clk), .rst(rst), .a(pe_3_4_b), .b(pe_3_5_b), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_5_a), .fft_b(pe_4_5_b), .fft_pe_valid());
 
-       FFT_PE pe_4_7(.clk(clk), .rst(rst), .a(pe_3_6_a), .b(pe_3_7_a), .power(0), .ab_valid(1)
+       FFT_PE pe_4_7(.clk(clk), .rst(rst), .a(pe_3_6_a), .b(pe_3_7_a), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_6_a), .fft_b(pe_4_6_b), .fft_pe_valid());
 
-       FFT_PE pe_4_8(.clk(clk), .rst(rst), .a(pe_3_6_b), .b(pe_3_7_b), .power(0), .ab_valid(1)
+       FFT_PE pe_4_8(.clk(clk), .rst(rst), .a(pe_3_6_b), .b(pe_3_7_b), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_7_a), .fft_b(pe_4_7_b), .fft_pe_valid());
 
        assign fft_d0 = pe_4_0_a;
@@ -237,32 +235,34 @@ module FAS(
        assign fft_d13 = pe_4_5_b;
        assign fft_d14 = pe_4_3_b;
        assign fft_d15 = pe_4_7_b;
+
        wire  [32:0]abs[0:15];  
-       wire  [32:0]abs[0] =  fft_0[31:16]  * fft_0[31:16]  + fft_d0[15:0]  * fft_d0[15:0]  ;
-       wire  [32:0]abs[1] =  fft_1[31:16]  * fft_1[31:16]  + fft_d1[15:0]  * fft_d1[15:0]  ;
-       wire  [32:0]abs[2] =  fft_2[31:16]  * fft_2[31:16]  + fft_d2[15:0]  * fft_d2[15:0]  ;
-       wire  [32:0]abs[3] =  fft_3[31:16]  * fft_3[31:16]  + fft_d3[15:0]  * fft_d3[15:0]  ;
-       wire  [32:0]abs[4] =  fft_4[31:16]  * fft_4[31:16]  + fft_d4[15:0]  * fft_d4[15:0]  ;
-       wire  [32:0]abs[5] =  fft_5[31:16]  * fft_5[31:16]  + fft_d5[15:0]  * fft_d5[15:0]  ;
-       wire  [32:0]abs[6] =  fft_6[31:16]  * fft_6[31:16]  + fft_d6[15:0]  * fft_d6[15:0]  ;
-       wire  [32:0]abs[7] =  fft_7[31:16]  * fft_7[31:16]  + fft_d7[15:0]  * fft_d7[15:0]  ;
-       wire  [32:0]abs[8] =  fft_8[31:16]  * fft_8[31:16]  + fft_d8[15:0]  * fft_d8[15:0]  ;
-       wire  [32:0]abs[9] =  fft_9[31:16]  * fft_9[31:16]  + fft_d9[15:0]  * fft_d9[15:0]  ;
-       wire  [32:0]abs[10] = fft_10[31:16] * fft_10[31:16] + fft_d10[15:0] * fft_d10[15:0] ;
-       wire  [32:0]abs[11] = fft_11[31:16] * fft_11[31:16] + fft_d11[15:0] * fft_d11[15:0] ;
-       wire  [32:0]abs[12] = fft_12[31:16] * fft_12[31:16] + fft_d12[15:0] * fft_d12[15:0] ;
-       wire  [32:0]abs[13] = fft_13[31:16] * fft_13[31:16] + fft_d13[15:0] * fft_d13[15:0] ;
-       wire  [32:0]abs[14] = fft_14[31:16] * fft_14[31:16] + fft_d14[15:0] * fft_d14[15:0] ;
-       wire  [32:0]abs[15] = fft_15[31:16] * fft_15[31:16] + fft_d15[15:0] * fft_d15[15:0] ;
+
+       assign  abs[0] =  fft_d0[31:16]  * fft_d0[31:16]  + fft_d0[15:0]  * fft_d0[15:0]  ;
+       assign  abs[1] =  fft_d1[31:16]  * fft_d1[31:16]  + fft_d1[15:0]  * fft_d1[15:0]  ;
+       assign  abs[2] =  fft_d2[31:16]  * fft_d2[31:16]  + fft_d2[15:0]  * fft_d2[15:0]  ;
+       assign  abs[3] =  fft_d3[31:16]  * fft_d3[31:16]  + fft_d3[15:0]  * fft_d3[15:0]  ;
+       assign  abs[4] =  fft_d4[31:16]  * fft_d4[31:16]  + fft_d4[15:0]  * fft_d4[15:0]  ;
+       assign  abs[5] =  fft_d5[31:16]  * fft_d5[31:16]  + fft_d5[15:0]  * fft_d5[15:0]  ;
+       assign  abs[6] =  fft_d6[31:16]  * fft_d6[31:16]  + fft_d6[15:0]  * fft_d6[15:0]  ;
+       assign  abs[7] =  fft_d7[31:16]  * fft_d7[31:16]  + fft_d7[15:0]  * fft_d7[15:0]  ;
+       assign  abs[8] =  fft_d8[31:16]  * fft_d8[31:16]  + fft_d8[15:0]  * fft_d8[15:0]  ;
+       assign  abs[9] =  fft_d9[31:16]  * fft_d9[31:16]  + fft_d9[15:0]  * fft_d9[15:0]  ;
+       assign  abs[10] = fft_d10[31:16] * fft_d10[31:16] + fft_d10[15:0] * fft_d10[15:0] ;
+       assign  abs[11] = fft_d11[31:16] * fft_d11[31:16] + fft_d11[15:0] * fft_d11[15:0] ;
+       assign  abs[12] = fft_d12[31:16] * fft_d12[31:16] + fft_d12[15:0] * fft_d12[15:0] ;
+       assign  abs[13] = fft_d13[31:16] * fft_d13[31:16] + fft_d13[15:0] * fft_d13[15:0] ;
+       assign  abs[14] = fft_d14[31:16] * fft_d14[31:16] + fft_d14[15:0] * fft_d14[15:0] ;
+       assign  abs[15] = fft_d15[31:16] * fft_d15[31:16] + fft_d15[15:0] * fft_d15[15:0] ;
        
-       wire [3:0]ana_1_1 = (abs_0 > abs_1) ? 0 : 1;
-       wire [3:0]ana_1_2 = (abs_2 > abs_3) ? 2 : 3;
-       wire [3:0]ana_1_3 = (abs_4 > abs_5) ? 4 : 5;
-       wire [3:0]ana_1_4 = (abs_6 > abs_7) ? 6 : 7;
-       wire [3:0]ana_1_5 = (abs_8 > abs_9) ? 8 : 9;
-       wire [3:0]ana_1_6 = (abs_10 > abs_11) ? 10 : 11;
-       wire [3:0]ana_1_7 = (abs_12 > abs_13) ? 12 : 13;
-       wire [3:0]ana_1_8 = (abs_14 > abs_15) ? 14 : 15;
+       wire [3:0]ana_1_1 = (abs[0] > abs[1]) ? 0 : 1;
+       wire [3:0]ana_1_2 = (abs[2] > abs[3]) ? 2 : 3;
+       wire [3:0]ana_1_3 = (abs[4] > abs[5]) ? 4 : 5;
+       wire [3:0]ana_1_4 = (abs[6] > abs[7]) ? 6 : 7;
+       wire [3:0]ana_1_5 = (abs[8] > abs[9]) ? 8 : 9;
+       wire [3:0]ana_1_6 = (abs[10] > abs[11]) ? 10 : 11;
+       wire [3:0]ana_1_7 = (abs[12] > abs[13]) ? 12 : 13;
+       wire [3:0]ana_1_8 = (abs[14] > abs[15]) ? 14 : 15;
 
        wire [3:0]ana_2_1 = (abs[ana_1_1] > abs[ana_1_2]) ? ana_1_1 : ana_1_2;
        wire [3:0]ana_2_2 = (abs[ana_1_3] > abs[ana_1_4]) ? ana_1_3 : ana_1_4;
@@ -508,202 +508,202 @@ module FAS(
                      case(pc)
                             0:
                             begin
-                                   buf_0 <= buff[0];
-                                   buf_1 <= buff[1];
-                                   buf_2 <= buff[2];
-                                   buf_3 <= buff[3];
-                                   buf_4 <= buff[4];
-                                   buf_5 <= buff[5];
-                                   buf_6 <= buff[6];
-                                   buf_7 <= buff[7];
-                                   buf_8 <= buff[8];
-                                   buf_9 <= buff[9];
-                                   buf_10 <= buff[10];
-                                   buf_11 <= buff[11];
-                                   buf_12 <= buff[12];
-                                   buf_13 <= buff[13];
-                                   buf_14 <= buff[14];
-                                   buf_15 <= buff[15];
+                                   buf_0 <=  {buff[0],16'd0};
+                                   buf_1 <=  {buff[1] ,16'd0};
+                                   buf_2 <=  {buff[2] ,16'd0};
+                                   buf_3 <=  {buff[3] ,16'd0};
+                                   buf_4 <=  {buff[4] ,16'd0};
+                                   buf_5 <=  {buff[5] ,16'd0};
+                                   buf_6 <=  {buff[6] ,16'd0};
+                                   buf_7 <=  {buff[7] ,16'd0};
+                                   buf_8 <=  {buff[8] ,16'd0};
+                                   buf_9 <=  {buff[9] ,16'd0};
+                                   buf_10 <= {buff[10],16'd0};
+                                   buf_11 <= {buff[11],16'd0};
+                                   buf_12 <= {buff[12],16'd0};
+                                   buf_13 <= {buff[13],16'd0};
+                                   buf_14 <= {buff[14],16'd0};
+                                   buf_15 <= {buff[15],16'd0};
                             end
 
                             1:
                             begin
-                                   buf_0 <= buff[16];
-                                   buf_1 <= buff[17];
-                                   buf_2 <= buff[18];
-                                   buf_3 <= buff[19];
-                                   buf_4 <= buff[20];
-                                   buf_5 <= buff[21];
-                                   buf_6 <= buff[22];
-                                   buf_7 <= buff[23];
-                                   buf_8 <= buff[24];
-                                   buf_9 <= buff[25];
-                                   buf_10 <= buff[26];
-                                   buf_11 <= buff[27];
-                                   buf_12 <= buff[28];
-                                   buf_13 <= buff[29];
-                                   buf_14 <= buff[30];
-                                   buf_15 <= buff[31];
+                                   buf_0 <=  {buff[16],16'd0};
+                                   buf_1 <=  {buff[17],16'd0};
+                                   buf_2 <=  {buff[18],16'd0};
+                                   buf_3 <=  {buff[19],16'd0};
+                                   buf_4 <=  {buff[20],16'd0};
+                                   buf_5 <=  {buff[21],16'd0};
+                                   buf_6 <=  {buff[22],16'd0};
+                                   buf_7 <=  {buff[23],16'd0};
+                                   buf_8 <=  {buff[24],16'd0};
+                                   buf_9 <=  {buff[25],16'd0};
+                                   buf_10 <= {buff[26],16'd0};
+                                   buf_11 <= {buff[27],16'd0};
+                                   buf_12 <= {buff[28],16'd0};
+                                   buf_13 <= {buff[29],16'd0};
+                                   buf_14 <= {buff[30],16'd0};
+                                   buf_15 <= {buff[31],16'd0};
                             end
 
                             2:
                             begin
-                                   buf_0  <= buff[32];
-                                   buf_1  <= buff[33];
-                                   buf_2  <= buff[34];
-                                   buf_3  <= buff[35];
-                                   buf_4  <= buff[36];
-                                   buf_5  <= buff[37];
-                                   buf_6  <= buff[38];
-                                   buf_7  <= buff[39];
-                                   buf_8  <= buff[40];
-                                   buf_9  <= buff[41];
-                                   buf_10 <= buff[42];
-                                   buf_11 <= buff[43];
-                                   buf_12 <= buff[44];
-                                   buf_13 <= buff[45];
-                                   buf_14 <= buff[46];
-                                   buf_15 <= buff[47];
+                                   buf_0  <= {buff[32],16'd0};
+                                   buf_1  <= {buff[33],16'd0};
+                                   buf_2  <= {buff[34],16'd0};
+                                   buf_3  <= {buff[35],16'd0};
+                                   buf_4  <= {buff[36],16'd0};
+                                   buf_5  <= {buff[37],16'd0};
+                                   buf_6  <= {buff[38],16'd0};
+                                   buf_7  <= {buff[39],16'd0};
+                                   buf_8  <= {buff[40],16'd0};
+                                   buf_9  <= {buff[41],16'd0};
+                                   buf_10 <= {buff[42],16'd0};
+                                   buf_11 <= {buff[43],16'd0};
+                                   buf_12 <= {buff[44],16'd0};
+                                   buf_13 <= {buff[45],16'd0};
+                                   buf_14 <= {buff[46],16'd0};
+                                   buf_15 <= {buff[47],16'd0};
                             end
 
                             3:
                             begin
-                                   buf_0  <= buff[48];
-                                   buf_1  <= buff[49];
-                                   buf_2  <= buff[50];
-                                   buf_3  <= buff[51];
-                                   buf_4  <= buff[52];
-                                   buf_5  <= buff[53];
-                                   buf_6  <= buff[54];
-                                   buf_7  <= buff[55];
-                                   buf_8  <= buff[56];
-                                   buf_9  <= buff[57];
-                                   buf_10 <= buff[58];
-                                   buf_11 <= buff[59];
-                                   buf_12 <= buff[60];
-                                   buf_13 <= buff[61];
-                                   buf_14 <= buff[62];
-                                   buf_15 <= buff[63];
+                                   buf_0  <= {buff[48],16'd0};
+                                   buf_1  <= {buff[49],16'd0};
+                                   buf_2  <= {buff[50],16'd0};
+                                   buf_3  <= {buff[51],16'd0};
+                                   buf_4  <= {buff[52],16'd0};
+                                   buf_5  <= {buff[53],16'd0};
+                                   buf_6  <= {buff[54],16'd0};
+                                   buf_7  <= {buff[55],16'd0};
+                                   buf_8  <= {buff[56],16'd0};
+                                   buf_9  <= {buff[57],16'd0};
+                                   buf_10 <= {buff[58],16'd0};
+                                   buf_11 <= {buff[59],16'd0};
+                                   buf_12 <= {buff[60],16'd0};
+                                   buf_13 <= {buff[61],16'd0};
+                                   buf_14 <= {buff[62],16'd0};
+                                   buf_15 <= {buff[63],16'd0};
                             end
 
                             4:
                             begin
-                                   buf_0  <= buff[64];
-                                   buf_1  <= buff[65];
-                                   buf_2  <= buff[66];
-                                   buf_3  <= buff[67];
-                                   buf_4  <= buff[68];
-                                   buf_5  <= buff[69];
-                                   buf_6  <= buff[70];
-                                   buf_7  <= buff[71];
-                                   buf_8  <= buff[72];
-                                   buf_9  <= buff[73];
-                                   buf_10 <= buff[74];
-                                   buf_11 <= buff[75];
-                                   buf_12 <= buff[76];
-                                   buf_13 <= buff[77];
-                                   buf_14 <= buff[78];
-                                   buf_15 <= buff[79];
+                                   buf_0  <= {buff[64],16'd0};
+                                   buf_1  <= {buff[65],16'd0};
+                                   buf_2  <= {buff[66],16'd0};
+                                   buf_3  <= {buff[67],16'd0};
+                                   buf_4  <= {buff[68],16'd0};
+                                   buf_5  <= {buff[69],16'd0};
+                                   buf_6  <= {buff[70],16'd0};
+                                   buf_7  <= {buff[71],16'd0};
+                                   buf_8  <= {buff[72],16'd0};
+                                   buf_9  <= {buff[73],16'd0};
+                                   buf_10 <= {buff[74],16'd0};
+                                   buf_11 <= {buff[75],16'd0};
+                                   buf_12 <= {buff[76],16'd0};
+                                   buf_13 <= {buff[77],16'd0};
+                                   buf_14 <= {buff[78],16'd0};
+                                   buf_15 <= {buff[79],16'd0};
                             end
 
                             5:
                             begin
-                                   buf_0  <= buff[80];
-                                   buf_1  <= buff[81];
-                                   buf_2  <= buff[82];
-                                   buf_3  <= buff[83];
-                                   buf_4  <= buff[84];
-                                   buf_5  <= buff[85];
-                                   buf_6  <= buff[86];
-                                   buf_7  <= buff[87];
-                                   buf_8  <= buff[88];
-                                   buf_9  <= buff[89];
-                                   buf_10 <= buff[90];
-                                   buf_11 <= buff[91];
-                                   buf_12 <= buff[92];
-                                   buf_13 <= buff[93];
-                                   buf_14 <= buff[94];
-                                   buf_15 <= buff[95];
+                                   buf_0  <= {buff[80],16'd0};
+                                   buf_1  <= {buff[81],16'd0};
+                                   buf_2  <= {buff[82],16'd0};
+                                   buf_3  <= {buff[83],16'd0};
+                                   buf_4  <= {buff[84],16'd0};
+                                   buf_5  <= {buff[85],16'd0};
+                                   buf_6  <= {buff[86],16'd0};
+                                   buf_7  <= {buff[87],16'd0};
+                                   buf_8  <= {buff[88],16'd0};
+                                   buf_9  <= {buff[89],16'd0};
+                                   buf_10 <= {buff[90],16'd0};
+                                   buf_11 <= {buff[91],16'd0};
+                                   buf_12 <= {buff[92],16'd0};
+                                   buf_13 <= {buff[93],16'd0};
+                                   buf_14 <= {buff[94],16'd0};
+                                   buf_15 <= {buff[95],16'd0};
                             end
 
                             6:
                             begin
-                                   buf_0  <= buff[96];
-                                   buf_1  <= buff[97];
-                                   buf_2  <= buff[98];
-                                   buf_3  <= buff[99];
-                                   buf_4  <= buff[100];
-                                   buf_5  <= buff[101];
-                                   buf_6  <= buff[102];
-                                   buf_7  <= buff[103];
-                                   buf_8  <= buff[104];
-                                   buf_9  <= buff[105];
-                                   buf_10 <= buff[106];
-                                   buf_11 <= buff[107];
-                                   buf_12 <= buff[108];
-                                   buf_13 <= buff[109];
-                                   buf_14 <= buff[110];
-                                   buf_15 <= buff[111];
+                                   buf_0  <= {buff[96] ,16'd0};
+                                   buf_1  <= {buff[97] ,16'd0};
+                                   buf_2  <= {buff[98] ,16'd0};
+                                   buf_3  <= {buff[99] ,16'd0};
+                                   buf_4  <= {buff[100],16'd0};
+                                   buf_5  <= {buff[101],16'd0};
+                                   buf_6  <= {buff[102],16'd0};
+                                   buf_7  <= {buff[103],16'd0};
+                                   buf_8  <= {buff[104],16'd0};
+                                   buf_9  <= {buff[105],16'd0};
+                                   buf_10 <= {buff[106],16'd0};
+                                   buf_11 <= {buff[107],16'd0};
+                                   buf_12 <= {buff[108],16'd0};
+                                   buf_13 <= {buff[109],16'd0};
+                                   buf_14 <= {buff[110],16'd0};
+                                   buf_15 <= {buff[111],16'd0};
                             end
 
                             7:
                             begin
-                                   buf_0  <= buff[112];
-                                   buf_1  <= buff[113];
-                                   buf_2  <= buff[114];
-                                   buf_3  <= buff[115];
-                                   buf_4  <= buff[116];
-                                   buf_5  <= buff[117];
-                                   buf_6  <= buff[118];
-                                   buf_7  <= buff[119];
-                                   buf_8  <= buff[120];
-                                   buf_9  <= buff[121];
-                                   buf_10 <= buff[122];
-                                   buf_11 <= buff[123];
-                                   buf_12 <= buff[124];
-                                   buf_13 <= buff[125];
-                                   buf_14 <= buff[126];
-                                   buf_15 <= buff[127];
+                                   buf_0  <= {buff[112],16'd0};
+                                   buf_1  <= {buff[113],16'd0};
+                                   buf_2  <= {buff[114],16'd0};
+                                   buf_3  <= {buff[115],16'd0};
+                                   buf_4  <= {buff[116],16'd0};
+                                   buf_5  <= {buff[117],16'd0};
+                                   buf_6  <= {buff[118],16'd0};
+                                   buf_7  <= {buff[119],16'd0};
+                                   buf_8  <= {buff[120],16'd0};
+                                   buf_9  <= {buff[121],16'd0};
+                                   buf_10 <= {buff[122],16'd0};
+                                   buf_11 <= {buff[123],16'd0};
+                                   buf_12 <= {buff[124],16'd0};
+                                   buf_13 <= {buff[125],16'd0};
+                                   buf_14 <= {buff[126],16'd0};
+                                   buf_15 <= {buff[127],16'd0};
                             end
 
                             8:
                             begin
-                                   buf_0  <= buff[128];
-                                   buf_1  <= buff[129];
-                                   buf_2  <= buff[130];
-                                   buf_3  <= buff[131];
-                                   buf_4  <= buff[132];
-                                   buf_5  <= buff[133];
-                                   buf_6  <= buff[134];
-                                   buf_7  <= buff[135];
-                                   buf_8  <= buff[136];
-                                   buf_9  <= buff[137];
-                                   buf_10 <= buff[138];
-                                   buf_11 <= buff[139];
-                                   buf_12 <= buff[140];
-                                   buf_13 <= buff[141];
-                                   buf_14 <= buff[142];
-                                   buf_15 <= buff[143];
+                                   buf_0  <= {buff[128],16'd0};
+                                   buf_1  <= {buff[129],16'd0};
+                                   buf_2  <= {buff[130],16'd0};
+                                   buf_3  <= {buff[131],16'd0};
+                                   buf_4  <= {buff[132],16'd0};
+                                   buf_5  <= {buff[133],16'd0};
+                                   buf_6  <= {buff[134],16'd0};
+                                   buf_7  <= {buff[135],16'd0};
+                                   buf_8  <= {buff[136],16'd0};
+                                   buf_9  <= {buff[137],16'd0};
+                                   buf_10 <= {buff[138],16'd0};
+                                   buf_11 <= {buff[139],16'd0};
+                                   buf_12 <= {buff[140],16'd0};
+                                   buf_13 <= {buff[141],16'd0};
+                                   buf_14 <= {buff[142],16'd0};
+                                   buf_15 <= {buff[143],16'd0};
                             end
 
                             9:
                             begin
-                                   buf_0  <= buff[144];
-                                   buf_1  <= buff[145];
-                                   buf_2  <= buff[146];
-                                   buf_3  <= buff[147];
-                                   buf_4  <= buff[148];
-                                   buf_5  <= buff[149];
-                                   buf_6  <= buff[150];
-                                   buf_7  <= buff[151];
-                                   buf_8  <= buff[152];
-                                   buf_9  <= buff[153];
-                                   buf_10 <= buff[154];
-                                   buf_11 <= buff[155];
-                                   buf_12 <= buff[156];
-                                   buf_13 <= buff[157];
-                                   buf_14 <= buff[158];
-                                   buf_15 <= buff[159];
+                                   buf_0  <= {buff[144],16'd0};
+                                   buf_1  <= {buff[145],16'd0};
+                                   buf_2  <= {buff[146],16'd0};
+                                   buf_3  <= {buff[147],16'd0};
+                                   buf_4  <= {buff[148],16'd0};
+                                   buf_5  <= {buff[149],16'd0};
+                                   buf_6  <= {buff[150],16'd0};
+                                   buf_7  <= {buff[151],16'd0};
+                                   buf_8  <= {buff[152],16'd0};
+                                   buf_9  <= {buff[153],16'd0};
+                                   buf_10 <= {buff[154],16'd0};
+                                   buf_11 <= {buff[155],16'd0};
+                                   buf_12 <= {buff[156],16'd0};
+                                   buf_13 <= {buff[157],16'd0};
+                                   buf_14 <= {buff[158],16'd0};
+                                   buf_15 <= {buff[159],16'd0};
                             end                            
                      endcase
 
