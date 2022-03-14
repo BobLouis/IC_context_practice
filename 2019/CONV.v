@@ -119,6 +119,10 @@ module  CONV(
 				begin
 					next_state = FINISH;
 				end
+			default: 
+				begin
+					next_state = IDLE;
+				end
 		endcase
 	end
 
@@ -173,7 +177,7 @@ module  CONV(
 				4'd5: iaddr <= {row,col+6'd1}; 
 				4'd6: iaddr <= {row+6'd1,col-6'd1}; 
 				4'd7: iaddr <= {row+6'd1,col}; 
-				4'd8: iaddr <= {row-6'd1,col+6'd1}; 
+				4'd8: iaddr <= {row+6'd1,col+6'd1}; 
 				default: iaddr <= 0;
 			endcase
 		end
@@ -199,7 +203,7 @@ module  CONV(
 		else if(next_state == WRITE_L1) caddr_wr <= {row[5:1],col[5:1]};//divide by 2
 	end
 
-	assign roundTemp = resultTemp[35:15]+resultTemp[15];
+	assign roundTemp = resultTemp[35:15] + resultTemp[15];
 
 	//cdata_wr
 	always @(posedge clk or posedge reset) begin
@@ -246,7 +250,7 @@ module  CONV(
 				4'd8: if(row != 63 && col != 0) convTemp <= convTemp + mulTemp;
 				4'd9: if(row != 63) convTemp <= convTemp + mulTemp;
 				4'd10: if(row != 63 && col != 63) convTemp <= convTemp + mulTemp;
-				4'd11: resultTemp <= convTemp + $signed({20'h01310,16'hd0});
+				4'd11: resultTemp <= convTemp + $signed({20'h01310,16'h0});
 			endcase
 		end
 	end

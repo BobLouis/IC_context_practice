@@ -247,8 +247,7 @@ begin
     if(reset) convTemp <= 44'd0; 
     else if(current_State == READ_CONV)
     begin
-        case(counterRead)
-        
+        case(counterRead)       
         4'd0:   convTemp <= 44'd0;
         4'd2:   if(col != 6'd0 && row != 6'd0)  convTemp <= mulTemp;
         4'd3:   if(row != 6'd0) convTemp <= convTemp + mulTemp;
