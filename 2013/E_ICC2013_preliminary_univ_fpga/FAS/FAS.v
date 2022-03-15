@@ -15,11 +15,11 @@ module FAS(
        input	rst;
        input	data_valid;
        input signed [15:0] data;
-       output [31:0] fft_d0,fft_d1,fft_d2,fft_d3,fft_d4,fft_d5,fft_d6,fft_d7, 
+       output signed[31:0] fft_d0,fft_d1,fft_d2,fft_d3,fft_d4,fft_d5,fft_d6,fft_d7, 
                      fft_d8,fft_d9,fft_d10,fft_d11,fft_d12,fft_d13,fft_d14,fft_d15;
        output reg fft_valid;
        output reg done;                      
-       output reg [3:0] freq;
+       output [3:0] freq;
 
        parameter IDLE = 3'd0;
        parameter READ = 3'd1;
@@ -219,16 +219,18 @@ module FAS(
        FFT_PE pe_4_8(.clk(clk), .rst(rst), .a(pe_3_6_b), .b(pe_3_7_b), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_4_7_a), .fft_b(pe_4_7_b), .fft_pe_valid());
 
-       assign fft_d0 = pe_4_0_a;
-       assign fft_d1 = pe_4_4_a;
-       assign fft_d2 = pe_4_2_a;
-       assign fft_d3 = pe_4_6_a;
-       assign fft_d4 = pe_4_1_a;
-       assign fft_d5 = pe_4_5_a;
-       assign fft_d6 = pe_4_3_a;
-       assign fft_d7 = pe_4_7_a;
-       assign fft_d8 = pe_4_0_b;
-       assign fft_d9 = pe_4_4_b;
+
+       //output assign
+       assign fft_d0  = pe_4_0_a;
+       assign fft_d1  = pe_4_4_a;
+       assign fft_d2  = pe_4_2_a;
+       assign fft_d3  = pe_4_6_a;
+       assign fft_d4  = pe_4_1_a;
+       assign fft_d5  = pe_4_5_a;
+       assign fft_d6  = pe_4_3_a;
+       assign fft_d7  = pe_4_7_a;
+       assign fft_d8  = pe_4_0_b;
+       assign fft_d9  = pe_4_4_b;
        assign fft_d10 = pe_4_2_b;
        assign fft_d11 = pe_4_6_b;
        assign fft_d12 = pe_4_1_b;
@@ -272,7 +274,7 @@ module FAS(
        wire [3:0]ana_3_1 = (abs[ana_2_1] > abs[ana_2_2]) ? ana_2_1 : ana_2_2;
        wire [3:0]ana_3_2 = (abs[ana_2_3] > abs[ana_2_4]) ? ana_2_3 : ana_2_4;
 
-       wire [3:0]ana_4 = (ana_3_1 > ana_3_2) ? ana_3_1 : ana_3_2;
+       assign freq = (ana_3_1 > ana_3_2) ? ana_3_1 : ana_3_2;
 
 
        always @(posedge clk or posedge rst) begin
@@ -291,7 +293,7 @@ module FAS(
                             end
                             READ:
                             begin
-                                   if(pc == 159) next_state = CAL;
+                                   if(pc == 160) next_state = CAL;
                                    else next_state = READ;
                             end
                             CAL:
@@ -307,10 +309,23 @@ module FAS(
        //pc
        always @(posedge clk or posedge rst) begin
               if(rst) pc <= 0;
-              else if(pc == 159) pc <= 0;
-              else if(pc == 10 && state == CAL) pc <= 0;
+              else if(pc == 160) pc <= 0;
+              else if(pc == 14 && state == CAL) pc <= 0;
               else pc <= pc + 1;
        end
+
+       //done
+       always @(negedge clk) begin
+              if(state == CAL && pc >4)begin
+                     done = 1;
+                     fft_valid = 1;
+              end
+              else begin
+                     done = 0;
+                     fft_valid = 0;
+              end
+       end
+
        //counterRead
        // always @(posedge clk or posedge rst) begin
        //        if(rst) counterRead <= 0;
@@ -709,8 +724,4 @@ module FAS(
 
               end
        end
-
-
-
-
 endmodule
