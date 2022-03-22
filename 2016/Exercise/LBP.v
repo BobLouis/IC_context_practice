@@ -44,7 +44,7 @@ output  reg	finish;
                     end
                 READ:
                     begin
-                        if(counterRead == 10) next_state = WRITE;
+                        if(counterRead == 9) next_state = WRITE;
                         else next_state = READ;
                     end
                 WRITE:
@@ -108,7 +108,7 @@ output  reg	finish;
             mid <= gray_data;
         end 
         else if(counterRead > 1 && counterRead < 10)begin
-            buff[counterRead-1] = (gray_data < mid) ? 0 : 1;
+            buff[counterRead-2] = (gray_data < mid) ? 0 : 1;
         end
     end
     //gray_req
@@ -153,11 +153,6 @@ output  reg	finish;
             finish = 1'b0;
         end
     end
-
-
-
-
-
 
 //====================================================================
 endmodule
