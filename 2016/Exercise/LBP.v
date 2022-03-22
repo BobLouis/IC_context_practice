@@ -66,7 +66,7 @@ output  reg	finish;
 
     //row col
     always @(posedge clk or posedge reset) begin
-        if(reset) {row, col} = 129;
+        if(reset) {row, col} <= 129;
         else if(state == WRITE)begin
             //go up one
             if(col == 126)begin
