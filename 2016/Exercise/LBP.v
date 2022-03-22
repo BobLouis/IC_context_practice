@@ -44,7 +44,7 @@ output  reg	finish;
                     end
                 READ:
                     begin
-                        if(counterRead == 9) next_state = WRITE;
+                        if(counterRead == 10) next_state = WRITE;
                         else next_state = READ;
                     end
                 WRITE:
@@ -70,7 +70,7 @@ output  reg	finish;
         else if(state == WRITE)begin
             //go up one
             if(col == 126)begin
-                col <= 127;
+                col <= 1;
                 row <= row + 1;
             end
             else col <= col + 1;
@@ -99,16 +99,16 @@ output  reg	finish;
                 default: gray_addr <= 0;
             endcase
             counterRead <= counterRead + 4'd1;
-            if(counterRead == 4'd9)
+            if(counterRead == 4'd10)
                 counterRead <= 0;
         end
     end
     always@(posedge clk)begin
-        if(counterRead == 1)begin
+        if(counterRead == 2)begin
             mid <= gray_data;
         end 
-        else if(counterRead > 1 && counterRead < 10)begin
-            buff[counterRead-2] = (gray_data < mid) ? 0 : 1;
+        else if(counterRead > 2 && counterRead < 11)begin
+            buff[counterRead-3] = (gray_data < mid) ? 0 : 1;
         end
     end
     //gray_req
