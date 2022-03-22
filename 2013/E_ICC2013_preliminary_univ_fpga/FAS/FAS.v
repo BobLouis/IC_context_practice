@@ -119,7 +119,7 @@ module FAS(
        wire signed[31:0]pe_4_7_b;
 
 
-
+       
        FFT_PE pe_1_1(.clk(clk), .rst(rst), .a(buf_0), .b(buf_8), .power(3'd0), .ab_valid(1'd1)
                      , .fft_a(pe_1_0_a), .fft_b(pe_1_0_b), .fft_pe_valid());
 

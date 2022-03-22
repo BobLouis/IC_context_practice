@@ -13,7 +13,7 @@ input clk, rst;
 input signed [31:0] a, b;
 input [2:0] power;
 input ab_valid;		 
-output reg[31:0] fft_a, fft_b;
+output reg signed [31:0] fft_a, fft_b;
 output reg fft_pe_valid;
 
 	reg signed [31:0]a_tmp_real,a_tmp_img,b_tmp_real,b_tmp_img;
