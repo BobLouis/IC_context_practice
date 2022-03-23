@@ -19,8 +19,8 @@ output  reg	finish;
     reg [13:0] pc;
     reg [3:0] counterRead;
     reg [6:0]col,row;
-    reg [7:0]data[0:8];
     reg buff[0:7];
+    reg [7:0]mid;
 
     parameter IDLE = 4'd0;
 	parameter READ = 4'd1;
@@ -44,7 +44,7 @@ output  reg	finish;
                     end
                 READ:
                     begin
-                        if((counterRead == 10 && col == 1) || (counterRead == 4 && col != 1)) next_state = WRITE;
+                        if(counterRead == 10) next_state = WRITE;
                         else next_state = READ;
                     end
                 WRITE:
@@ -85,7 +85,7 @@ output  reg	finish;
             gray_addr <= 0;
             counterRead <= 0;
         end
-        else if(state == READ && col == 1)begin
+        else if(state == READ)begin
             case(counterRead)
                 4'd1: gray_addr <= {row,col}; 
 				4'd2: gray_addr <= {row-7'd1,col-7'd1}; 
@@ -102,59 +102,13 @@ output  reg	finish;
             if(counterRead == 4'd10)
                 counterRead <= 0;
         end
-        else if(state == READ && col !=1 )begin
-            case(counterRead)
-				4'd1: gray_addr <= {row-7'd1,col+7'd1}; 
-				4'd2: gray_addr <= {row,col+7'd1}; 
-				4'd3: gray_addr <= {row+7'd1,col+7'd1}; 
-                default: gray_addr <= 0;
-            endcase
-            counterRead <= counterRead + 4'd1;
-            if(counterRead == 4'd4)
-                counterRead <= 0;
-        end
     end
     always@(posedge clk)begin
-        if(col == 1)begin
-            if(counterRead == 2)begin
-                data[8] <= gray_data;
-            end 
-            else if(counterRead > 2 && counterRead < 11)begin
-                buff[counterRead-3] <= (gray_data < data[8]) ? 0 : 1;
-                data[counterRead-3] <= gray_data;
-            end
-        end
-        else begin
-            case (counterRead)
-                1:begin
-                    data[0] <= data[1];
-                    data[3] <= data[8];
-                    data[5] <= data[6];
-                    data[1] <= data[2];
-                    data[8] <= data[4];
-                    data[6] <= data[7];
-
-                    buff[0] <= (data[1] < data[4]) ? 0:1;
-                    buff[1] <= (data[2] < data[4]) ? 0:1;
-
-                    buff[3] <= (data[8] < data[4]) ? 0:1;
-
-                    buff[5] <= (data[6] < data[4]) ? 0:1;
-                    buff[6] <= (data[7] < data[4]) ? 0:1;
-                end 
-                2:begin
-                    buff[2] <= (gray_data < data[8]) ? 0 : 1;
-                    data[2] <= gray_data;
-                end
-                3:begin
-                    buff[4] <= (gray_data < data[8]) ? 0 : 1;
-                    data[4] <= gray_data;
-                end
-                4:begin
-                    buff[7] <= (gray_data < data[8]) ? 0 : 1;
-                    data[7] <= gray_data;
-                end
-            endcase
+        if(counterRead == 2)begin
+            mid <= gray_data;
+        end 
+        else if(counterRead > 2 && counterRead < 11)begin
+            buff[counterRead-3] = (gray_data < mid) ? 0 : 1;
         end
     end
     //gray_req
