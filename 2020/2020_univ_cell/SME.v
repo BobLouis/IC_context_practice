@@ -94,7 +94,7 @@ always@(posedge clk or posedge reset)begin
     if(reset)begin 
         cal_cnt <= 0; 
     end
-    else if(next_state == CAL) 
+    else if(next_state == CAL || (next_state == READPAT && !ispattern)) 
         cal_cnt <= cal_cnt + 1; //string -> pattern cnt==0
     else begin
         cal_cnt <= 0;
