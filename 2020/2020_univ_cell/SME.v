@@ -167,9 +167,6 @@ assign match = (pattern[8] == 8'h24) ? 0 : &match_tmp && (cal_cnt > 1);
 
 
 
-
-
-
 //output
 always @(*) begin
     if(next_state == OUT)begin
