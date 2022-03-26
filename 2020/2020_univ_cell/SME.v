@@ -52,7 +52,7 @@ always@(*)begin
             end
             OUT:begin
                 if(isstring == 1) next_state = READSTR;
-                else if(ispattern == 1) next_state = READPAT;
+                else next_state = READPAT; 
             end
             default:    next_state = IDLE;
         endcase
