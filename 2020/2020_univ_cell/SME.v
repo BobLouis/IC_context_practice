@@ -124,7 +124,11 @@ always@(posedge clk or posedge reset)begin
             for(i=2;i<34;i=i+1)
                 string[i] <= 8'h20;
         end
+
+        string[0] <= 8'h20;
     end
+    else
+        string[0] <= 8'h20;
 end
 
 //READ DATA PATTERN
