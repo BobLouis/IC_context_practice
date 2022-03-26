@@ -13,7 +13,7 @@ reg [7:0] pattern [0:8];
 reg [7:0] str_cnt, pat_cnt, cal_cnt;
 reg [7:0] str_len, pat_len;
 reg [7:0] match_tmp;
-reg [15:0] k;
+
 
 
 reg [2:0]state, next_state;
@@ -179,10 +179,5 @@ always @(*) begin
     end
 end
 
-
-always @(posedge clk or posedge reset) begin
-    if(reset) k <= 0;
-    else k <= k+1;
-end
 
 endmodule
