@@ -10,7 +10,7 @@ output reg valid;
 
 reg [7:0] string [0:33];
 reg [7:0] pattern [0:7];
-reg [7:0] cnt, pat_cnt;
+reg [7:0] str_cnt, pat_cnt, cal_cnt;
 reg [7:0] match_tmp;
 reg [15:0] k;
 
@@ -46,7 +46,7 @@ always@(*)begin
                 else next_state = READPAT;
             end
             CAL:begin
-                if(match || cnt == 8'd26)next_state = OUT;
+                if(match || cal_cnt == 8'd26)next_state = OUT;
                 else next_state = CAL;
             end
             OUT:begin
@@ -61,20 +61,17 @@ end
 
 
 
-//cnt
+//str cnt
 always@(posedge clk or posedge reset)begin
     if(reset)begin 
-        cnt <= 0; 
+        str_cnt <= 0; 
     end
-    else if((match == 1'b1 || cnt == 8'd27) && state == CAL) begin 
-        cnt <= 0;
-    end
-    else if(next_state == CAL || next_state == READSTR ) 
+    else if(isstring) 
     begin
-        cnt <= cnt + 1; //string -> pattern cnt==0
+        str_cnt <= str_cnt + 1; //string -> pattern cnt==0
     end
-    else if(next_state == READPAT || next_state == OUT) begin
-        cnt <= 0;
+    else begin
+        str_cnt <= 0;
     end    
 end
 
@@ -91,6 +88,18 @@ always@(posedge clk or posedge reset)begin
         pat_cnt <= pat_cnt + 1;
     end    
 end
+
+//cal cnt
+always@(posedge clk or posedge reset)begin
+    if(reset)begin 
+        cal_cnt <= 0; 
+    end
+    else if(next_state == CAL) 
+        cal_cnt <= cal_cnt + 1; //string -> pattern cnt==0
+    else begin
+        cal_cnt <= 0;
+    end    
+end
     
 
 //READ DATA STRING
@@ -99,9 +108,9 @@ always@(posedge clk or posedge reset)begin
         for(i=0;i<34;i=i+1)
             string[i] <= 8'h20;
     end
-    else if(next_state == READSTR)begin
-        string[cnt + 1] <= chardata;
-        if(cnt == 0)begin
+    else if(isstring)begin
+        string[str_cnt + 1] <= chardata;
+        if(str_cnt == 0)begin
             for(i=2;i<34;i=i+1)
                 string[i] <= 8'h20;
         end
@@ -114,8 +123,7 @@ always@(posedge clk or posedge reset)begin
         for(j=0;j<8;j=j+1)
             pattern[j] <= 8'h2E;
     end
-    else if(next_state == READPAT || next_state == OUT)begin
-        if(ispattern)
+    else if(ispattern)begin
             pattern[pat_cnt] <= chardata;
         if(pat_cnt == 0)begin
             for(j=1;j<8;j=j+1)
@@ -128,26 +136,26 @@ end
 //match_tmp
 always @(posedge clk) begin
     //cnt 0 ~ 26
-    if(next_state == CAL && cnt <27)begin
-        match_tmp[0] <= ((pattern[0] == 8'h2E) || (pattern[0] == 8'h5E && string[cnt] == 8'h20) || (pattern[0] == string[cnt])) ? 1 : 0;
-        match_tmp[1] <= ((pattern[1] == 8'h2E) || (pattern[1] == string[cnt+4'd1]) || (pattern[1] == 8'h24 && string[cnt+4'd1] == 8'h20)) ? 1 : 0;
-        match_tmp[2] <= ((pattern[2] == 8'h2E) || (pattern[2] == string[cnt+4'd2]) || (pattern[2] == 8'h24 && string[cnt+4'd2] == 8'h20)) ? 1 : 0;
-        match_tmp[3] <= ((pattern[3] == 8'h2E) || (pattern[3] == string[cnt+4'd3]) || (pattern[3] == 8'h24 && string[cnt+4'd3] == 8'h20)) ? 1 : 0;
-        match_tmp[4] <= ((pattern[4] == 8'h2E) || (pattern[4] == string[cnt+4'd4]) || (pattern[4] == 8'h24 && string[cnt+4'd4] == 8'h20)) ? 1 : 0;
-        match_tmp[5] <= ((pattern[5] == 8'h2E) || (pattern[5] == string[cnt+4'd5]) || (pattern[5] == 8'h24 && string[cnt+4'd5] == 8'h20)) ? 1 : 0;
-        match_tmp[6] <= ((pattern[6] == 8'h2E) || (pattern[6] == string[cnt+4'd6]) || (pattern[6] == 8'h24 && string[cnt+4'd6] == 8'h20)) ? 1 : 0;
-        match_tmp[7] <= ((pattern[7] == 8'h2E) || (pattern[7] == string[cnt+4'd7]) || (pattern[7] == 8'h24 && string[cnt+4'd7] == 8'h20)) ? 1 : 0;
+    if(next_state == CAL && cal_cnt <27)begin
+        match_tmp[0] <= ((pattern[0] == 8'h2E) || (pattern[0] == 8'h5E && string[cal_cnt] == 8'h20) || (pattern[0] == string[cal_cnt])) ? 1 : 0;
+        match_tmp[1] <= ((pattern[1] == 8'h2E) || (pattern[1] == string[cal_cnt+4'd1]) || (pattern[1] == 8'h24 && string[cal_cnt+4'd1] == 8'h20)) ? 1 : 0;
+        match_tmp[2] <= ((pattern[2] == 8'h2E) || (pattern[2] == string[cal_cnt+4'd2]) || (pattern[2] == 8'h24 && string[cal_cnt+4'd2] == 8'h20)) ? 1 : 0;
+        match_tmp[3] <= ((pattern[3] == 8'h2E) || (pattern[3] == string[cal_cnt+4'd3]) || (pattern[3] == 8'h24 && string[cal_cnt+4'd3] == 8'h20)) ? 1 : 0;
+        match_tmp[4] <= ((pattern[4] == 8'h2E) || (pattern[4] == string[cal_cnt+4'd4]) || (pattern[4] == 8'h24 && string[cal_cnt+4'd4] == 8'h20)) ? 1 : 0;
+        match_tmp[5] <= ((pattern[5] == 8'h2E) || (pattern[5] == string[cal_cnt+4'd5]) || (pattern[5] == 8'h24 && string[cal_cnt+4'd5] == 8'h20)) ? 1 : 0;
+        match_tmp[6] <= ((pattern[6] == 8'h2E) || (pattern[6] == string[cal_cnt+4'd6]) || (pattern[6] == 8'h24 && string[cal_cnt+4'd6] == 8'h20)) ? 1 : 0;
+        match_tmp[7] <= ((pattern[7] == 8'h2E) || (pattern[7] == string[cal_cnt+4'd7]) || (pattern[7] == 8'h24 && string[cal_cnt+4'd7] == 8'h20)) ? 1 : 0;
     end
 end
 
-assign match = &match_tmp;
+assign match = &match_tmp && (cal_cnt > 0);
 
 
 //output
 always @(*) begin
     if(next_state == OUT)begin
         valid = 1'b1;
-        match_index = (pattern[0] == 8'h5E) ? cnt[4:0] - 5'd1 : cnt[4:0] - 5'd2;
+        match_index = (pattern[0] == 8'h5E) ? cal_cnt[4:0] - 5'd1 : cal_cnt[4:0] - 5'd2;
     end
     else begin
         valid = 0;
@@ -155,12 +163,6 @@ always @(*) begin
     end
 end
 
-always@(match)begin
-    if(match==1)
-        cnt = 0;
-    else 
-        cnt = cnt;
-end
 
 always @(posedge clk or posedge reset) begin
     if(reset) k <= 0;
