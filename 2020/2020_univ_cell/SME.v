@@ -12,6 +12,7 @@ reg [7:0] string [0:33];
 reg [7:0] pattern [0:7];
 reg [7:0] cnt, pat_cnt;
 reg [7:0] match_tmp;
+reg [15:0] k;
 
 
 reg [2:0]state, next_state;
@@ -57,22 +58,40 @@ always@(*)begin
     end
 end
 
-//counter
+
+
+
+//cnt
 always@(posedge clk or posedge reset)begin
     if(reset)begin 
         cnt <= 0; 
+    end
+    else if((match == 1'b1 || cnt == 8'd27) && state == CAL) begin 
+        cnt <= 0;
+    end
+    else if(next_state == CAL || next_state == READSTR ) 
+    begin
+        cnt <= cnt + 1; //string -> pattern cnt==0
+    end
+    else if(next_state == READPAT || next_state == OUT) begin
+        cnt <= 0;
+    end    
+end
+
+//pat_cnt
+always@(posedge clk or posedge reset)begin
+    if(reset)begin 
         pat_cnt <= 0;  
     end
-    else if(state == CAL && cnt == 33) begin 
-        cnt <= 0;
+    else if(next_state == CAL || next_state == READSTR ) 
+    begin
         pat_cnt <= 0;
     end
-    else if(next_state == CAL || next_state == READSTR ) cnt <= cnt + 1; //string -> pattern cnt==0??
-    else if(next_state == READPAT ) begin
-        cnt <= 0;
+    else if(next_state == READPAT || next_state == OUT) begin
         pat_cnt <= pat_cnt + 1;
     end    
 end
+    
 
 //READ DATA STRING
 always@(posedge clk or posedge reset)begin
@@ -95,8 +114,9 @@ always@(posedge clk or posedge reset)begin
         for(j=0;j<8;j=j+1)
             pattern[j] <= 8'h2E;
     end
-    else if(next_state == READPAT)begin
-        pattern[pat_cnt] <= chardata;
+    else if(next_state == READPAT || next_state == OUT)begin
+        if(ispattern)
+            pattern[pat_cnt] <= chardata;
         if(pat_cnt == 0)begin
             for(j=1;j<8;j=j+1)
                 pattern[j] <= 8'h2E;
@@ -109,14 +129,14 @@ end
 always @(posedge clk or posedge reset) begin
     //cnt 0 ~ 26
     if(next_state == CAL && cnt <27)begin
-        match_tmp[0] <= ((pattern[cnt] == 8'h2E) || (pattern[cnt] == 8'h5E && string[cnt] == 8'd20) || (pattern[cnt] == string[cnt])) ? 1 : 0;
-        match_tmp[1] <= ((pattern[cnt+4'd1] == 8'h2E) || (pattern[cnt+4'd1] == string[cnt+4'd1])) ? 1 : 0;
-        match_tmp[2] <= ((pattern[cnt+4'd2] == 8'h2E) || (pattern[cnt+4'd2] == string[cnt+4'd2])) ? 1 : 0;
-        match_tmp[3] <= ((pattern[cnt+4'd3] == 8'h2E) || (pattern[cnt+4'd3] == string[cnt+4'd3])) ? 1 : 0;
-        match_tmp[4] <= ((pattern[cnt+4'd4] == 8'h2E) || (pattern[cnt+4'd4] == string[cnt+4'd4])) ? 1 : 0;
-        match_tmp[5] <= ((pattern[cnt+4'd5] == 8'h2E) || (pattern[cnt+4'd5] == string[cnt+4'd5])) ? 1 : 0;
-        match_tmp[6] <= ((pattern[cnt+4'd6] == 8'h2E) || (pattern[cnt+4'd6] == string[cnt+4'd6])) ? 1 : 0;
-        match_tmp[7] <= ((pattern[cnt+4'd7] == 8'h2E) || (pattern[cnt+4'd7] == string[cnt+4'd7]) || (pattern[cnt+4'd7] == 8'h24 && string[cnt+4'd7] == 8'd20)) ? 1 : 0;
+        match_tmp[0] <= ((pattern[0] == 8'h2E) || (pattern[0] == 8'h5E && string[cnt] == 8'h20) || (pattern[0] == string[cnt])) ? 1 : 0;
+        match_tmp[1] <= ((pattern[1] == 8'h2E) || (pattern[1] == string[cnt+4'd1]) || (pattern[1] == 8'h24 && string[cnt+4'd1] == 8'h20)) ? 1 : 0;
+        match_tmp[2] <= ((pattern[2] == 8'h2E) || (pattern[2] == string[cnt+4'd2]) || (pattern[2] == 8'h24 && string[cnt+4'd2] == 8'h20)) ? 1 : 0;
+        match_tmp[3] <= ((pattern[3] == 8'h2E) || (pattern[3] == string[cnt+4'd3]) || (pattern[3] == 8'h24 && string[cnt+4'd3] == 8'h20)) ? 1 : 0;
+        match_tmp[4] <= ((pattern[4] == 8'h2E) || (pattern[4] == string[cnt+4'd4]) || (pattern[4] == 8'h24 && string[cnt+4'd4] == 8'h20)) ? 1 : 0;
+        match_tmp[5] <= ((pattern[5] == 8'h2E) || (pattern[5] == string[cnt+4'd5]) || (pattern[5] == 8'h24 && string[cnt+4'd5] == 8'h20)) ? 1 : 0;
+        match_tmp[6] <= ((pattern[6] == 8'h2E) || (pattern[6] == string[cnt+4'd6]) || (pattern[6] == 8'h24 && string[cnt+4'd6] == 8'h20)) ? 1 : 0;
+        match_tmp[7] <= ((pattern[7] == 8'h2E) || (pattern[7] == string[cnt+4'd7]) || (pattern[7] == 8'h24 && string[cnt+4'd7] == 8'h20)) ? 1 : 0;
     end
 end
 
@@ -127,12 +147,24 @@ assign match = &match_tmp;
 always @(*) begin
     if(next_state == OUT)begin
         valid = 1'b1;
-        match_index = cnt[4:0];
+        match_index = (pattern[0] == 8'h5E) ? cnt[4:0] - 5'd1 : cnt[4:0] - 5'd2;
     end
     else begin
         valid = 0;
         match_index = 0;
     end
+end
+
+always@(match)begin
+    if(match==1)
+        cnt = 0;
+    else 
+        cnt = cnt;
+end
+
+always @(posedge clk or posedge reset) begin
+    if(reset) k <= 0;
+    else k <= k+1;
 end
 
 endmodule
