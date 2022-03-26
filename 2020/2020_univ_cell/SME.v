@@ -11,6 +11,7 @@ output reg valid;
 reg [7:0] string [0:33];
 reg [7:0] pattern [0:7];
 reg [7:0] str_cnt, pat_cnt, cal_cnt;
+reg [7:0] str_len, pat_len;
 reg [7:0] match_tmp;
 reg [15:0] k;
 
@@ -46,7 +47,7 @@ always@(*)begin
                 else next_state = READPAT;
             end
             CAL:begin
-                if(match || cal_cnt == 8'd26)next_state = OUT;
+                if(match || cal_cnt == str_len - pat_len + 4)next_state = OUT;
                 else next_state = CAL;
             end
             OUT:begin
@@ -99,6 +100,15 @@ always@(posedge clk or posedge reset)begin
     else begin
         cal_cnt <= 0;
     end    
+end
+
+//str_len
+always @(negedge isstring) begin
+    str_len <= str_cnt;
+end
+
+always @(negedge ispattern) begin
+    pat_len <= pat_cnt;
 end
     
 
