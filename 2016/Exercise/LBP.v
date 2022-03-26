@@ -16,7 +16,6 @@ output  reg	finish;
 //====================================================================
 
     reg [2:0]state, next_state;
-    reg [13:0] pc;
     reg [3:0] counterRead;
     reg [6:0]col,row;
     reg [7:0]data[0:8];
