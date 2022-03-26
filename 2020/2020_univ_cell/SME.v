@@ -47,7 +47,7 @@ always@(*)begin
                 else next_state = READPAT;
             end
             CAL:begin
-                if(match || cal_cnt == str_len - pat_len + 4)next_state = OUT;
+                if(match || cal_cnt == str_len - pat_len + 3)next_state = OUT;
                 else next_state = CAL;
             end
             OUT:begin
@@ -146,8 +146,8 @@ end
 //match_tmp
 always @(posedge clk) begin
     //cnt 0 ~ 26
-    if(next_state == CAL && cal_cnt <27)begin
-        match_tmp[0] <= ((pattern[0] == 8'h2E) || (pattern[0] == 8'h5E && string[cal_cnt] == 8'h20) || (pattern[0] == string[cal_cnt])) ? 1 : 0;
+    if(next_state == CAL && cal_cnt <34)begin
+        match_tmp[0] <= ((pattern[0] == 8'h2E) || (pattern[0] == 8'h5E && string[cal_cnt] == 8'h20) ||           (pattern[0] == string[cal_cnt])) ? 1 : 0;
         match_tmp[1] <= ((pattern[1] == 8'h2E) || (pattern[1] == string[cal_cnt+4'd1]) || (pattern[1] == 8'h24 && string[cal_cnt+4'd1] == 8'h20)) ? 1 : 0;
         match_tmp[2] <= ((pattern[2] == 8'h2E) || (pattern[2] == string[cal_cnt+4'd2]) || (pattern[2] == 8'h24 && string[cal_cnt+4'd2] == 8'h20)) ? 1 : 0;
         match_tmp[3] <= ((pattern[3] == 8'h2E) || (pattern[3] == string[cal_cnt+4'd3]) || (pattern[3] == 8'h24 && string[cal_cnt+4'd3] == 8'h20)) ? 1 : 0;
