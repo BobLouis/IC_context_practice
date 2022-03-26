@@ -9,7 +9,7 @@ output reg [4:0] match_index;
 output reg valid;
 
 reg [7:0] string [0:33];
-reg [7:0] pattern [0:7];
+reg [7:0] pattern [0:8];
 reg [7:0] str_cnt, pat_cnt, cal_cnt;
 reg [7:0] str_len, pat_len;
 reg [7:0] match_tmp;
@@ -136,7 +136,7 @@ always@(posedge clk or posedge reset)begin
     else if(ispattern)begin
             pattern[pat_cnt] <= chardata;
         if(pat_cnt == 0)begin
-            for(j=1;j<8;j=j+1)
+            for(j=1;j<9;j=j+1)
                 pattern[j] <= 8'h2E;
         end
     end
@@ -158,7 +158,12 @@ always @(posedge clk) begin
     end
 end
 
-assign match = &match_tmp && (cal_cnt > 0);
+assign match = (pattern[8] == 8'h24) ? 0 : &match_tmp && (cal_cnt > 1);
+// assign match =  &match_tmp && (cal_cnt > 1);
+
+
+
+
 
 
 //output
