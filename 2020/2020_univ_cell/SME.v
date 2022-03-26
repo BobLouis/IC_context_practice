@@ -126,7 +126,7 @@ end
 
 
 //match_tmp
-always @(posedge clk or posedge reset) begin
+always @(posedge clk) begin
     //cnt 0 ~ 26
     if(next_state == CAL && cnt <27)begin
         match_tmp[0] <= ((pattern[0] == 8'h2E) || (pattern[0] == 8'h5E && string[cnt] == 8'h20) || (pattern[0] == string[cnt])) ? 1 : 0;
