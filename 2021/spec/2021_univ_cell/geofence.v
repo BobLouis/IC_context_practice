@@ -1,6 +1,8 @@
 // `define OUTER(Ax,Ay,Bx,By) (((Ax*By) - (Ay*Bx)) >0 ? 1:0)
-// `define OUTER(Ax,Ay,Bx,By) (($signed({11'd0,Ax})*$signed(By)) > ($signed({11'd0,Ay})*$signed(Bx)) ? 1:0)
-`define OUTER(Ax,Ay,Bx,By) 1
+`define OUTER(Ax,Ay,Bx,By) (((Ax*By) - (Ay*Bx)) >0 )
+
+// `define OUTER(Ax,Ay,Bx,By) (($signed({11'd0,Ax})*$signed({11'd0,By})) > ($signed({11'd0,Ay})*$signed({11'd0,Bx})) ? 1:0)
+// `define OUTER(Ax,Ay,Bx,By) (({10'd0,Ax*By) - (Ay*Bx))
 module geofence ( clk,reset,X,Y,valid,is_inside);
 input clk;
 input reset;
