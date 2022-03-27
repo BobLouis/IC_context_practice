@@ -23,7 +23,7 @@ reg [9:0]loc_y[0:5];
 reg [5:0]judge;
 wire outer_tmp;
 wire outer_set;
-// wire signed[19:0]mul1,mul2;
+wire signed[19:0]mul1,mul2;
 wire [2:0]cal_cnt;
 wire signed[10:0] out1, out2, out3, out4;
 
@@ -112,8 +112,8 @@ assign v2_y = loc_y[cmp2] - loc_y[0];
 
 
 assign outer_set = (`OUTER(v1_x,v1_y,v2_x,v2_y));
-// assign mul1 = v1_x*v2_y;
-// assign mul2 = v1_y*v2_x;
+assign mul1 = v1_x*v2_y;
+assign mul2 = v1_y*v2_x;
 
 //DATA INPUT AND SET
 always@(posedge clk)begin
