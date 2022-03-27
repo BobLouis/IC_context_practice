@@ -1,4 +1,4 @@
-`define outer(Ax,Ay,Bx,By) ((((Ax*By) - (Ay*Bx)) > 0) ? 1:0)
+`define OUTER(Ax,Ay,Bx,By) (((Ax*By) > (Ay*Bx)) ? 1:0)
 
 module geofence ( clk,reset,X,Y,valid,is_inside);
 input clk;
@@ -6,21 +6,23 @@ input reset;
 input [9:0] X;
 input [9:0] Y;
 output reg valid;
-output reg is_inside;
+output is_inside;
 
 reg [2:0]state, next_state;
 parameter IDLE = 3'b000;
-parameter READ1 = 3'b001;
+parameter READ = 3'b001;
 parameter SET = 3'b010;
 parameter CAL = 3'b011;
 parameter OUT = 3'b100;
 
 reg [2:0]counter;
+reg [2:0]cal_cnt;
 reg [9:0]target_x;
 reg [9:0]target_y;
 reg [9:0]loc_x[0:5]; 
 reg [9:0]loc_y[0:5];
 reg [5:0]judge;
+wire outer_tmp;
 
 //set
 reg [2:0]cmp1,cmp2;
@@ -34,13 +36,13 @@ always@(posedge clk or posedge reset)begin
         state <= next_state;
 end
 
-always(*)begin
+always@(*)begin
     if(reset)
         next_state <= IDLE;
     else begin
         case(state)
             IDLE:
-                next_state = READL;
+                next_state = READ;
             READ:begin
                 if(counter == 7) next_state = SET;
                 else next_state = READ;  
@@ -50,7 +52,7 @@ always(*)begin
                 else next_state = SET;  
             end
             CAL:begin
-                if() next_state = OUT;
+                if(cal_cnt == 6) next_state = OUT;
                 else next_state = CAL;
             end 
             OUT:begin
@@ -66,10 +68,10 @@ always@(posedge clk or posedge reset)begin
     if(reset)
         counter <= 0;
     else begin
-        if(counter < 7)
-            counter <= counter + 1;
-        else
+        if(next_state == SET)
             counter <= 0;
+        else
+            counter <= counter + 1;
     end
 end
 
@@ -85,7 +87,7 @@ always @(posedge clk or posedge reset) begin
             cmp2 <= cmp1 + 3'd2;
         end
         else begin
-            cmp2 <= cmp2 + 3d'1;
+            cmp2 <= cmp2 + 3'd1;
         end
     end
 end
@@ -112,13 +114,48 @@ always@(posedge clk)begin
         end
     end
     else if(state == SET) begin
-        if(outer(v1_x,v1_y,v2_x,v2_y) == 0) begin
+        if( (`OUTER(v1_x,v1_y,v2_x,v2_y)) == 0) begin
+            //swap
             loc_x[cmp1] <= loc_x[cmp2];
             loc_x[cmp2] <= loc_x[cmp1];
             loc_y[cmp1] <= loc_y[cmp2];
             loc_y[cmp2] <= loc_y[cmp1];
         end
     end 
+end
+
+//CAL_CNT
+always @(posedge clk or posedge reset) begin
+    if(reset)
+        cal_cnt <= 0;
+    else begin
+        if(next_state == OUT)
+            cal_cnt <= 0;
+        else
+            cal_cnt <= cal_cnt + 1;
+    end
+end
+
+assign  outer_tmp = `OUTER(target_x, target_y, loc_x[cal_cnt], loc_y[cal_cnt]);
+
+
+always@(posedge clk or posedge reset)begin
+    if(reset)
+        judge <= 0;
+    else if(next_state == CAL)
+        judge[cal_cnt] <= outer_tmp;
+end
+
+//RESULT
+assign  is_inside = &judge || &(~judge);
+
+
+//OUTPUT
+always @(*) begin
+    if(next_state == OUT)
+        valid = 1'b1;
+    else 
+        valid = 0;
 end
 
 endmodule
