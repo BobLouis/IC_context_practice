@@ -21,11 +21,11 @@ reg [9:0]target_y;
 reg [9:0]loc_x[0:5]; 
 reg [9:0]loc_y[0:5];
 reg [5:0]judge;
-wire outer_tmp;
-wire outer_set;
-wire signed[19:0]mul1,mul2;
+wire outer_;
+
+// wire signed[19:0]mul1,mul2;
 wire [2:0]cal_cnt;
-wire signed[10:0] out1, out2, out3, out4;
+reg signed[10:0] out1, out2, out3, out4;
 
 
 //set
@@ -101,19 +101,21 @@ always @(posedge clk or posedge reset) begin
     end
 end
 
+always @(*) begin
+    if(next_state == SET || state == SET)begin
+        out1 = loc_x[cmp1] - loc_x[0];
+        out2 = loc_y[cmp1] - loc_y[0];
+        out3 = loc_x[cmp2] - loc_x[0];
+        out4 = loc_y[cmp2] - loc_y[0];
+    end
+    else begin
+        out1 = loc_x[cnt] - target_x;
+        out2 = loc_y[cnt] - target_y;
+        out3 = loc_x[cal_cnt] - loc_x[cnt];
+        out4 = loc_y[cal_cnt] - loc_y[cnt];
+    end
 
-
-assign v1_x = loc_x[cmp1] - loc_x[0] ;
-assign v1_y = loc_y[cmp1] - loc_y[0] ;
-
-assign v2_x = loc_x[cmp2] - loc_x[0];
-assign v2_y = loc_y[cmp2] - loc_y[0];
-
-
-
-assign outer_set = (`OUTER(v1_x,v1_y,v2_x,v2_y));
-assign mul1 = v1_x*v2_y;
-assign mul2 = v1_y*v2_x;
+end
 
 //DATA INPUT AND SET
 always@(posedge clk)begin
@@ -128,7 +130,7 @@ always@(posedge clk)begin
         end
     end
     else if(next_state == SET || state == SET) begin
-        if( outer_set == 0) begin
+        if( outer_ == 0) begin
             //swap
             loc_x[cmp1] <= loc_x[cmp2];
             loc_x[cmp2] <= loc_x[cmp1];
@@ -139,19 +141,19 @@ always@(posedge clk)begin
 end
 
 
-assign out1 = loc_x[cnt] - target_x;
-assign out2 = loc_y[cnt] - target_y;
-assign out3 = loc_x[cal_cnt] - loc_x[cnt];
-assign out4 = loc_y[cal_cnt] - loc_y[cnt];
+// assign out1 = loc_x[cnt] - target_x;
+// assign out2 = loc_y[cnt] - target_y;
+// assign out3 = loc_x[cal_cnt] - loc_x[cnt];
+// assign out4 = loc_y[cal_cnt] - loc_y[cnt];
 assign cal_cnt = (cnt < 5) ? cnt+1 : 0;
-assign  outer_tmp = `OUTER(out1  , out2  , out3, out4);
+assign  outer_ = `OUTER(out1  , out2  , out3, out4);
 
 //CAL
 always@(posedge clk or posedge reset)begin
     if(reset)
         judge <= 0;
     else if(state == CAL)
-        judge[cnt] <= outer_tmp;
+        judge[cnt] <= outer_;
 end
 
 //RESULT
