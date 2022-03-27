@@ -1,0 +1,54 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/bob90/verilog/IC_context_practice/2020/2020_univ_cell
+vgeofence
+!s110 1648354641
+!i10b 1
+!s100 9bI^In9X@>TeD`@2Ibz=g0
+IRnRD1R3TN8PHdO^4GgNFM3
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 dC:/Users/bob90/verilog/IC_context_practice/2021/spec/2021_univ_cell
+w1648354637
+8geofence.v
+Fgeofence.v
+L0 3
+Z2 OV;L;10.6d;65
+r1
+!s85 0
+31
+!s108 1648354641.000000
+!s107 geofence.v|
+!s90 -reportprogress|300|geofence.v|
+!i113 1
+Z3 tCvgOpt 0
+vtestfixture
+DXx6 sv_std 3 std 0 22 ;edk3;YfCLjCm[Hd=`UGQ2
+!s110 1648352958
+!i10b 1
+!s100 gW<L1jM2iNXiG=[Gd8Z:a2
+IbY1IDnkZ[iB?4f_WkYMHR3
+R0
+!s105 tb_sv_unit
+S1
+R1
+w1616462404
+8C:/Users/bob90/verilog/IC_context_practice/2021/spec/2021_univ_cell/tb.sv
+FC:/Users/bob90/verilog/IC_context_practice/2021/spec/2021_univ_cell/tb.sv
+L0 7
+R2
+r1
+!s85 0
+31
+!s108 1648352958.000000
+!s107 C:/Users/bob90/verilog/IC_context_practice/2021/spec/2021_univ_cell/tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/bob90/verilog/IC_context_practice/2021/spec/2021_univ_cell/tb.sv|
+!i113 1
+o-work work -sv
+R3

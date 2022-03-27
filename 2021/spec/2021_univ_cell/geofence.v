@@ -26,7 +26,7 @@ wire outer_tmp;
 
 //set
 reg [2:0]cmp1,cmp2;
-wire signed [9:0] v1_x,v1_y,v2_x,v2_y;
+wire signed [10:0] v1_x,v1_y,v2_x,v2_y;
 
 
 always@(posedge clk or posedge reset)begin
@@ -94,10 +94,11 @@ end
 
 
 
-assign v1_x = loc_x[0] - loc_x[cmp1];
-assign v1_y = loc_y[0] - loc_y[cmp1];
-assign v2_x = loc_x[0] - loc_x[cmp2];
-assign v2_y = loc_y[0] - loc_y[cmp2];
+assign v1_x = loc_x[cmp1] - loc_x[0] ;
+assign v1_y = loc_y[cmp1] - loc_y[0] ;
+
+assign v2_x = loc_x[cmp2] - loc_x[0];
+assign v2_y = loc_y[cmp2] - loc_y[0];
 
 
 
@@ -113,7 +114,7 @@ always@(posedge clk)begin
             loc_y[counter-1] <= Y;
         end
     end
-    else if(state == SET) begin
+    else if(next_state == SET) begin
         if( (`OUTER(v1_x,v1_y,v2_x,v2_y)) == 0) begin
             //swap
             loc_x[cmp1] <= loc_x[cmp2];
