@@ -48,7 +48,7 @@ always@(*)begin
             IDLE:
                 next_state = READ;
             READ:begin
-                if(cnt == 7) next_state = SET;
+                if(cnt == 3'd7) next_state = SET;
                 else next_state = READ;  
             end
             SET:begin
@@ -56,7 +56,7 @@ always@(*)begin
                 else next_state = SET;  
             end
             CAL:begin
-                if(cnt == 6) next_state = OUT;
+                if(cnt == 3'd6) next_state = OUT;
                 else next_state = CAL;
             end 
             OUT:begin
@@ -72,10 +72,10 @@ always@(posedge clk or posedge reset)begin
     if(reset)
         cnt <= 0;
     else if(next_state == READ)begin
-        cnt <= cnt + 1;
+        cnt <= cnt + 3'd1;
     end
-    else if(state == CAL && cnt < 6)
-        cnt <= cnt + 1;
+    else if(state == CAL && cnt < 3'd6)
+        cnt <= cnt + 3'd1;
     else
         cnt <= 0;
 end
@@ -125,8 +125,8 @@ always@(posedge clk)begin
             target_y <= Y;
         end
         else begin
-            loc_x[cnt-1] <= X;        
-            loc_y[cnt-1] <= Y;
+            loc_x[cnt - 3'd1] <= X;        
+            loc_y[cnt - 3'd1] <= Y;
         end
     end
     else if(next_state == SET || state == SET) begin
@@ -140,12 +140,8 @@ always@(posedge clk)begin
     end 
 end
 
-
-// assign out1 = loc_x[cnt] - target_x;
-// assign out2 = loc_y[cnt] - target_y;
-// assign out3 = loc_x[cal_cnt] - loc_x[cnt];
-// assign out4 = loc_y[cal_cnt] - loc_y[cnt];
-assign cal_cnt = (cnt < 5) ? cnt+1 : 0;
+//CAL_RESULT OUT
+assign cal_cnt = (cnt < 3'd5) ? cnt + 3'd1 : 0;
 assign  outer_ = `OUTER(out1  , out2  , out3, out4);
 
 //CAL
