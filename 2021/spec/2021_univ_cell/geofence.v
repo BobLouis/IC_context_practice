@@ -42,7 +42,7 @@ end
 
 always@(*)begin
     if(reset)
-        next_state <= IDLE;
+        next_state = IDLE;
     else begin
         case(state)
             IDLE:
