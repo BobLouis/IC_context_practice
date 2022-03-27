@@ -15,8 +15,7 @@ parameter SET = 3'b010;
 parameter CAL = 3'b011;
 parameter OUT = 3'b100;
 
-reg [2:0]counter;
-reg [2:0]cal_cnt;
+reg [2:0]cnt;
 reg [9:0]target_x;
 reg [9:0]target_y;
 reg [9:0]loc_x[0:5]; 
@@ -25,7 +24,8 @@ reg [5:0]judge;
 wire outer_tmp;
 wire outer_set;
 wire signed[19:0]mul1,mul2;
-
+wire [2:0]cal_cnt;
+wire signed[10:0] out1, out2, out3, out4;
 
 
 //set
@@ -48,7 +48,7 @@ always@(*)begin
             IDLE:
                 next_state = READ;
             READ:begin
-                if(counter == 7) next_state = SET;
+                if(cnt == 7) next_state = SET;
                 else next_state = READ;  
             end
             SET:begin
@@ -56,7 +56,7 @@ always@(*)begin
                 else next_state = SET;  
             end
             CAL:begin
-                if(cal_cnt == 6) next_state = OUT;
+                if(cnt == 6) next_state = OUT;
                 else next_state = CAL;
             end 
             OUT:begin
@@ -67,19 +67,20 @@ always@(*)begin
     end 
 end
 
-//COUNTER
+//cnt
 always@(posedge clk or posedge reset)begin
     if(reset)
-        counter <= 0;
-    else begin
-        if(next_state == SET)
-            counter <= 0;
-        else
-            counter <= counter + 1;
+        cnt <= 0;
+    else if(next_state == READ)begin
+        cnt <= cnt + 1;
     end
+    else if(state == CAL && cnt < 6)
+        cnt <= cnt + 1;
+    else
+        cnt <= 0;
 end
 
-//set counter
+//set cnt
 always @(posedge clk or posedge reset) begin
     if(reset)begin
         cmp1 <= 3'd1;
@@ -117,13 +118,13 @@ assign mul2 = v1_y*v2_x;
 //DATA INPUT AND SET
 always@(posedge clk)begin
     if(next_state == READ)begin
-        if(counter == 0)begin
+        if(cnt == 0)begin
             target_x <= X;
             target_y <= Y;
         end
         else begin
-            loc_x[counter-1] <= X;        
-            loc_y[counter-1] <= Y;
+            loc_x[cnt-1] <= X;        
+            loc_y[cnt-1] <= Y;
         end
     end
     else if(next_state == SET || state == SET) begin
@@ -137,26 +138,20 @@ always@(posedge clk)begin
     end 
 end
 
-//CAL_CNT
-always @(posedge clk or posedge reset) begin
-    if(reset)
-        cal_cnt <= 0;
-    else begin
-        if(next_state == OUT)
-            cal_cnt <= 0;
-        else
-            cal_cnt <= cal_cnt + 1;
-    end
-end
 
-assign  outer_tmp = `OUTER(target_x - loc_x[cal_cnt], target_y - loc_y[cal_cnt], loc_x[cal_cnt+1] - loc_x[cal_cnt], loc_y[cal_cnt+1]-loc_y[cal_cnt]);
+assign out1 = loc_x[cnt] - target_x;
+assign out2 = loc_y[cnt] - target_y;
+assign out3 = loc_x[cal_cnt] - loc_x[cnt];
+assign out4 = loc_y[cal_cnt] - loc_y[cnt];
+assign cal_cnt = (cnt < 5) ? cnt+1 : 0;
+assign  outer_tmp = `OUTER(out1  , out2  , out3, out4);
 
-
+//CAL
 always@(posedge clk or posedge reset)begin
     if(reset)
         judge <= 0;
-    else if(next_state == CAL)
-        judge[cal_cnt] <= outer_tmp;
+    else if(state == CAL)
+        judge[cnt] <= outer_tmp;
 end
 
 //RESULT
