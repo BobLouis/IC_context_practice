@@ -78,9 +78,8 @@ end
 always@(posedge clk or posedge reset)begin
     if(reset)
         cnt <= 0;
-    else if(next_state == READ)begin
+    else if(next_state == READ)
         cnt <= cnt + 3'd1;
-    end
     else if(state == CAL && cnt < 3'd6)begin
         if(cnt_div == 2)
             cnt <= cnt + 3'd1;
@@ -165,20 +164,20 @@ always @(*) begin
 end
 
 
-always @(posedge clk) begin
-    if(next_state == SET || state == SET)begin
-        out1 = loc_x[cmp1] - loc_x[0];
-        out2 = loc_y[cmp1] - loc_y[0];
-        out3 = loc_x[cmp2] - loc_x[0];
-        out4 = loc_y[cmp2] - loc_y[0];
-    end
-    else begin
-        out1 = loc_x[cnt] - target_x;
-        out2 = loc_y[cnt] - target_y;
-        out3 = loc_x[cal_cnt] - loc_x[cnt];
-        out4 = loc_y[cal_cnt] - loc_y[cnt];
-    end
-end
+// always @(posedge clk) begin
+//     if(next_state == SET || state == SET)begin
+//         out1 = loc_x[cmp1] - loc_x[0];
+//         out2 = loc_y[cmp1] - loc_y[0];
+//         out3 = loc_x[cmp2] - loc_x[0];
+//         out4 = loc_y[cmp2] - loc_y[0];
+//     end
+//     else begin
+//         out1 = loc_x[cnt] - target_x;
+//         out2 = loc_y[cnt] - target_y;
+//         out3 = loc_x[cal_cnt] - loc_x[cnt];
+//         out4 = loc_y[cal_cnt] - loc_y[cnt];
+//     end
+// end
 
 //DATA INPUT AND SET
 always@(posedge clk)begin
