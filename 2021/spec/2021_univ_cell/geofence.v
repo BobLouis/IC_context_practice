@@ -18,14 +18,16 @@ parameter SET = 3'b010;
 parameter CAL = 3'b011;
 parameter OUT = 3'b100;
 
+reg [1:0]cnt_div;
 reg [2:0]cnt;
 reg [9:0]target_x;
 reg [9:0]target_y;
 reg [9:0]loc_x[0:5]; 
 reg [9:0]loc_y[0:5];
 reg [5:0]judge;
+reg signed[10:0] buf1, buf2;
 wire outer_;
-wire signed [20:0]mul1,mul2;
+reg signed[20:0]mul1,mul2;
 
 
 // wire signed[19:0]mul1,mul2;
@@ -57,7 +59,7 @@ always@(*)begin
                 else next_state = READ;  
             end
             SET:begin
-                if(cmp1 == 3'd4 && cmp2 == 3'd5) next_state = CAL;
+                if(cmp1 == 3'd4 && cmp2 == 3'd5 && cnt_div == 2) next_state = CAL;
                 else next_state = SET;  
             end
             CAL:begin
@@ -79,10 +81,26 @@ always@(posedge clk or posedge reset)begin
     else if(next_state == READ)begin
         cnt <= cnt + 3'd1;
     end
-    else if(state == CAL && cnt < 3'd6)
-        cnt <= cnt + 3'd1;
+    else if(state == CAL && cnt < 3'd6)begin
+        if(cnt_div == 2)
+            cnt <= cnt + 3'd1;
+    end
     else
         cnt <= 0;
+end
+//cnt_div
+always @(posedge clk or posedge reset) begin
+    if(reset)begin
+        cnt_div <= 0;
+    end
+    else if(next_state == SET)begin
+        if(cnt_div == 2'd2) cnt_div <= 0;
+        else cnt_div <= cnt_div + 1;
+    end
+    else if(next_state == CAL)begin
+        if(cnt_div == 2'd2) cnt_div <= 0;
+        else cnt_div <= cnt_div + 1;
+    end
 end
 
 //set cnt
@@ -91,7 +109,7 @@ always @(posedge clk or posedge reset) begin
         cmp1 <= 3'd1;
         cmp2 <= 3'd2;
     end
-    else if(next_state == SET)begin
+    else if(next_state == SET && cnt_div == 2)begin
         if(cmp2 == 3'd5)begin
             cmp1 <= cmp1 + 3'd1;
             cmp2 <= cmp1 + 3'd2;
@@ -100,7 +118,7 @@ always @(posedge clk or posedge reset) begin
             cmp2 <= cmp2 + 3'd1;
         end
     end
-    else begin
+    else if(cmp1 == 3'd4 && cmp2 == 3'd5 && cnt_div == 2)begin
         cmp1 <= 3'd1;
         cmp2 <= 3'd2;
     end
@@ -119,7 +137,47 @@ always @(*) begin
         out3 = loc_x[cal_cnt] - loc_x[cnt];
         out4 = loc_y[cal_cnt] - loc_y[cnt];
     end
+end
 
+always @(*) begin
+    //set
+    if(next_state == SET || state == SET)begin
+        if(cnt_div == 0)begin
+            buf1 = out1;
+            buf2 = out4;
+        end
+        else begin
+            buf1 = out2;
+            buf2 = out3;
+        end
+    end
+    else begin
+        //cal
+        if(cnt_div == 0)begin
+            buf1 = out1;
+            buf2 = out4;
+        end
+        else begin
+            buf1 = out2;
+            buf2 = out3;
+        end
+    end
+end
+
+
+always @(posedge clk) begin
+    if(next_state == SET || state == SET)begin
+        out1 = loc_x[cmp1] - loc_x[0];
+        out2 = loc_y[cmp1] - loc_y[0];
+        out3 = loc_x[cmp2] - loc_x[0];
+        out4 = loc_y[cmp2] - loc_y[0];
+    end
+    else begin
+        out1 = loc_x[cnt] - target_x;
+        out2 = loc_y[cnt] - target_y;
+        out3 = loc_x[cal_cnt] - loc_x[cnt];
+        out4 = loc_y[cal_cnt] - loc_y[cnt];
+    end
 end
 
 //DATA INPUT AND SET
@@ -134,8 +192,8 @@ always@(posedge clk)begin
             loc_y[cnt - 3'd1] <= Y;
         end
     end
-    else if(next_state == SET || state == SET) begin
-        if( outer_ == 0) begin
+    else if((next_state == SET || state == SET) && cnt_div == 2) begin
+        if( outer_== 0) begin
             //swap
             loc_x[cmp1] <= loc_x[cmp2];
             loc_x[cmp2] <= loc_x[cmp1];
@@ -149,8 +207,18 @@ end
 assign cal_cnt = (cnt < 3'd5) ? cnt + 3'd1 : 0;
 // assign  outer_ = `OUTER(out1  , out2  , out3, out4);
 // assign outer_ = (((out1*out4) - (out2*out3)) >0 );//ALL PASS
-assign mul1 = (out1*out4);
-assign mul2 = (out2*out3);
+
+wire signed[20:0] mul;
+assign mul = buf1 * buf2;
+
+always @(posedge clk) begin
+    if(cnt_div==0)
+        mul1 <= mul;
+    else 
+        mul2 <= mul;
+end
+// assign mul1 = (out1*out4);
+// assign mul2 = (out2*out3);
 assign outer_ = (mul1 > mul2);
 // assign outer_ = ((out1*out4) - (out2*out3));
 
