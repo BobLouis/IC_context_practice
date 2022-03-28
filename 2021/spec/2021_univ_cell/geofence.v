@@ -1,5 +1,5 @@
 // `define OUTER(Ax,Ay,Bx,By) (((Ax*By) - (Ay*Bx)) >0 ? 1:0)
-`define OUTER(Ax,Ay,Bx,By) (((Ax*By) - (Ay*Bx)) >0 )
+// `define OUTER(Ax,Ay,Bx,By) (((Ax*By) - (Ay*Bx)) >0 )
 
 // `define OUTER(Ax,Ay,Bx,By) (($signed({11'd0,Ax})*$signed({11'd0,By})) > ($signed({11'd0,Ay})*$signed({11'd0,Bx})) ? 1:0)
 // `define OUTER(Ax,Ay,Bx,By) (({10'd0,Ax*By) - (Ay*Bx))
@@ -25,6 +25,8 @@ reg [9:0]loc_x[0:5];
 reg [9:0]loc_y[0:5];
 reg [5:0]judge;
 wire outer_;
+wire signed [20:0]mul1,mul2;
+
 
 // wire signed[19:0]mul1,mul2;
 wire [2:0]cal_cnt;
@@ -145,7 +147,13 @@ end
 
 //CAL_RESULT OUT
 assign cal_cnt = (cnt < 3'd5) ? cnt + 3'd1 : 0;
-assign  outer_ = `OUTER(out1  , out2  , out3, out4);
+// assign  outer_ = `OUTER(out1  , out2  , out3, out4);
+// assign outer_ = (((out1*out4) - (out2*out3)) >0 );//ALL PASS
+assign mul1 = (out1*out4);
+assign mul2 = (out2*out3);
+assign outer_ = (mul1 > mul2);
+// assign outer_ = ((out1*out4) - (out2*out3));
+
 
 //CAL
 always@(posedge clk or posedge reset)begin
