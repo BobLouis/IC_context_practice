@@ -1,0 +1,13 @@
+C:/Users/bob90/verilog/IC_context_practice/2022/2022_univ_cell/2022_univ_cell/tb.sv {0 {vlog -work work -sv C:/Users/bob90/verilog/IC_context_practice/2022/2022_univ_cell/2022_univ_cell/tb.sv
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+** Error: (vlog-42) Unsupported ModelSim library format for "C:/Users/bob90/verilog/IC_context_practice/2022/2022_univ_cell/2022_univ_cell/work". (Format: 4)
+
+** Error: Verilog Compiler exiting
+
+} {3.0 4.0 5.0 6.0} {}} C:/Users/bob90/verilog/IC_context_practice/2022/2022_univ_cell/2022_univ_cell/JAM.v {0 {vlog -work work C:/Users/bob90/verilog/IC_context_practice/2022/2022_univ_cell/2022_univ_cell/JAM.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+** Error: (vlog-42) Unsupported ModelSim library format for "C:/Users/bob90/verilog/IC_context_practice/2022/2022_univ_cell/2022_univ_cell/work". (Format: 4)
+
+** Error: Verilog Compiler exiting
+
+} {3.0 4.0 5.0 6.0} {}}
