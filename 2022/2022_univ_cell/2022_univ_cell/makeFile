@@ -1,0 +1,12 @@
+
+VERILOG = iverilog
+TARGET = simple.vcd
+
+$(TARGET) : simple.vvp
+	vvp simple.vvp
+
+simple.vvp: tb.sv JAM.v
+	$(VERILOG) -o simple.vvp tb.sv JAM.v
+
+clean:
+	rm $(TARGET)
