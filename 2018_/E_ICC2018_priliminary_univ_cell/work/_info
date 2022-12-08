@@ -1,0 +1,84 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\bob90\verilog\IC_context_practice\2022\2022_univ_cell\2022_mod
+vIRAM
+!i10b 1
+Z1 !s100 ShWXITX>P10c8eoXzl4m`0
+Z2 If`OTKT3OGj?zU^J`Y8_E`2
+Z3 V<@Ffj1cn60zcz7;=HAIWo0
+Z4 dC:\Users\bob90\verilog\IC_context_practice\2018_\E_ICC2018_priliminary_univ_cell
+Z5 w1670489621
+Z6 8testfixture.v
+Z7 Ftestfixture.v
+Z8 L0 191
+Z9 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z10 !s108 1670489663.363000
+Z11 !s107 testfixture.v|
+Z12 !s90 -reportprogress|300|testfixture.v|
+!s101 -O0
+o-O0
+Z13 n@i@r@a@m
+vIROM
+!i10b 1
+Z14 !s100 a;Bzg?8kU<@T7^``PiiM^1
+Z15 IzO6GMW@jg8LFb^Im;8>b=0
+Z16 VTm6D@FeKBTlED]LWI0ZaV0
+R4
+R5
+R6
+R7
+Z17 L0 166
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!s101 -O0
+o-O0
+Z18 n@i@r@o@m
+vLCD_CTRL
+Z19 Ik8ddmO:bM1fJf5=jIAc@i1
+Z20 V4FWmW=;OfWmMkaPblobGU1
+R4
+Z21 w1670489572
+Z22 8LCD_CTRL.v
+Z23 FLCD_CTRL.v
+L0 1
+R9
+r1
+31
+Z24 !s90 -reportprogress|300|LCD_CTRL.v|
+o-O0
+Z25 n@l@c@d_@c@t@r@l
+Z26 !s100 a:RfSD=Dk`zJ0kJmA6Hm=1
+Z27 !s108 1670489594.296000
+Z28 !s107 LCD_CTRL.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vtest
+!i10b 1
+Z29 !s100 8z_A?HPE^k5^b@d68M5mg3
+Z30 Ic<]YU3?OE:_BgaGa1TVFC2
+Z31 ViYi1S7iTl]5NUC4OOjAFG3
+R4
+R5
+R6
+R7
+L0 27
+R9
+r1
+!s85 0
+31
+R10
+R11
+R12
+!s101 -O0
+o-O0
