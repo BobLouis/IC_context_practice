@@ -52,6 +52,8 @@ always @(posedge clk or posedge reset) begin
                 cnt_read <= cnt_read +1; 
             else
                 cnt_read <= 0;
+            if(cnt_read == 10)
+                read_done = 1;
         end
         else
         begin
@@ -65,6 +67,9 @@ always @(posedge clk or posedge reset) begin
                 cnt_read <= cnt_read +1; 
             else
                 cnt_read <= 0;
+
+            if(cnt_read == 4)
+                read_done = 1;
         end
     end
 end
@@ -78,7 +83,7 @@ always @(posedge clk) begin
         begin
             case (read_cnt)
                 2 :pix[4] <= gray_data;  
-                3 :pix[0] <= gray_data;  
+                3 :pix[0] <= gray_data; 
                 4 :pix[1] <= gray_data;  
                 5 :pix[2] <= gray_data;  
                 6 :pix[3] <= gray_data;  
@@ -87,30 +92,51 @@ always @(posedge clk) begin
                 9 :pix[7] <= gray_data;  
                 10:pix[8] <= gray_data;  
             endcase
+            
+            case (read_cnt)
+                3 :buffer[0] <= (gray_data >= pix[4]) ? 1:0;  
+                4 :buffer[1] <= (gray_data >= pix[4]) ? 1:0;  
+                5 :buffer[2] <= (gray_data >= pix[4]) ? 1:0;  
+                6 :buffer[3] <= (gray_data >= pix[4]) ? 1:0;  
+                7 :buffer[5] <= (gray_data >= pix[4]) ? 1:0;  
+                8 :buffer[6] <= (gray_data >= pix[4]) ? 1:0;  
+                9 :buffer[7] <= (gray_data >= pix[4]) ? 1:0;  
+                10 :buffer[8] <= (gray_data >= pix[4]) ? 1:0;   
+            endcase
+
         end
         else //read three
         begin
-            if(read_cnt == 1)
+            if(read_cnt == 0)
             begin
                 pix[0] <= pix[1];
                 pix[1] <= pix[2];
                 pix[3] <= pix[4];
-                pix[5] <= pix[1];
+                pix[4] <= pix[5];
+                pix[6] <= pix[7];
+                pix[7] <= pix[8];
                 pix[0] <= pix[1];
-                pix[0] <= pix[1];
-                pix[0] <= pix[1];
+
+                buffer[0] <= (pix[0] >= pix[4]) ? 1:0;
+                buffer[1] <= (pix[1] >= pix[4]) ? 1:0;
+                buffer[3] <= (pix[3] >= pix[4]) ? 1:0;
+                buffer[6] <= (pix[6] >= pix[4]) ? 1:0;
+                buffer[7] <= (pix[7] >= pix[4]) ? 1:0;
             end
-            case (read_cnt)
-                2 :pix[4] <= gray_data;  
-                3 :pix[0] <= gray_data;  
-                4 :pix[1] <= gray_data;  
-                5 :pix[2] <= gray_data;  
-                6 :pix[3] <= gray_data;  
-                7 :pix[5] <= gray_data;  
-                8 :pix[6] <= gray_data;  
-                9 :pix[7] <= gray_data;  
-                10:pix[8] <= gray_data;  
-            endcase
+            else 
+            begin
+                case (read_cnt)
+                    1 :pix[2] <= gray_data;  
+                    2 :pix[5] <= gray_data;  
+                    3 :pix[8] <= gray_data;   
+                endcase
+                
+                case (read_cnt)
+                    1 :pix[2] <= (gray_data >= pix[4]) ? 1:0;    
+                    2 :pix[5] <= (gray_data >= pix[4]) ? 1:0;    
+                    3 :pix[8] <= (gray_data >= pix[4]) ? 1:0;     
+                endcase
+            end
         end
     end
 end
