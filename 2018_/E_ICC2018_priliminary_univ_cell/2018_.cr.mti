@@ -1,1 +1,10 @@
+C:/Users/bob90/verilog/IC_context_practice/2018_/E_ICC2018_priliminary_univ_cell/testfixture.v {1 {vlog -work work C:/Users/bob90/verilog/IC_context_practice/2018_/E_ICC2018_priliminary_univ_cell/testfixture.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module test
+-- Compiling module IROM
+-- Compiling module IRAM
 
+Top level modules:
+	test
+
+} {} {}}

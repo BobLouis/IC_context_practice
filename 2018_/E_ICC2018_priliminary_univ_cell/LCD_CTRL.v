@@ -6,11 +6,11 @@ input cmd_valid;
 input [7:0] IROM_Q;
 output IROM_rd;
 output [5:0] IROM_A;
-output IRAM_valid;
-output [7:0] IRAM_D;
-output [5:0] IRAM_A;
+output reg IRAM_valid;
+output reg [7:0] IRAM_D;
+output reg [5:0] IRAM_A;
 output busy;
-output done;
+output reg done;
 
 reg [2:0]state;
 reg [2:0]next_state;
@@ -65,7 +65,7 @@ always @(posedge clk or posedge reset) begin
     if(reset) cnt <= 0;
     else if(state == READ) cnt <= cnt + 1;
     else if(state == CMD) cnt <= 0;
-    else if(state == WRITE) cnt <= cnt + 1;
+    else if(state == WRITE && cnt != 6'd63) cnt <= cnt + 1;
 end
 
 
@@ -192,14 +192,39 @@ end
 assign IROM_A = cnt;
 assign IROM_rd = (state == READ)?1:0;
 
-assign IRAM_valid = (state == WRITE)?1:0;
-assign IRAM_D = data[cnt];
-assign IRAM_A = cnt;
-assign done = (state == DONE)?1:0;
+// assign IRAM_valid = (state == WRITE)?1:0;
+
+always @(posedge clk or posedge reset) begin
+    if(state == DONE)
+        done <= 1;
+    else
+        done <= 0;
+    if(reset)
+    begin
+        IRAM_D <= 0;
+        IRAM_A <= 0;
+    end
+    else  
+    begin  
+        IRAM_D <= data[cnt];
+        IRAM_A <= cnt;
+    end
+end
+
+always @(posedge clk or posedge reset) begin
+    if(state == WRITE)
+        IRAM_valid <= 1;
+    else
+        IRAM_valid <= 0;
+end
+
+// assign IRAM_D = data[cnt];
+// assign IRAM_A = cnt;
+// assign done = (state == DONE)?1:0;
 
 
 //busy
-assign busy = (state == IDLE || state == READ || state == WRITE)?1:0;
+assign busy = (state == IDLE || state == READ || state == WRITE || state == DONE)?1:0;
 
 
 

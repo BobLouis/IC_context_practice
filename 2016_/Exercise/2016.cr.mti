@@ -1,0 +1,16 @@
+C:/Users/bob90/verilog/IC_context_practice/2016/Exercise/LBP.v {1 {vlog -work work -stats=none C:/Users/bob90/verilog/IC_context_practice/2016/Exercise/LBP.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module LBP
+
+Top level modules:
+	LBP
+
+} {} {}} C:/Users/bob90/verilog/IC_context_practice/2016/Exercise/testfixture.v {1 {vlog -work work -stats=none C:/Users/bob90/verilog/IC_context_practice/2016/Exercise/testfixture.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.6d Compiler 2018.02 Feb 24 2018
+-- Compiling module testfixture
+-- Compiling module lbp_mem
+
+Top level modules:
+	testfixture
+
+} {} {}}
