@@ -17,7 +17,7 @@ reg [3:0]cnt_read;
 reg [7:0]pix [0:8];
 reg [7:0]buffer [0:8];
 reg read_done;
-
+reg is_edge;
 //====================================================================
 
 
@@ -31,10 +31,18 @@ always @(posedge clk or posedge reset) begin
     begin
         gray_addr <= 0;
         cnt_read <= 0;
+        read_done <= 0;
+        is_edge <= 0;
     end
+    
     else if(state == READ) //read full 
     begin
-        if(col == 1)
+        if(col == 0 || col == 127 || row == 0 || row == 127) 
+        begin
+            read_done <= 1;
+            is_edge <= 1;
+        end
+        else if(col == 1)
         begin
             case (cnt_read)
                 1: gray_addr <= {row,col}; 
@@ -72,13 +80,19 @@ always @(posedge clk or posedge reset) begin
                 read_done = 1;
         end
     end
+    else
+    begin
+        read_done <= 0;
+        is_edge <= 0;
+    end
 end
 
 //pix buff
 
-always @(posedge clk) begin
+always @(posedge clk or posedge reset) begin
     if(state == READ)
     begin
+        
         if(col == 1) //full read
         begin
             case (read_cnt)
@@ -105,6 +119,7 @@ always @(posedge clk) begin
             endcase
 
         end
+
         else //read three
         begin
             if(read_cnt == 0)
