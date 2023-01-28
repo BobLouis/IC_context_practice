@@ -1,31 +1,90 @@
-
 `timescale 1ns/10ps
 module LBP ( clk, reset, gray_addr, gray_req, gray_ready, gray_data, lbp_addr, lbp_valid, lbp_data, finish);
 input   	clk;
 input   	reset;
 output  reg[13:0] 	gray_addr;
-output  reg      	gray_req;
+output  reg       	gray_req;
 input   	gray_ready;
 input   [7:0] 	gray_data;
 output  [13:0] 	lbp_addr;
 output 	lbp_valid;
 output  reg[7:0] 	lbp_data;
-output  reg	finish;
+output  	finish;
 
 
+//====================================================================
+reg [2:0]state, next_state;
+parameter IDLE = 3'd0;
+parameter READ = 3'd1;
+parameter CAL = 3'd2;
+parameter WRITE = 3'd3;
+parameter FINISH = 3'd4;
+
+reg [6:0]col;
+reg [6:0]row;
+reg [3:0]cnt_out;
+reg read_done;
 reg [3:0]cnt_read;
 reg [7:0]pix [0:8];
 reg [7:0]buffer [0:8];
-reg read_done;
 reg is_edge;
-//====================================================================
 
 
-//cnt_read
+assign lbp_addr = {row, col};
+assign lbp_valid = (state == WRITE) ? 1 : 0;
+assign finish = (state == FINISH) ? 1 : 0;
+
+always@(posedge clk or posedge reset)begin
+    if(reset)
+        state <= IDLE;
+    else 
+        state <= next_state;
+end
+
+always@(*)begin
+    if(reset)
+        next_state = IDLE;
+    else begin
+        case(state)
+            IDLE:
+                if(gray_ready == 1) next_state = READ;
+                else next_state = IDLE;
+            READ:begin
+                if(read_done == 1) next_state = CAL;
+                else next_state = READ;  
+            end
+            CAL:begin
+                next_state = WRITE;
+            end 
+            WRITE:
+                if(row == 127 && col == 127) next_state = FINISH;
+                else next_state = READ;
+            FINISH:
+                next_state = FINISH;
+            default:    next_state = IDLE;
+        endcase
+    end 
+end
 
 
+//COL or ROW Controller
+always@(posedge clk or posedge reset)begin
+    if(reset)begin
+        col <= 0;
+        row <= 0;
+    end
+    else begin
+        if(col == 127)begin
+            row <= row + 1;
+            col <= 0;
+        end
+        else if(state == WRITE)
+            col <= col + 1;
+        else 
+            col <= col;        
+    end
+end
 
-//gray_addr cnt_read
 always @(posedge clk or posedge reset) begin
     if(reset)
     begin
@@ -95,7 +154,7 @@ always @(posedge clk or posedge reset) begin
         
         if(col == 1) //full read
         begin
-            case (read_cnt)
+            case (cnt_read)
                 2 :pix[4] <= gray_data;  
                 3 :pix[0] <= gray_data; 
                 4 :pix[1] <= gray_data;  
@@ -107,7 +166,7 @@ always @(posedge clk or posedge reset) begin
                 10:pix[8] <= gray_data;  
             endcase
             
-            case (read_cnt)
+            case (cnt_read)
                 3 :buffer[0] <= (gray_data >= pix[4]) ? 1:0;  
                 4 :buffer[1] <= (gray_data >= pix[4]) ? 1:0;  
                 5 :buffer[2] <= (gray_data >= pix[4]) ? 1:0;  
@@ -122,7 +181,7 @@ always @(posedge clk or posedge reset) begin
 
         else //read three
         begin
-            if(read_cnt == 0)
+            if(cnt_read == 0)
             begin
                 pix[0] <= pix[1];
                 pix[1] <= pix[2];
@@ -140,13 +199,13 @@ always @(posedge clk or posedge reset) begin
             end
             else 
             begin
-                case (read_cnt)
+                case (cnt_read)
                     1 :pix[2] <= gray_data;  
                     2 :pix[5] <= gray_data;  
                     3 :pix[8] <= gray_data;   
                 endcase
                 
-                case (read_cnt)
+                case (cnt_read)
                     1 :pix[2] <= (gray_data >= pix[4]) ? 1:0;    
                     2 :pix[5] <= (gray_data >= pix[4]) ? 1:0;    
                     3 :pix[8] <= (gray_data >= pix[4]) ? 1:0;     
@@ -157,9 +216,26 @@ always @(posedge clk or posedge reset) begin
 end
 
 
-assign lbp_valid (state == WRITE)?1:0;
+//DATA CAL
+always@(posedge clk)begin
+    if(state == CAL)
+    begin
+        buffer[4] <= buffer[0] + (buffer[1] << 1) + (buffer[2] << 2) + (buffer[3] << 3) + (buffer[5] << 4) + (buffer[6] << 5) + (buffer[7] << 6) + (buffer[8] << 7);
+    end
+end
 
 
-    
+//DATA OUTPUT
+always@(posedge clk)begin
+    if(state == WRITE)begin
+        if(is_edge == 1)
+            lbp_data <= 0;
+        else 
+            lbp_data <= buffer[4];
+    end
+
+
+end
+
 //====================================================================
 endmodule
