@@ -1,158 +1,241 @@
-
 `timescale 1ns/10ps
 module LBP ( clk, reset, gray_addr, gray_req, gray_ready, gray_data, lbp_addr, lbp_valid, lbp_data, finish);
 input   	clk;
 input   	reset;
 output  reg[13:0] 	gray_addr;
-output  reg      	gray_req;
+output  reg       	gray_req;
 input   	gray_ready;
 input   [7:0] 	gray_data;
 output  [13:0] 	lbp_addr;
-output  reg	lbp_valid;
+output 	lbp_valid;
 output  reg[7:0] 	lbp_data;
-output  reg	finish;
+output  	finish;
 
 
 //====================================================================
+reg [2:0]state, next_state;
+parameter IDLE = 3'd0;
+parameter READ = 3'd1;
+parameter CAL = 3'd2;
+parameter WRITE = 3'd3;
+parameter FINISH = 3'd4;
 
-    reg [2:0]state, next_state;
-    reg [13:0] pc;
-    reg [3:0] counterRead;
-    reg [6:0]col,row;
-    reg buff[0:7];
-    reg [7:0]mid;
-
-    parameter IDLE = 4'd0;
-	parameter READ = 4'd1;
-	parameter WRITE = 4'd2;
-	parameter FINISH = 4'd5;
+reg [6:0]col;
+reg [6:0]row;
+reg [3:0]cnt_out;
+reg read_done;
+reg [3:0]cnt_read;
+reg [7:0]pix [0:8];
+reg [7:0]buffer [0:8];
+reg is_edge;
 
 
-    always @(posedge clk or posedge reset) begin
-		if(reset) state <= IDLE;
-		else state <= next_state;
-	end
+assign lbp_addr = {row, col};
+assign lbp_valid = (state == WRITE) ? 1 : 0;
+assign finish = (state == FINISH) ? 1 : 0;
 
-    always @(*) begin
-        if(reset) next_state = IDLE;
-        else begin
-            case(state)
-                IDLE:
-                    begin
-                        if(gray_ready == 1) next_state = READ;
-                        else next_state = IDLE;
-                    end
-                READ:
-                    begin
-                        if(counterRead == 10) next_state = WRITE;
-                        else next_state = READ;
-                    end
-                WRITE:
-                    begin
-                        if(col == 126 && row == 126) next_state = FINISH;
-                        else next_state = READ;
-                    end
-                FINISH:
-                    begin
-                        next_state = FINISH;
-                    end
-                default: 
-                    begin
-                        next_state = IDLE;
-                    end
-            endcase
-        end
-	end
+always@(posedge clk or posedge reset)begin
+    if(reset)
+        state <= IDLE;
+    else 
+        state <= next_state;
+end
 
-    //row col
-    always @(posedge clk or posedge reset) begin
-        if(reset) {row, col} <= 129;
-        else if(state == WRITE)begin
-            //go up one
-            if(col == 126)begin
-                col <= 1;
-                row <= row + 1;
+always@(*)begin
+    if(reset)
+        next_state = IDLE;
+    else begin
+        case(state)
+            IDLE:
+                if(gray_ready == 1) next_state = READ;
+                else next_state = IDLE;
+            READ:begin
+                if(read_done == 1) next_state = CAL;
+                else next_state = READ;  
             end
-            else col <= col + 1;
-        end
+            CAL:begin
+                next_state = WRITE;
+            end 
+            WRITE:
+                if(row == 127 && col == 127) next_state = FINISH;
+                else next_state = READ;
+            FINISH:
+                next_state = FINISH;
+            default:    next_state = IDLE;
+        endcase
+    end 
+end
+
+
+//COL or ROW Controller
+always@(posedge clk or posedge reset)begin
+    if(reset)begin
+        col <= 0;
+        row <= 0;
     end
-
-    //gray_addr
-
-
-    always@(posedge clk or posedge reset)begin
-        if(reset)begin
-            gray_addr <= 0;
-            counterRead <= 0;
+    else begin
+        if(col == 127)begin
+            row <= row + 1;
+            col <= 0;
         end
-        else if(state == READ)begin
-            case(counterRead)
-                4'd1: gray_addr <= {row,col}; 
-				4'd2: gray_addr <= {row-7'd1,col-7'd1}; 
-				4'd3: gray_addr <= {row-7'd1,col}; 
-				4'd4: gray_addr <= {row-7'd1,col+7'd1}; 
-				4'd5: gray_addr <= {row,col-7'd1}; 
-				4'd6: gray_addr <= {row,col+7'd1}; 
-				4'd7: gray_addr <= {row+7'd1,col-7'd1}; 
-				4'd8: gray_addr <= {row+7'd1,col}; 
-				4'd9: gray_addr <= {row+7'd1,col+7'd1}; 
+        else if(state == WRITE)
+            col <= col + 1;
+        else 
+            col <= col;        
+    end
+end
+
+always @(posedge clk or posedge reset) begin
+    if(reset)
+    begin
+        gray_addr <= 0;
+        cnt_read <= 0;
+        read_done <= 0;
+        is_edge <= 0;
+    end
+    
+    else if(state == READ) //read full 
+    begin
+        if(col == 0 || col == 127 || row == 0 || row == 127) 
+        begin
+            read_done <= 1;
+            is_edge <= 1;
+        end
+        else if(col == 1)
+        begin
+            case (cnt_read)
+                1: gray_addr <= {row,col}; 
+                2: gray_addr <= {row-7'd1,col-7'd1}; 
+                3: gray_addr <= {row-7'd1,col}; 
+                4: gray_addr <= {row-7'd1,col+7'd1}; 
+                5: gray_addr <= {row,col-7'd1}; 
+                6: gray_addr <= {row,col+7'd1};
+                7: gray_addr <= {row+7'd1,col-7'd1}; 
+                8: gray_addr <= {row+7'd1,col}; 
+                9: gray_addr <= {row+7'd1,col+7'd1}; 
                 default: gray_addr <= 0;
             endcase
-            counterRead <= counterRead + 4'd1;
-            if(counterRead == 4'd10)
-                counterRead <= 0;
+            if(cnt_read < 10)
+                cnt_read <= cnt_read +1; 
+            else
+                cnt_read <= 0;
+            if(cnt_read == 10)
+                read_done = 1;
         end
-    end
-    always@(posedge clk)begin
-        if(counterRead == 2)begin
-            mid <= gray_data;
-        end 
-        else if(counterRead > 2 && counterRead < 11)begin
-            buff[counterRead-3] = (gray_data < mid) ? 0 : 1;
-        end
-    end
-    //gray_req
-    always @(posedge clk or posedge reset) begin
-        if(reset) gray_req <=0;
-        else begin
-            if(state == READ)begin
-                gray_req <= 1;
-            end
-            else begin
-                gray_req <= 0;
-            end
-        end
-    end
-    //lbp_addr;
-    assign lbp_addr = {row,col};
-    //lbp_valid;
-    always @(*) begin
-        if(state == WRITE)begin
-            lbp_valid = 1'b1;
-        end
-        else begin
-            lbp_valid = 1'b0;
-        end
-    end
-
-    //lbp_data;
-    always @(*) begin
-        if(state == WRITE)
+        else
         begin
-            lbp_data = ((buff[0] + (buff[1] << 1)) + ((buff[2] << 2) + (buff[3] << 3))) + (((buff[4] << 4) + (buff[5] <<5)) + ((buff[6] << 6) + (buff[7] << 7)));
+            case (cnt_read)
+                1: gray_addr <= {row-7'd1,col+7'd1}; 
+                2: gray_addr <= {row,col+7'd1}; 
+                3: gray_addr <= {row+7'd1,col+7'd1}; 
+                default: gray_addr <= 0;
+            endcase
+            if(cnt_read < 4)
+                cnt_read <= cnt_read +1; 
+            else
+                cnt_read <= 0;
+
+            if(cnt_read == 4)
+                read_done = 1;
         end
-        else lbp_data = 0;
+    end
+    else
+    begin
+        read_done <= 0;
+        is_edge <= 0;
+    end
+end
+
+//pix buff
+
+always @(posedge clk or posedge reset) begin
+    if(state == READ)
+    begin
+        
+        if(col == 1) //full read
+        begin
+            case (cnt_read)
+                2 :pix[4] <= gray_data;  
+                3 :pix[0] <= gray_data; 
+                4 :pix[1] <= gray_data;  
+                5 :pix[2] <= gray_data;  
+                6 :pix[3] <= gray_data;  
+                7 :pix[5] <= gray_data;  
+                8 :pix[6] <= gray_data;  
+                9 :pix[7] <= gray_data;  
+                10:pix[8] <= gray_data;  
+            endcase
+            
+            case (cnt_read)
+                3 :buffer[0] <= (gray_data >= pix[4]) ? 1:0;  
+                4 :buffer[1] <= (gray_data >= pix[4]) ? 1:0;  
+                5 :buffer[2] <= (gray_data >= pix[4]) ? 1:0;  
+                6 :buffer[3] <= (gray_data >= pix[4]) ? 1:0;  
+                7 :buffer[5] <= (gray_data >= pix[4]) ? 1:0;  
+                8 :buffer[6] <= (gray_data >= pix[4]) ? 1:0;  
+                9 :buffer[7] <= (gray_data >= pix[4]) ? 1:0;  
+                10 :buffer[8] <= (gray_data >= pix[4]) ? 1:0;   
+            endcase
+
+        end
+
+        else //read three
+        begin
+            if(cnt_read == 0)
+            begin
+                pix[0] <= pix[1];
+                pix[1] <= pix[2];
+                pix[3] <= pix[4];
+                pix[4] <= pix[5];
+                pix[6] <= pix[7];
+                pix[7] <= pix[8];
+                pix[0] <= pix[1];
+
+                buffer[0] <= (pix[0] >= pix[4]) ? 1:0;
+                buffer[1] <= (pix[1] >= pix[4]) ? 1:0;
+                buffer[3] <= (pix[3] >= pix[4]) ? 1:0;
+                buffer[6] <= (pix[6] >= pix[4]) ? 1:0;
+                buffer[7] <= (pix[7] >= pix[4]) ? 1:0;
+            end
+            else 
+            begin
+                case (cnt_read)
+                    1 :pix[2] <= gray_data;  
+                    2 :pix[5] <= gray_data;  
+                    3 :pix[8] <= gray_data;   
+                endcase
+                
+                case (cnt_read)
+                    1 :pix[2] <= (gray_data >= pix[4]) ? 1:0;    
+                    2 :pix[5] <= (gray_data >= pix[4]) ? 1:0;    
+                    3 :pix[8] <= (gray_data >= pix[4]) ? 1:0;     
+                endcase
+            end
+        end
+    end
+end
+
+
+//DATA CAL
+always@(posedge clk)begin
+    if(state == CAL)
+    begin
+        buffer[4] <= buffer[0] + (buffer[1] << 1) + (buffer[2] << 2) + (buffer[3] << 3) + (buffer[5] << 4) + (buffer[6] << 5) + (buffer[7] << 6) + (buffer[8] << 7);
+    end
+end
+
+
+//DATA OUTPUT
+always@(posedge clk)begin
+    if(state == WRITE)begin
+        if(is_edge == 1)
+            lbp_data <= 0;
+        else 
+            lbp_data <= buffer[4];
     end
 
-    //finish
-    always @(*) begin
-        if(state == FINISH)begin
-            finish = 1'b1;
-        end
-        else begin
-            finish = 1'b0;
-        end
-    end
+
+end
 
 //====================================================================
 endmodule
