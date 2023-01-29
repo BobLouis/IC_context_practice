@@ -5,59 +5,59 @@ cModel Technology
 Z0 dC:\altera\13.0sp1
 vLBP
 !i10b 1
-!s100 XZ@4h56boBP;Pj5INFkZk2
-IWNQo0`<Vo6CbYY<k8h`EC3
-Z1 V0H3ZbdhTK?NG^D4XVzJHl1
-Z2 dC:\Users\bob90\verilog\IC_context_practice\2023_practice\2016_\Exercise
-w1675005605
-Z3 8LBP.v
-Z4 FLBP.v
+!s100 =h6bleA<W4gza66RCU::83
+Id<S:9mHH;ZFMKke]=g>lQ1
+V[aWL;Y5J`m^iX3<S^@;>j2
+Z1 dC:\Users\bob90\verilog\IC_context_practice\2023_practice\2016_\Exercise
+w1675005755
+Z2 8LBP.v
+Z3 FLBP.v
 L0 2
-Z5 OV;L;10.1d;51
+Z4 OV;L;10.1d;51
 r1
 !s85 0
 31
-!s108 1675005618.455000
+!s108 1675005817.468000
 !s107 LBP.v|
-Z6 !s90 -reportprogress|300|LBP.v|
+Z5 !s90 -reportprogress|300|LBP.v|
 !s101 -O0
 o-O0
-Z7 n@l@b@p
+Z6 n@l@b@p
 vlbp_mem
-Z8 !s100 WZ[lOE3U1MV0ie^;l:?Jg0
-Z9 I1zR:ijE3Kl2VYcM=PS[;S0
-Z10 V4^>^19e9minGgac6Q`VUB3
-R2
-Z11 w1671244180
-Z12 8C:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v
-Z13 FC:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v
-Z14 L0 134
-R5
+Z7 !s100 WZ[lOE3U1MV0ie^;l:?Jg0
+Z8 I1zR:ijE3Kl2VYcM=PS[;S0
+Z9 V4^>^19e9minGgac6Q`VUB3
+R1
+Z10 w1671244180
+Z11 8C:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v
+Z12 FC:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v
+Z13 L0 134
+R4
 r1
 31
-Z15 !s108 1674969288.620000
-Z16 !s107 C:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v|
-Z17 !s90 -reportprogress|300|-work|work|C:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v|
-Z18 o-work work -O0
+Z14 !s108 1674969288.620000
+Z15 !s107 C:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v|
+Z16 !s90 -reportprogress|300|-work|work|C:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v|
+Z17 o-work work -O0
 !i10b 1
 !s85 0
 !s101 -O0
 vtestfixture
-Z19 !s100 Y]6@Ui5>a<=:EgfHFJhkg0
-Z20 I9MB3W:^>S:RR[n2G[QkoG0
-Z21 VA47mW?eGS^dWC?fbCnia03
-R2
+Z18 !s100 Y]6@Ui5>a<=:EgfHFJhkg0
+Z19 I9MB3W:^>S:RR[n2G[QkoG0
+Z20 VA47mW?eGS^dWC?fbCnia03
+R1
+R10
 R11
 R12
-R13
 L0 10
-R5
+R4
 r1
 31
+R14
 R15
 R16
 R17
-R18
 !i10b 1
 !s85 0
 !s101 -O0

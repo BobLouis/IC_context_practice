@@ -13,12 +13,11 @@ output  	finish;
 
 
 //====================================================================
-reg [2:0] state, next_state;
-parameter IDLE = 3'd0; 
-parameter READ = 3'd1; 
-parameter CAL = 3'd2; 
-parameter WRITE = 3'd3; 
-parameter FINISH = 3'd4; 
+reg [1:0] state, next_state;
+parameter IDLE =   2'd0; 
+parameter READ =   2'd1; 
+parameter WRITE =  2'd2; 
+parameter FINISH = 2'd3; 
 
 reg [6:0] col;
 reg [6:0] row;
@@ -96,7 +95,6 @@ always @(posedge clk or posedge reset) begin
             6 : gray_addr <= {row+7'd1,col-7'd1};
             7 : gray_addr <= {row+7'd1,col};
             8 : gray_addr <= {row+7'd1,col+7'd1};
-            //default: gray_addr <= 0
         endcase
 
         if(cnt_read < 11)
@@ -182,7 +180,6 @@ always @(posedge clk) begin
                 10 : add2 <= buff[8];
             endcase
         end
-
     end
 end
 
@@ -197,16 +194,5 @@ always @(posedge clk) begin
     else
         lbp_valid <= 0;
 end
-
-
-
-
-
-
-
-
-
-
-
 //====================================================================
 endmodule
