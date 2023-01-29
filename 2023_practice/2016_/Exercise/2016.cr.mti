@@ -1,0 +1,9 @@
+C:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v {1 {vlog -work work C:/Users/bob90/verilog/IC_context_practice/2023_practice/2016_/Exercise/testfixture.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module testfixture
+-- Compiling module lbp_mem
+
+Top level modules:
+	testfixture
+
+} {} {}}

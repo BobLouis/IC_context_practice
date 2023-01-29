@@ -6,7 +6,7 @@ output  reg[13:0] 	gray_addr;
 output  reg       	gray_req;
 input   	gray_ready;
 input   [7:0] 	gray_data;
-output  [13:0] 	lbp_addr;
+output  reg [13:0] 	lbp_addr;
 output 	reg lbp_valid;
 output  reg[7:0] 	lbp_data;
 output  	finish;
@@ -29,7 +29,7 @@ reg [3:0]cnt_cal;
 reg [7:0] pix [0:8];
 reg [7:0] buff[0:8];
 
-assign lbp_addr = {row,col};
+// assign lbp_addr = {row,col};
 assign finish = (state == FINISH)?1:0;
 
 always @(posedge clk or posedge reset) begin
@@ -50,11 +50,11 @@ always @(*) begin
                 else next_state = READ;
             end
             CAL: begin
-                if(cnt_cal == 9) next_state = WRITE;
+                if(cnt_cal == 8) next_state = WRITE;
                 else next_state = CAL;
             end
             WRITE: begin
-                if(row == 127 && col == 127) next_state = FINISH; //u &row && &col
+                if(lbp_addr == 16254) next_state = FINISH; //u &row && &col
                 else next_state = READ;
             end
             default: next_state = IDLE;
@@ -66,10 +66,20 @@ end
 always @(posedge clk or posedge reset) begin
     if(reset) {row,col} <= 129;
     else begin
-        if(state == WRITE) begin
-            if(col == 127) row <= row + 1;
-            col <= col + 1;
+        if(next_state == WRITE) begin
+            if(col == 126)
+            begin
+            row <= row + 1;
+            col <= 1;
+            end
+            else col <= col + 1;
         end
+    end
+end
+
+always @(posedge clk) begin
+    if(next_state == WRITE) begin
+        lbp_addr <= {row,col};
     end
 end
 
@@ -79,8 +89,9 @@ always @(posedge clk or posedge reset) begin
         cnt_read <= 0;
         read_done <= 0;
         is_edge <= 0;
+        gray_req <= 0;
     end
-    else if(state == READ) begin
+    else if(next_state == READ) begin
         if(col == 0 || col == 127 || row == 0 || row == 127) //u |row &row
         begin
             read_done <= 1;
@@ -88,18 +99,17 @@ always @(posedge clk or posedge reset) begin
         end
         else if (col == 1)
         begin
+            gray_req <= 1;
             case (cnt_read)
-                1 : gray_addr <= {row,col}; //w watch the wave if cnt_read can start from 0
-                2 : gray_addr <= {row-7'd1,col-7'd1};
-                3 : gray_addr <= {row-7'd1,col};
-                4 : gray_addr <= {row-7'd1,col+7'd1};
-
-                5 : gray_addr <= {row,col-7'd1};
-                6 : gray_addr <= {row,col-7'd1};
-
-                7 : gray_addr <= {row+7'd1,col-7'd1};
-                8 : gray_addr <= {row+7'd1,col};
-                9 : gray_addr <= {row+7'd1,col+7'd1};
+                0 : gray_addr <= {row,col}; //w watch the wave if cnt_read can start from 0
+                1 : gray_addr <= {row-7'd1,col-7'd1};
+                2 : gray_addr <= {row-7'd1,col};
+                3 : gray_addr <= {row-7'd1,col+7'd1};
+                4 : gray_addr <= {row,col-7'd1};
+                5 : gray_addr <= {row,col+7'd1};
+                6 : gray_addr <= {row+7'd1,col-7'd1};
+                7 : gray_addr <= {row+7'd1,col};
+                8 : gray_addr <= {row+7'd1,col+7'd1};
                 //default: gray_addr <= 0
             endcase
 
@@ -113,6 +123,7 @@ always @(posedge clk or posedge reset) begin
         end
         else
         begin
+            gray_req <= 1;
             case (cnt_read)
                 1: gray_addr <= {row-7'd1,col+7'd1};
                 2: gray_addr <= {row,col+7'd1}; 
@@ -131,6 +142,7 @@ always @(posedge clk or posedge reset) begin
     end
     else
     begin
+        gray_req <= 0;
         read_done <= 0;
         is_edge <= 0;
     end
@@ -139,36 +151,48 @@ end
 //pix buf
 
 always @(posedge clk or posedge reset) begin
-    if(state == READ)
+    if(reset)
+    begin
+        buff[0] <= 0;
+        buff[1] <= 0;
+        buff[2] <= 0;
+        buff[3] <= 0;
+        buff[4] <= 0;
+        buff[5] <= 0;
+        buff[6] <= 0;
+        buff[7] <= 0;
+        buff[8] <= 0;
+    end
+    else if(next_state == READ)
     begin
         if(col == 1)
         begin
             case (cnt_read)
-                2:  pix[4] <= gray_data; 
-                3:  pix[4] <= gray_data; 
-                4:  pix[4] <= gray_data; 
-                5:  pix[4] <= gray_data; 
-                6:  pix[4] <= gray_data; 
-                7:  pix[4] <= gray_data; 
-                8:  pix[4] <= gray_data; 
-                9:  pix[4] <= gray_data; 
-                10: pix[4] <= gray_data; 
+                1:  pix[4] <= gray_data; 
+                2:  pix[0] <= gray_data; 
+                3:  pix[1] <= gray_data; 
+                4:  pix[2] <= gray_data; 
+                5:  pix[3] <= gray_data; 
+                6:  pix[5] <= gray_data; 
+                7:  pix[6] <= gray_data; 
+                8:  pix[7] <= gray_data; 
+                9:  pix[8] <= gray_data; 
             endcase
 
             case (cnt_read)
-                3:  buff[0][0]  <= (gray_data >= pix[4])?1:0;   
-                4:  buff[1][1]  <= (gray_data >= pix[4])?1:0;   
-                5:  buff[2][2]  <= (gray_data >= pix[4])?1:0;   
-                6:  buff[3][3]  <= (gray_data >= pix[4])?1:0;   
-                7:  buff[5][4]  <= (gray_data >= pix[4])?1:0;   
-                8:  buff[6][5]  <= (gray_data >= pix[4])?1:0;   
-                9:  buff[7][6]  <= (gray_data >= pix[4])?1:0;   
-                10: buff[8][7] <= (gray_data >= pix[4])?1:0;   
+                2:  buff[0][0]  <= (gray_data >= pix[4])?1:0;   
+                3:  buff[1][1]  <= (gray_data >= pix[4])?1:0;   
+                4:  buff[2][2]  <= (gray_data >= pix[4])?1:0;   
+                5:  buff[3][3]  <= (gray_data >= pix[4])?1:0;   
+                6:  buff[5][4]  <= (gray_data >= pix[4])?1:0;   
+                7:  buff[6][5]  <= (gray_data >= pix[4])?1:0;   
+                8:  buff[7][6]  <= (gray_data >= pix[4])?1:0;   
+                9:  buff[8][7]  <= (gray_data >= pix[4])?1:0;   
             endcase
         end
         else //read three
         begin
-            if(cnt_read == 0)
+            if(cnt_read == 1)
             begin
                 pix[0] <= pix[1];
                 pix[1] <= pix[2];
@@ -176,28 +200,27 @@ always @(posedge clk or posedge reset) begin
                 pix[4] <= pix[5];
                 pix[6] <= pix[7];
                 pix[7] <= pix[8];
-                pix[0] <= pix[1];
 
-                buff[0][0] <= (pix[0] >= pix[4]) ? 1:0;
-                buff[1][1] <= (pix[1] >= pix[4]) ? 1:0;
-                buff[3][3] <= (pix[3] >= pix[4]) ? 1:0;
-                buff[6][5] <= (pix[6] >= pix[4]) ? 1:0;
-                buff[7][6] <= (pix[7] >= pix[4]) ? 1:0;
+                buff[0][0] <= (pix[1] >= pix[5]) ? 1:0;
+                buff[1][1] <= (pix[2] >= pix[5]) ? 1:0;
+                buff[3][3] <= (pix[4] >= pix[5]) ? 1:0;
+                buff[6][5] <= (pix[7] >= pix[5]) ? 1:0;
+                buff[7][6] <= (pix[8] >= pix[5]) ? 1:0;
             end
             else
             begin
                 case (cnt_read)
-                    1 :
+                    2 :
                     begin
                         pix[2] <= gray_data;
                         buff[2][2] <= (gray_data >= pix[4]) ? 1:0;
                     end
-                    2 :
+                    3 :
                     begin
                         pix[5] <= gray_data;
                         buff[5][4] <=  (gray_data >= pix[4]) ? 1:0;
                     end
-                    3 :
+                    4 :
                     begin
                         pix[8] <= gray_data; 
                         buff[8][7] <= (gray_data >= pix[4]) ? 1:0;
@@ -206,11 +229,23 @@ always @(posedge clk or posedge reset) begin
             end
         end
     end
+    else if(next_state == WRITE)
+    begin
+        buff[0] <= 0;
+        buff[1] <= 0;
+        buff[2] <= 0;
+        buff[3] <= 0;
+        buff[4] <= 0;
+        buff[5] <= 0;
+        buff[6] <= 0;
+        buff[7] <= 0;
+        buff[8] <= 0;
+    end
 end
 
-wire [7:0] result;
-reg [7:0] add1, add2;
-assign reuslt = add1 + add2;
+wire unsigned [7:0] result;
+reg unsigned [7:0] add1, add2;
+assign result = add1 + add2;
 //cal
 always @(posedge clk) begin
     if(state == CAL)
@@ -223,17 +258,25 @@ always @(posedge clk) begin
         end
         else
         begin
-            // buff[4] <= result;
+            
             add1 <= result;
-            add2 <= buff[cnt_cal];
+            case (cnt_cal)
+                1 : add2 <= buff[1];
+                2 : add2 <= buff[2];
+                3 : add2 <= buff[3];
+                4 : add2 <= buff[5];
+                5 : add2 <= buff[6];
+                6 : add2 <= buff[7];
+                7 : add2 <= buff[8];
+            endcase
         end
 
-        if(cnt_cal < 9)
+        if(cnt_cal < 8)
             cnt_cal <= cnt_cal + 1;
         else
         begin
             cnt_cal <= 0;
-            buff[4] <= result;
+            lbp_data <= result;
         end
     end
 end
@@ -241,12 +284,8 @@ end
 //data out
 
 always @(posedge clk) begin
-    if(state == WRITE)
+    if(next_state == WRITE)
     begin
-        if(is_edge ==1)
-            lbp_data <= 0;
-        else
-            lbp_data <= buff[4];
         lbp_valid <= 1;
     end
     else
