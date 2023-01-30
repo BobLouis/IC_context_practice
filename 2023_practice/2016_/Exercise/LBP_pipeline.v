@@ -24,6 +24,9 @@ reg [6:0] row;
 
 reg [3:0]cnt_read;
 reg [7:0] mid;
+reg [7:0] buff[0:8];
+
+// assign lbp_addr = {row,col};
 assign finish = (state == FINISH)?1:0;
 
 always @(posedge clk or posedge reset) begin
@@ -67,7 +70,7 @@ always @(posedge clk or posedge reset) begin
     end
 end
 
-always @(posedge clk) begin //
+always @(posedge clk) begin
     if(next_state == WRITE) begin
         lbp_addr <= {row,col};
     end
@@ -105,23 +108,78 @@ always @(posedge clk or posedge reset) begin
     end
 end
 
-//cal lbp
+//pix buf
 
 always @(posedge clk or posedge reset) begin
-    if(next_state == READ)
+    if(reset)
+    begin
+        buff[0] <= 0;
+        buff[1] <= 0;
+        buff[2] <= 0;
+        buff[3] <= 0;
+        buff[4] <= 0;
+        buff[5] <= 0;
+        buff[6] <= 0;
+        buff[7] <= 0;
+        buff[8] <= 0;
+    end
+    else if(next_state == READ)
     begin
         if(cnt_read == 1)
             mid <= gray_data; 
+
+
         case (cnt_read)
-            2:  lbp_data[0]  <= (gray_data >= mid)?1:0;   
-            3:  lbp_data[1]  <= (gray_data >= mid)?1:0;   
-            4:  lbp_data[2]  <= (gray_data >= mid)?1:0;   
-            5:  lbp_data[3]  <= (gray_data >= mid)?1:0;   
-            6:  lbp_data[4]  <= (gray_data >= mid)?1:0;   
-            7:  lbp_data[5]  <= (gray_data >= mid)?1:0;   
-            8:  lbp_data[6]  <= (gray_data >= mid)?1:0;   
-            9:  lbp_data[7]  <= (gray_data >= mid)?1:0;   
+            2:  buff[0][0]  <= (gray_data >= mid)?1:0;   
+            3:  buff[1][1]  <= (gray_data >= mid)?1:0;   
+            4:  buff[2][2]  <= (gray_data >= mid)?1:0;   
+            5:  buff[3][3]  <= (gray_data >= mid)?1:0;   
+            6:  buff[5][4]  <= (gray_data >= mid)?1:0;   
+            7:  buff[6][5]  <= (gray_data >= mid)?1:0;   
+            8:  buff[7][6]  <= (gray_data >= mid)?1:0;   
+            9:  buff[8][7]  <= (gray_data >= mid)?1:0;   
         endcase
+    end
+    else if(next_state == WRITE)
+    begin
+        buff[0] <= 0;
+        buff[1] <= 0;
+        buff[2] <= 0;
+        buff[3] <= 0;
+        buff[4] <= 0;
+        buff[5] <= 0;
+        buff[6] <= 0;
+        buff[7] <= 0;
+        buff[8] <= 0;
+    end
+end
+
+wire unsigned [7:0] result;
+reg unsigned [7:0] add1, add2;
+assign result = add1 + add2;
+//cal
+always @(posedge clk) begin
+    if(state == READ)
+    begin
+        if(cnt_read == 3)
+        begin
+            add1 <= 0;
+            add2 <= buff[0];
+        end
+        else
+        begin
+            
+            add1 <= result;
+            case (cnt_read)
+                4 : add2 <= buff[1];
+                5 : add2 <= buff[2];
+                6 : add2 <= buff[3];
+                7 : add2 <= buff[5];
+                8 : add2 <= buff[6];
+                9 : add2 <= buff[7];
+                10 : add2 <= buff[8];
+            endcase
+        end
     end
 end
 
@@ -130,6 +188,7 @@ end
 always @(posedge clk) begin
     if(next_state == WRITE)
     begin
+        lbp_data <= result;
         lbp_valid <= 1;
     end
     else
