@@ -1,0 +1,52 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/bob90/verilog/IC_context_practice/2015/testbench
+vSET
+!s110 1645532126
+!i10b 1
+!s100 ^=K?aLOJ;De5T216DBg[T0
+I9VO5zN`6]OMXbT[F^RZn_0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1645532109
+8SET.v
+FSET.v
+L0 5
+Z2 OV;L;10.6d;65
+r1
+!s85 0
+31
+!s108 1645532126.000000
+!s107 SET.v|
+!s90 -reportprogress|300|SET.v|
+!i113 1
+Z3 tCvgOpt 0
+n@s@e@t
+vtestfixture1
+!s110 1645532192
+!i10b 1
+!s100 Fm>omX<:BX_n4N4P]3FGM0
+I=M`foSz3A7an90dRQbi_E0
+R1
+R0
+w1645528100
+8testfixture.v
+Ftestfixture.v
+L0 7
+R2
+r1
+!s85 0
+31
+!s108 1645532192.000000
+!s107 testfixture.v|
+!s90 -reportprogress|300|testfixture.v|+define+MD2|
+!i113 1
+!s92 +define+MD2
+R3
