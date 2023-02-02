@@ -24,7 +24,7 @@ reg [2:0] tmp;
 
 
 
-always @(posedge CLK or posedge RST) begin
+always @(posedge CLK ) begin
     state <= next_state;
 end
 
@@ -179,7 +179,7 @@ always @(posedge CLK or posedge RST) begin
 end
 
 
-always @(posedge CLK or posedge RST) begin
+always @(posedge CLK) begin
     if(next_state == READ)
     begin
         W <= cnt;
