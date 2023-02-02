@@ -1,0 +1,47 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\bob90\verilog\IC_context_practice\2023_practice\2016_\Exercise
+vJAM
+!i10b 1
+!s100 akRDlnCN>VAef_SD3JozH0
+I8EkDOilALa3NT4l^l>i;f2
+Z1 VhbEnXETNQaVM0N7TmdSHF1
+Z2 dC:\Users\bob90\verilog\IC_context_practice\2023_practice\2022_\2022_univ_cell
+w1675224733
+Z3 8JAM.v
+Z4 FJAM.v
+L0 1
+Z5 OV;L;10.1d;51
+r1
+!s85 0
+31
+!s108 1675224787.828000
+!s107 JAM.v|
+Z6 !s90 -reportprogress|300|JAM.v|
+!s101 -O0
+o-O0
+Z7 n@j@a@m
+vtestfixture
+Z8 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+Z9 !s100 H0fShP=HTfS?^6h7jF2c50
+Z10 I:NgT0G[9h:WKh`IW]jUQ?1
+Z11 VKBIIT=eCh7cJh[^JXBGX00
+Z12 !s105 tb_sv_unit
+S1
+R2
+Z13 w1675177018
+Z14 8C:/Users/bob90/verilog/IC_context_practice/2023_practice/2022_/2022_univ_cell/tb.sv
+Z15 FC:/Users/bob90/verilog/IC_context_practice/2023_practice/2022_/2022_univ_cell/tb.sv
+L0 18
+R5
+r1
+31
+Z16 !s90 -reportprogress|300|-work|work|-sv|C:/Users/bob90/verilog/IC_context_practice/2023_practice/2022_/2022_univ_cell/tb.sv|
+Z17 o-work work -sv -O0
+Z18 !s108 1675221872.765000
+Z19 !s107 C:/Users/bob90/verilog/IC_context_practice/2023_practice/2022_/2022_univ_cell/tb.sv|
+!i10b 1
+!s85 0
+!s101 -O0

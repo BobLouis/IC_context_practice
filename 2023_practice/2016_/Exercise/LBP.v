@@ -10,8 +10,6 @@ output  reg [13:0] 	lbp_addr;
 output 	reg lbp_valid;
 output  reg[7:0] 	lbp_data;
 output  	finish;
-
-
 //====================================================================
 reg [1:0] state, next_state;
 parameter IDLE =   2'd0; 
@@ -26,7 +24,7 @@ reg [3:0]cnt_read;
 reg [7:0] mid;
 assign finish = (state == FINISH)?1:0;
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk) begin
     state <= next_state;
 end
 
@@ -107,7 +105,7 @@ end
 
 //cal lbp
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk) begin
     if(next_state == READ)
     begin
         if(cnt_read == 1)
