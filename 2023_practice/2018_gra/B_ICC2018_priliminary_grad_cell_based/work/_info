@@ -1,0 +1,43 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\bob90\verilog\IC_context_practice\2023_practice\2022_\2022_univ_cell
+vhuffman
+Z1 !s100 n;]GH4iiAh527X@=HaleR2
+Z2 IWjj^B4]2i>EK6e;E23>o:3
+Z3 VBhfLG78@Sm0U2EMb2DV123
+Z4 dC:\Users\bob90\verilog\IC_context_practice\2023_practice\2018_gra\B_ICC2018_priliminary_grad_cell_based
+Z5 w1676550838
+Z6 8C:/Users/bob90/verilog/IC_context_practice/2023_practice/2018_gra/B_ICC2018_priliminary_grad_cell_based/huffman.v
+Z7 FC:/Users/bob90/verilog/IC_context_practice/2023_practice/2018_gra/B_ICC2018_priliminary_grad_cell_based/huffman.v
+L0 1
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -reportprogress|300|-work|work|C:/Users/bob90/verilog/IC_context_practice/2023_practice/2018_gra/B_ICC2018_priliminary_grad_cell_based/huffman.v|
+Z10 o-work work -O0
+!i10b 1
+!s85 0
+Z11 !s108 1676551064.780000
+Z12 !s107 C:/Users/bob90/verilog/IC_context_practice/2023_practice/2018_gra/B_ICC2018_priliminary_grad_cell_based/huffman.v|
+!s101 -O0
+vtb
+!i10b 1
+Z13 !s100 AhZ38E>el@jo3nX`CEfN<3
+Z14 IBVGj2i`mA@iZ7g002OLWb1
+Z15 VV@Xn<HnSRM[I5c1?BH]3a3
+R4
+Z16 w1676545463
+Z17 8C:/Users/bob90/verilog/IC_context_practice/2023_practice/2018_gra/B_ICC2018_priliminary_grad_cell_based/tb.v
+Z18 FC:/Users/bob90/verilog/IC_context_practice/2023_practice/2018_gra/B_ICC2018_priliminary_grad_cell_based/tb.v
+L0 35
+R8
+r1
+!s85 0
+31
+!s108 1676551064.842000
+!s107 C:/Users/bob90/verilog/IC_context_practice/2023_practice/2018_gra/B_ICC2018_priliminary_grad_cell_based/tb.v|
+Z19 !s90 -reportprogress|300|-work|work|C:/Users/bob90/verilog/IC_context_practice/2023_practice/2018_gra/B_ICC2018_priliminary_grad_cell_based/tb.v|
+!s101 -O0
+R10

@@ -1,9 +1,0 @@
-# Current time Thu Jan 27 23:11:07 2022
-# ModelSim - Intel FPGA Edition Stack Trace
-# Program = vish
-# Id = "10.6d"
-# Version = "2018.02"
-# Date = "Feb 24 2018"
-# Platform = win32pe
-
-Exception c0000005 has occurred at address 00776a7d. Traceback:
