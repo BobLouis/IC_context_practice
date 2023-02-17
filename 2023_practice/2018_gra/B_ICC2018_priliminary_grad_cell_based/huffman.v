@@ -72,12 +72,12 @@ always@(*)begin
             CNT_OUT: next_state = FIR;
             FIR://3
             begin
-                if(cnt == 6) next_state = SEC;
+                if(ptr == 7) next_state = SEC;
                 else next_state = FIR;
             end
             SEC:
             begin
-                if(cnt == 6) next_state = ENC;
+                if(ptr == 7) next_state = ENC;
                 else next_state = SEC;
             end
             ENC:
@@ -139,12 +139,12 @@ always@(posedge clk)begin
         arr_val [5] <= CNT5;
         arr_val [6] <= CNT6;
 
-        group[1] <= 1;
-        group[2] <= 2;
-        group[3] <= 3;
-        group[4] <= 4;
-        group[5] <= 5;
-        group[6] <= 6;
+        group[1] <= 0;
+        group[2] <= 1;
+        group[3] <= 2;
+        group[4] <= 3;
+        group[5] <= 4;
+        group[6] <= 5;
 
         len[1] <= 0;
         len[2] <= 0;
@@ -160,23 +160,36 @@ always@(posedge clk)begin
         code[5] <= 0;
         code[6] <= 0;
 
-        ptr <= 1;
-        ptr_fir <= 0;
-        ptr_sec <= 0;
+        ptr <= 2;
+        ptr_fir <= 1;
+        ptr_sec <= 1;
         cnt <= 0;
         cnt_stage <= 0;
         next_group <= 6;
     end
     else if(next_state == FIR)
     begin
-        if(arr_val[ptr] <= arr_val[ptr_fir] && group[ptr] > group[ptr_fir])
-            ptr_fir <= ptr;
+        if(arr_val[ptr] <= arr_val[ptr_fir])
+        begin
+            if(arr_val[ptr] == arr_val[ptr_fir])
+            begin
+                if(group[ptr] > group[ptr_fir])
+                    ptr_fir <= ptr;
+            end 
+            else
+            begin
+                ptr_fir <= ptr;
+            end           
+        end
+
 
 
         if(ptr == 7)
-            ptr <= 0;
+            ptr <= 2;
         else
             ptr <= ptr + 1;
+
+        
 
         if(cnt == 6)
             cnt <= 0;
@@ -185,13 +198,17 @@ always@(posedge clk)begin
     end
     else if(next_state == SEC)
     begin
-        if(arr_val[ptr] <= arr_val[ptr_sec] && group[ptr] > group[ptr_sec] && ptr_fir != ptr)
+
+        if(arr_val[ptr] <= arr_val[ptr_sec] && group[ptr_fir] != group[ptr])
             ptr_sec <= ptr;
+        else if(group[ptr_fir] == group[ptr_sec])
+            ptr_sec <= ptr_sec +1;
 
         if(ptr == 7)
-            ptr <= 0;
+            ptr <= 2;
         else
-            ptr <= ptr + 1;
+            ptr <= ptr+1;
+        
 
         if(cnt == 6)
             cnt <= 0;
@@ -204,15 +221,19 @@ always@(posedge clk)begin
         begin
             if (group[i] == group[ptr_fir])
             begin
-                code[len[i]] <= 1;
+                code[i][len[i]] <= 1;
                 len[i] <= len[i] + 1;
+                arr_val[i] <= arr_val[ptr_fir]+ arr_val[ptr_sec];
             end
 
             if (group[i] == group[ptr_sec])
             begin
                 len[i] <= len[i] + 1;
+                arr_val[i] <= arr_val[ptr_fir]+ arr_val[ptr_sec];
             end
         end
+
+
     end
     else if(next_state == GRP)
     begin
@@ -226,9 +247,9 @@ always@(posedge clk)begin
         end
 
         cnt_stage <= cnt_stage + 1;
-
-        ptr_fir <= 0;
-        ptr_sec <= 0;
+        ptr <= 2;
+        ptr_fir <= 1;
+        ptr_sec <= 1;
     end
     else if(next_state == OUT)
     begin
