@@ -25,7 +25,7 @@
 //  `define PAT "./pattern4.dat"
 //  `define EXP "./golden4.dat"
 //`endif
-//
+
 //`ifdef tb5
 //  `define PAT "./pattern5.dat"
 //  `define EXP "./golden5.dat"
