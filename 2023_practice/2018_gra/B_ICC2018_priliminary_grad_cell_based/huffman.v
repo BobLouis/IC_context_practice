@@ -41,6 +41,7 @@ assign HC3 = code[3];
 assign HC4 = code[4];
 assign HC5 = code[5];
 assign HC6 = code[6];
+//assign {HC1,HC2,}=code
 
 assign M1 = M[1];
 assign M2 = M[2];
@@ -163,9 +164,9 @@ always@(posedge clk)begin
         ptr <= 2;
         ptr_fir <= 1;
         ptr_sec <= 1;
-        cnt <= 0;
         cnt_stage <= 0;
         next_group <= 6;
+        code_valid <= 1;
     end
     else if(next_state == FIR)
     begin
@@ -191,10 +192,6 @@ always@(posedge clk)begin
 
         
 
-        if(cnt == 6)
-            cnt <= 0;
-        else
-            cnt <= cnt + 1;
     end
     else if(next_state == SEC)
     begin
@@ -209,11 +206,6 @@ always@(posedge clk)begin
         else
             ptr <= ptr+1;
         
-
-        if(cnt == 6)
-            cnt <= 0;
-        else
-            cnt <= cnt + 1;
     end
     else if(next_state == ENC)
     begin
