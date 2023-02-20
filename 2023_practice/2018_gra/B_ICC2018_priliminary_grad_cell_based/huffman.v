@@ -21,7 +21,6 @@ parameter IDLE = 3'd0,
     GRP = 3'd6,
     OUT = 3'd7;
 
-// reg [2:0]cnt;
 reg [2:0]cnt_stage;
 reg [6:0]arr_val[1:6];
 reg [3:0]group  [1:6];
@@ -53,7 +52,10 @@ assign M6 = M[6];
 integer  i;
 
 
-always@(posedge clk )begin
+always@(posedge clk or posedge reset)begin
+    if(reset)
+        state <= IDLE;
+    else
         state <= next_state;
 end
 
@@ -130,15 +132,15 @@ end
 
 
 //combine
-always@(posedge clk)begin
-    if(next_state == CNT_OUT)
+always@(posedge clk or posedge reset)begin
+    if(reset)
     begin
-        arr_val [1] <= CNT1;
-        arr_val [2] <= CNT2;
-        arr_val [3] <= CNT3;
-        arr_val [4] <= CNT4;
-        arr_val [5] <= CNT5;
-        arr_val [6] <= CNT6;
+        arr_val [1] <= 0;
+        arr_val [2] <= 0;
+        arr_val [3] <= 0;
+        arr_val [4] <= 0;
+        arr_val [5] <= 0;
+        arr_val [6] <= 0;
 
         group[1] <= 0;
         group[2] <= 1;
@@ -164,10 +166,18 @@ always@(posedge clk)begin
         ptr <= 2;
         ptr_fir <= 1;
         ptr_sec <= 1;
-        // cnt <= 0;
         cnt_stage <= 0;
         next_group <= 6;
         code_valid <= 0;
+    end
+    if(next_state == CNT_OUT)
+    begin
+        arr_val [1] <= CNT1;
+        arr_val [2] <= CNT2;
+        arr_val [3] <= CNT3;
+        arr_val [4] <= CNT4;
+        arr_val [5] <= CNT5;
+        arr_val [6] <= CNT6;
     end
     else if(next_state == FIR)
     begin
@@ -192,11 +202,6 @@ always@(posedge clk)begin
             ptr <= ptr + 1;
 
         
-
-        // if(cnt == 6)
-        //     cnt <= 0;
-        // else
-        //     cnt <= cnt + 1;
     end
     else if(next_state == SEC)
     begin
@@ -210,12 +215,7 @@ always@(posedge clk)begin
             ptr <= 2;
         else
             ptr <= ptr+1;
-        
 
-        // if(cnt == 6)
-        //     cnt <= 0;
-        // else
-        //     cnt <= cnt + 1;
     end
     else if(next_state == ENC)
     begin
