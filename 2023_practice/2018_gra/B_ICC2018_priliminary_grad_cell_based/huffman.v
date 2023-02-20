@@ -53,9 +53,9 @@ integer  i;
 
 
 always@(posedge clk or posedge reset)begin
-    if(reset)
-        state <= IDLE;
-    else
+    // if(reset)
+    //     state <= IDLE;
+    // else
         state <= next_state;
 end
 
@@ -170,7 +170,7 @@ always@(posedge clk or posedge reset)begin
         next_group <= 6;
         code_valid <= 0;
     end
-    if(next_state == CNT_OUT)
+    else if(next_state == CNT_OUT)
     begin
         arr_val [1] <= CNT1;
         arr_val [2] <= CNT2;
@@ -178,6 +178,7 @@ always@(posedge clk or posedge reset)begin
         arr_val [4] <= CNT4;
         arr_val [5] <= CNT5;
         arr_val [6] <= CNT6;
+
     end
     else if(next_state == FIR)
     begin

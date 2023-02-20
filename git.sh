@@ -1,3 +1,4 @@
+#!/bin/bash
 git add .
-git commit -m "up"
+git commit -m "$1"
 git push
