@@ -21,7 +21,7 @@ parameter IDLE = 3'd0,
     GRP = 3'd6,
     OUT = 3'd7;
 
-reg [2:0]cnt;
+// reg [2:0]cnt;
 reg [2:0]cnt_stage;
 reg [6:0]arr_val[1:6];
 reg [3:0]group  [1:6];
@@ -164,9 +164,10 @@ always@(posedge clk)begin
         ptr <= 2;
         ptr_fir <= 1;
         ptr_sec <= 1;
+        // cnt <= 0;
         cnt_stage <= 0;
         next_group <= 6;
-        code_valid <= 1;
+        code_valid <= 0;
     end
     else if(next_state == FIR)
     begin
@@ -192,6 +193,10 @@ always@(posedge clk)begin
 
         
 
+        // if(cnt == 6)
+        //     cnt <= 0;
+        // else
+        //     cnt <= cnt + 1;
     end
     else if(next_state == SEC)
     begin
@@ -206,6 +211,11 @@ always@(posedge clk)begin
         else
             ptr <= ptr+1;
         
+
+        // if(cnt == 6)
+        //     cnt <= 0;
+        // else
+        //     cnt <= cnt + 1;
     end
     else if(next_state == ENC)
     begin

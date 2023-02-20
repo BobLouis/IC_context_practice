@@ -4,40 +4,40 @@ K3
 cModel Technology
 Z0 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2018_gra\B_ICC2018_priliminary_grad_cell_based
 vhuffman
-Z1 IPXQk_FX2=n8EY<ggQEi@90
-Z2 VBhfLG78@Sm0U2EMb2DV123
-Z3 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2018_gra\B_ICC2018_priliminary_grad_cell_based
-Z4 w1676620316
-Z5 8huffman.v
-Z6 Fhuffman.v
+!i10b 1
+!s100 Z]IA?n8WCjI0d7YmED`zO1
+I3ZZf=1OhX@bNVNff1C[dI0
+Z1 VBhfLG78@Sm0U2EMb2DV123
+Z2 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2018_gra\B_ICC2018_priliminary_grad_cell_based
+w1676862585
+Z3 8huffman.v
+Z4 Fhuffman.v
 L0 1
-Z7 OV;L;10.1d;51
+Z5 OV;L;10.1d;51
 r1
-31
-Z8 !s90 -reportprogress|300|huffman.v|
-o-O0
-Z9 !s100 IV5mLXC5QeiB`aR^HnN4k0
-Z10 !s108 1676620319.912000
-Z11 !s107 huffman.v|
-!i10b 1
 !s85 0
+31
+!s108 1676862870.476000
+!s107 huffman.v|
+Z6 !s90 -reportprogress|300|huffman.v|
 !s101 -O0
+o-O0
 vtb
-!i10b 1
-!s100 96cT=Ko[Ii`O3Fk6^zJ<c2
-IobP>^fL:>4ZYiVHRZG9YK2
-Z12 VV@Xn<HnSRM[I5c1?BH]3a3
-R3
-w1676620420
+Z7 IobP>^fL:>4ZYiVHRZG9YK2
+Z8 VV@Xn<HnSRM[I5c1?BH]3a3
+R2
+Z9 w1676622122
 8tb.v
 Ftb.v
 L0 35
-R7
+R5
 r1
-!s85 0
 31
-!s108 1676620424.279000
-!s107 tb.v|
-Z13 !s90 -reportprogress|300|tb.v|
-!s101 -O0
 o-O0
+Z10 !s100 96cT=Ko[Ii`O3Fk6^zJ<c2
+Z11 !s108 1676862455.421000
+Z12 !s107 tb.v|
+Z13 !s90 -reportprogress|300|tb.v|
+!i10b 1
+!s85 0
+!s101 -O0
