@@ -7,7 +7,7 @@ module DT(
 	input		[15:0]	sti_di,
 	output	reg		res_wr ,
 	output	reg		res_rd ,
-	output	 	[13:0]	res_addr ,
+	output	reg	[13:0]	res_addr ,
 	output	reg 	[7:0]	res_do,
 	input		[7:0]	res_di
 	);
@@ -23,18 +23,18 @@ reg [2:0]cnt;
 reg [7:0] min;
 
 //louis
-reg [7:0] row, col;
+reg [6:0] row, col;
 reg cur_pix;
 reg dir; //0 forward 1 backward
 
-assign res_addr = {row, col};
+
 assign done = (state == FINISH);
 always@(posedge clk)begin
     state <= next_state;
 end
 
 always@(*)begin
-    if(reset)
+    if(!reset)
         next_state = READ_ROM;
     else begin
         case(state)
@@ -42,18 +42,19 @@ always@(*)begin
                 next_state = READ_ROM;
             READ_ROM:
 			begin
-                if(cur_pix == 1) next_state = READ_RAM;
+                if(sti_di[15-col[3:0]] == 1) next_state = READ_RAM;
+				else if(row == 126 && col == 126) next_state = FINISH;
                 else next_state = READ_ROM;  
             end
             READ_RAM:
 			begin
-                if(cnt == 4) next_state = WRITE_RAM;
+                if(cnt == 5) next_state = WRITE_RAM;
                 else next_state = READ_RAM;
             end 
             WRITE_RAM:
 			begin
 				if(row == 126 && col == 126)
-					next_state = CHANGE_DIR;
+					next_state = FINISH;
 				else if (row == 1 && col == 1)
 					next_state = FINISH;
 				else
@@ -70,68 +71,83 @@ end
 
 
 //DATA INPUT
-always@(posedge clk or posedge reset)begin
-    if(reset)begin
-		sti_addr <= 0;
-		sti_rd <= 1;
-		row <= 0;
-		col <= 255;
-		res_wr <= 0; 
+//sti_addr sti_rd
+//sti_di
+always@(posedge clk or negedge reset)begin
+    if(!reset)begin
+		sti_addr <= 8;
+		sti_rd <= 0;
+
+		res_rd <= 0;
+
+
+		row <= 1;
+		col <= 1;
 		
+		cnt <= 0;
 
 		//louis
 		dir <= 0;
-		res_do <= 0;
+
     end
     else begin
-		if(next_state == IDLE)begin
-			sti_addr <= sti_addr + 1;
+		if(next_state == READ_ROM)begin
+			// if(sti_di[col[3:0]] == 0) //go to next pix
+			// begin
+			sti_rd <= 1;
+			
+			if(col < 126)
+				col <= col + 1;
+			else
+			begin
+				col <= 1;
+				row <= row + 1;	
+				sti_addr <= sti_addr + 1;				
+			end 
 
-		end
-		else if(next_state == READ_ROM)begin
-			if(sti_di == 0)begin
+			if(col[3:0] == 15)
 				sti_addr <= sti_addr + 1;
-				if(col == 127)begin
-					row <= row + 1;
-					col <= 0;
-				end
-				else
-					col <= col + 16;
-			end
-			else begin
-				if(sti_di[col] == 0)
-					col <= col + 1;
-				else begin
-					cur_pix <= sti_di[col];
-					col <= col - 129;
-				end
-			end
+
+			// end
 		end
 		else if(next_state == READ_RAM)begin
 			case(cnt)
-				0:begin	
-					min <= res_di;
-					col <= col + 1;
+				0:begin
+					res_rd <= 1;
+					res_addr <= {row-7'd1,col-7'd1};
 				end
-				1:begin
-					if(min > res_di)
-						min <= res_di;
-					col <= col + 1;
-					cnt <= cnt + 1;
+				1:begin	
+					min <= res_di;
+					res_addr <= {row-7'd1,col};
 				end
 				2:begin
 					if(min > res_di)
 						min <= res_di;
-					cnt <= cnt + 1;
-					col <= col + 126;
+					res_addr <= {row-7'd1,col+7'd1};
 				end
 				3:begin
 					if(min > res_di)
 						min <= res_di;
-					cnt <= cnt + 1;
+					res_addr <= {row,col-7'd1};
+					
+				end
+				4:begin
+					if(min > res_di)
+						min <= res_di;
+					res_rd <= 0;
+					res_addr <= {row,col};
 				end
 				
 			endcase
+			if(cnt < 5)
+				cnt <= cnt + 1;
+			else
+				cnt <= 0;
+		end
+		else if(next_state == WRITE_RAM)
+		begin
+			// res_addr <= {row,col};
+			
 		end
 		else if(next_state == CHANGE_DIR)
 		begin
@@ -140,8 +156,8 @@ always@(posedge clk or posedge reset)begin
     end
 end
 
-always @(negedge clk or posedge reset) begin
-	if(reset)
+always @(negedge clk or negedge reset) begin
+	if(!reset)
 	begin
 		res_wr <= 0;
 		res_do <= 0;
@@ -153,6 +169,10 @@ always @(negedge clk or posedge reset) begin
 			res_do <= min + 1;
 		else
 			res_do <= min;
+	end
+	else 
+	begin
+		res_wr <= 0;
 	end
 end
 

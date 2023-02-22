@@ -3,10 +3,12 @@
 `define SDFFILE    "../SYN/DT_syn.sdf"	  // Modify your sdf file name
 `define End_CYCLE  100000000             // Modify cycle times once your design need more cycle times!
 
+`define TB1
+
 `ifdef TB1
 	`define PAT        "./dat/Geometry_sti.dat"    
 	`define FWEXP        "./dat/Geometry_fwexp.dat"  
-	`define BCEXP        "./dat/Geometry_bcexp.dat"      
+	`define BCEXP        "./dat/Geometry_fwexp.dat"      
 `elsif TB2
 	`define PAT        "./dat/ICC17_sti.dat"    
 	`define FWEXP        "./dat/ICC17_fwexp.dat"

@@ -1,0 +1,84 @@
+m255
+K3
+13
+cModel Technology
+Z0 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2018_gra\B_ICC2018_priliminary_grad_cell_based
+vDT
+!i10b 1
+!s100 5c5Q`e]Z^ma8NIjLC<5NJ1
+InP@>_dYd]4?ji[:iK_YJ[0
+Z1 VLU>6g==M05G5D=4=U@SQQ3
+Z2 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2017\B_ICC2017_preliminary_grad_cell-based
+w1677052056
+8DT.v
+FDT.v
+L0 1
+Z3 OV;L;10.1d;51
+r1
+!s85 0
+31
+!s108 1677052064.220000
+!s107 DT.v|
+Z4 !s90 -reportprogress|300|DT.v|
+!s101 -O0
+o-O0
+n@d@t
+vres_RAM
+Z5 !s100 ;BdgFTS6lJ:7jL`h1EWBP0
+Z6 Iz^X2UQ<Bg;3=Zj=cY5bZA1
+Z7 VaB]kk<Pbk==z^0m=`z`[>0
+R2
+Z8 w1677049772
+Z9 8testfixture.v
+Z10 Ftestfixture.v
+Z11 L0 222
+R3
+r1
+31
+Z12 !s108 1677050152.109000
+Z13 !s107 testfixture.v|
+Z14 !s90 -reportprogress|300|testfixture.v|
+o-O0
+Z15 nres_@r@a@m
+!i10b 1
+!s85 0
+!s101 -O0
+vsti_ROM
+Z16 !s100 Fm_:gaXB`B6?m0S2i;ELF2
+Z17 IPAn5JQ^eP5IzYM1^QkciG1
+Z18 VM6_@zEzh3H[KNzlKPTfiM2
+R2
+R8
+R9
+R10
+Z19 L0 198
+R3
+r1
+31
+R12
+R13
+R14
+o-O0
+Z20 nsti_@r@o@m
+!i10b 1
+!s85 0
+!s101 -O0
+vtestfixture
+Z21 !s100 Y=lR_508zX[`SZiD@4NHk0
+Z22 I=NRGlY:kNhDco=gV44iFA0
+Z23 V<d7^G6dXC8e=mX:l9bUfB0
+R2
+R8
+R9
+R10
+L0 18
+R3
+r1
+31
+R12
+R13
+R14
+o-O0
+!i10b 1
+!s85 0
+!s101 -O0
