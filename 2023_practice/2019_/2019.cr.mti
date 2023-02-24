@@ -1,0 +1,8 @@
+//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/testfixture.v {1 {vlog -work work //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/testfixture.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module testfixture
+
+Top level modules:
+	testfixture
+
+} {} {}}

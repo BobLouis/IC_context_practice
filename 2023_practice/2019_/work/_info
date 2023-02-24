@@ -1,0 +1,44 @@
+m255
+K3
+13
+cModel Technology
+Z0 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2017\B_ICC2017_preliminary_grad_cell-based
+vCONV
+Z1 IR6?zdenV5b_lcL:0D2z`V0
+Z2 VN5mhTd8S[=GVCU2^za7HN2
+Z3 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2019_
+Z4 w1677245071
+Z5 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/CONV.v
+Z6 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/CONV.v
+L0 4
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/CONV.v|
+Z9 o-work work -O0
+Z10 n@c@o@n@v
+!i10b 1
+Z11 !s100 ?aSgW@5RUGVFN]1@b6`?O2
+!s85 0
+Z12 !s108 1677245074.327000
+Z13 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/CONV.v|
+!s101 -O0
+vtestfixture
+!i10b 1
+Z14 !s100 iF^2N9cLRG[>YITh9dW`I0
+Z15 IV^V6k2dTgd=`=;o1I]d4W1
+Z16 VKBIIT=eCh7cJh[^JXBGX00
+R3
+Z17 w1677241245
+Z18 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/testfixture.v
+Z19 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/testfixture.v
+L0 11
+R7
+r1
+!s85 0
+31
+!s108 1677245074.410000
+!s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/testfixture.v|
+Z20 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2019_/testfixture.v|
+!s101 -O0
+R9
