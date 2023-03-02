@@ -45,8 +45,7 @@ always@(*)begin
                 else next_state = READ;  
             end
             SORTING:begin
-
-
+                
             end
             CAL:begin
                 if() next_state = OUT;
@@ -70,6 +69,9 @@ always@(posedge clk or posedge reset)begin
             tmp_x[cnt] <= X;
             tmp_y[cnt] <= Y;
             cnt <= cnt + 1;
+        end
+        else if(next_state == SORTING)begin
+            
         end
     end
 end
