@@ -15,12 +15,24 @@ parameter IDLE = 3'd0,
 	  CAL = 3'd3,
 	  OUT = 3'd4;
 
+reg [2:0] sort_cnt;
 reg [2:0] cnt;
 reg [9:0] tmp_x[0:5];
 reg [9:0] tmp_y[0:5];
+reg [9:0] target_x;
+reg [9:0] target_y;
 
-reg [9:0] buf1;
-reg [9:0] buf2;
+reg signed [9:0] A_x;
+reg signed [9:0] A_y;
+reg signed [9:0] B_x;
+reg signed [9:0] B_y;
+
+reg signed [9:0] buf1;
+reg signed [9:0] buf2;
+reg signed [19:0] tmp1;
+reg signed [19:0] tmp2;
+
+reg done;
 
 wire signed [19:0]mul;
 
@@ -41,11 +53,12 @@ always@(*)begin
             IDLE:
                 next_state = READ;
             READ:begin
-                if(cnt == 7) next_state = SORTING;
+                if(done == 1) next_state = SORTING;
                 else next_state = READ;  
             end
             SORTING:begin
-                
+                if() next_state = CAL;
+                else next_state = SORTING;
             end
             CAL:begin
                 if() next_state = OUT;
@@ -63,19 +76,70 @@ end
 always@(posedge clk or posedge reset)begin
     if(reset)begin
         cnt <= 0;
+        done <= 0;
+        sort_cnt <= 0;
     end
     else begin
         if(next_state == READ) begin
-            tmp_x[cnt] <= X;
-            tmp_y[cnt] <= Y;
-            cnt <= cnt + 1;
+            if(cnt == 0)begin
+                target_x <= X;
+                target_y <= Y;
+            end
+            else begin
+                tmp_x[cnt-1] <= X;
+                tmp_y[cnt-1] <= Y;
+            end
+            if(cnt < 6)
+                cnt <= cnt + 1;
+            else begin
+                cnt <= 0;
+                done <= 1;
+            end
         end
         else if(next_state == SORTING)begin
-            
+            case(cnt)
+                0:begin
+                    A_x <= tmp_x[sort_cnt+1] - tmp_x[sort_cnt];    //
+                    A_y <= tmp_y[sort_cnt+1] - tmp_y[sort_cnt];    //
+                    B_x <= tmp_x[sort_cnt+2] - tmp_x[sort_cnt];    //
+                    B_y <= tmp_y[sort_cnt+2] - tmp_y[sort_cnt];    //
+                    cnt <= cnt + 1;
+                end
+                1:begin
+                    
+                    cnt <= cnt + 1;
+                end
+                2:begin
+                    buf1 <= ;
+                    buf2 <= ;
+
+                end
+                3:begin
+                    if(tmp > mul)begin
+                        cnt <= 7;
+                    end
+                    else 
+                        cnt <= 0;
+                end
+                4:begin
+                    
+
+                end
+                4:begin
+
+
+                end
+                7:begin
+                    tmp_x[sort_cnt] <= tmp_x[sort_cnt+1];
+                    tmp_x[sort_cnt+1] <= tmp_x[sort_cnt];
+                    tmp_y[sort_cnt] <= tmp_y[sort_cnt+1];
+                    tmp_y[sort_cnt+1] <= tmp_y[sort_cnt];
+                    sort_cnt <= sort_cnt + 1;
+                end
+            endcase
         end
     end
 end
-
 
 endmodule
 
