@@ -33,12 +33,8 @@ wire signed [21:0]mul;
 
 assign mul = buf1 * buf2;
 
-reg signed [19:0]mul1;
-reg signed [19:0]mul2;
 reg [5:0] result;
 
-wire out_;
-assign out_ = (mul1 > mul2);
 assign is_inside = &result | &(~result);
 
 always@(posedge clk or posedge reset)begin
