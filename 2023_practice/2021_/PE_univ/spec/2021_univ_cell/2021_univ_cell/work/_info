@@ -4,43 +4,43 @@ K3
 cModel Technology
 Z0 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2019_
 vgeofence
-Z1 I9hK6`X`M>YSWSd:WZ@FRJ3
-Z2 V6PoN1VoV:oea@b?eRY?Yj3
-Z3 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2021_\PE_univ\spec\2021_univ_cell\2021_univ_cell
-Z4 w1678264577
-Z5 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v
-Z6 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v
+!i10b 1
+!s100 jGGg3WF3:e1eElcn?dM]b0
+I9hK6`X`M>YSWSd:WZ@FRJ3
+Z1 V6PoN1VoV:oea@b?eRY?Yj3
+Z2 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2021_\PE_univ\spec\2021_univ_cell\2021_univ_cell
+w1678265028
+Z3 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v
+Z4 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v
 L0 1
-Z7 OV;L;10.1d;51
+Z5 OV;L;10.1d;51
 r1
-31
-Z8 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v|
-Z9 o-work work -O0
-!i10b 1
-Z10 !s100 jGGg3WF3:e1eElcn?dM]b0
 !s85 0
-Z11 !s108 1678264581.075000
-Z12 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v|
+31
+!s108 1678265030.554000
+!s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v|
+Z6 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v|
 !s101 -O0
+Z7 o-work work -O0
 vtestfixture
-Z13 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
-!i10b 1
-Z14 !s100 :nDFSHaE=YKiB0XnbU_5V3
-Z15 ImGZ0cNaF;0Ek2HNAE6lD^1
-Z16 VKBIIT=eCh7cJh[^JXBGX00
-Z17 !s105 tb_sv_unit
+Z8 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+Z9 !s100 :nDFSHaE=YKiB0XnbU_5V3
+Z10 ImGZ0cNaF;0Ek2HNAE6lD^1
+Z11 VKBIIT=eCh7cJh[^JXBGX00
+Z12 !s105 tb_sv_unit
 S1
-R3
-Z18 w1616462404
-Z19 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv
-Z20 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv
+R2
+Z13 w1616462404
+Z14 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv
+Z15 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv
 L0 7
-R7
+R5
 r1
-!s85 0
 31
-!s108 1678264581.166000
-!s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv|
-Z21 !s90 -reportprogress|300|-work|work|-sv|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv|
+Z16 !s90 -reportprogress|300|-work|work|-sv|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv|
+Z17 o-work work -sv -O0
+!i10b 1
+!s85 0
+Z18 !s108 1678265030.461000
+Z19 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv|
 !s101 -O0
-Z22 o-work work -sv -O0
