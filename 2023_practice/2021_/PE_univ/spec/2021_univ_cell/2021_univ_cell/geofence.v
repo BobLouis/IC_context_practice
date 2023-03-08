@@ -17,10 +17,8 @@ parameter IDLE = 3'd0,
 
 reg [2:0] sort_cnt;
 reg [2:0] cnt;
-reg [9:0] tmp_x[0:5];
-reg [9:0] tmp_y[0:5];
-reg [9:0] target_x;
-reg [9:0] target_y;
+reg [9:0] tmp_x[0:6];
+reg [9:0] tmp_y[0:6];
 reg [2:0] sort_idx;
 
 reg signed [10:0] buf1;
@@ -82,44 +80,16 @@ always@(posedge clk or posedge reset)begin
     if(reset)begin
         cnt <= 0;
         done <= 0;
-        sort_cnt <= 1;
-        sort_idx <= 4;
+        sort_cnt <= 2;
+        sort_idx <= 5;
         valid <= 0;
     end
     else begin
         if(next_state == READ) begin
             valid <= 0;
             
-            case(cnt)
-                0:begin
-                    target_x <= X;
-                    target_y <= Y;
-                end
-                1:begin
-                    tmp_x[0] <= X;
-                    tmp_y[0] <= Y;
-                end
-                2:begin
-                    tmp_x[1] <= X;
-                    tmp_y[1] <= Y;
-                end
-                3:begin
-                    tmp_x[2] <= X;
-                    tmp_y[2] <= Y;
-                end
-                4:begin
-                    tmp_x[3] <= X;
-                    tmp_y[3] <= Y;
-                end
-                5:begin
-                    tmp_x[4] <= X;
-                    tmp_y[4] <= Y;
-                end
-                6:begin
-                    tmp_x[5] <= X;
-                    tmp_y[5] <= Y;
-                end
-            endcase
+            tmp_x[cnt] <= X;
+            tmp_y[cnt] <= Y;
             
             if(cnt < 6)
                 cnt <= cnt + 1;
@@ -132,20 +102,20 @@ always@(posedge clk or posedge reset)begin
             done <= 0;
             case(cnt)
                 0:begin
-                    buf1 <= tmp_x[sort_cnt] - tmp_x[0];         
+                    buf1 <= tmp_x[sort_cnt] - tmp_x[1];         
                     cnt <= cnt + 1;
                 end
                 1:begin      
-                    buf2 <= tmp_y[sort_cnt+1] - tmp_y[0];    
+                    buf2 <= tmp_y[sort_cnt+1] - tmp_y[1];    
                     cnt <= cnt + 1;
                 end
                 2:begin
                     tmp <= mul;
-                    buf2 <= tmp_y[sort_cnt] - tmp_y[0];    
+                    buf2 <= tmp_y[sort_cnt] - tmp_y[1];    
                     cnt <= cnt + 1;
                 end
                 3:begin
-                    buf1 <= tmp_x[sort_cnt+1] - tmp_x[0];
+                    buf1 <= tmp_x[sort_cnt+1] - tmp_x[1];
                     cnt <= cnt + 1;
                 end
                 4:begin
@@ -177,51 +147,43 @@ always@(posedge clk or posedge reset)begin
                 end
             endcase
         end
-        else if(next_state == CAL)
-        begin
+        else if(next_state == CAL)begin
             case(cnt)
-            0:
-                begin
-                    buf1 <= tmp_x[sort_idx] - target_x;
-                    
-                end
+            0:begin
+                    buf1 <= tmp_x[sort_idx] - tmp_x[0];
+            end
             1:begin
-                if(sort_idx == 5)
-                        buf2 <= tmp_y[0] - target_y;
-                    else
-                        buf2 <= tmp_y[sort_idx+1] - target_y;
+                if(sort_idx == 6)
+                    buf2 <= tmp_y[1] - tmp_y[0];
+                else
+                    buf2 <= tmp_y[sort_idx+1] - tmp_y[0];
             end
             2:begin
                 tmp <= mul;
-                buf2 <= tmp_y[sort_idx] - target_y;
-                
+                buf2 <= tmp_y[sort_idx] - tmp_y[0];
             end
-            3:
-                begin
-
-                if(sort_idx == 5)
-                    buf1 <= tmp_x[0] - target_x;
+            3:begin
+                if(sort_idx == 6)
+                    buf1 <= tmp_x[1] - tmp_x[0];
                 else
-                    buf1 <= tmp_x[sort_idx+1] - target_x;
-                    
-                end
+                    buf1 <= tmp_x[sort_idx+1] - tmp_x[0];
+             end
             4:begin
                 result[sort_idx] <= (tmp > mul);
                 sort_idx <= sort_idx + 1;
-
             end
+
             endcase
-            if(cnt < 4)
-                begin
-                    cnt <= cnt + 1;
-                end
-                else 
-                    cnt <= 0;
+
+            if(cnt < 4)begin
+                cnt <= cnt + 1;
+            end
+            else 
+                cnt <= 0;
         end
-        else if(next_state == OUT)
-        begin
-            sort_idx <= 4;
-            sort_cnt <= 1;
+        else if(next_state == OUT)begin
+            sort_idx <= 5;
+            sort_cnt <= 2;
             cnt <= 0;
             valid <= 1;
         end
