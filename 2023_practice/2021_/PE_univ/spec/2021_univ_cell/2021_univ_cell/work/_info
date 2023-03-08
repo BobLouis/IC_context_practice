@@ -1,0 +1,46 @@
+m255
+K3
+13
+cModel Technology
+Z0 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2019_
+vgeofence
+Z1 I0z>cH2f2N4B@8<znb4=M52
+Z2 V6PoN1VoV:oea@b?eRY?Yj3
+Z3 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2021_\PE_univ\spec\2021_univ_cell\2021_univ_cell
+Z4 w1678261201
+Z5 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v
+Z6 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v
+L0 1
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v|
+Z9 o-work work -O0
+!i10b 1
+Z10 !s100 R_:bFH[@Z[0gOZ]ZZFDP?3
+!s85 0
+Z11 !s108 1678261207.537000
+Z12 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/geofence.v|
+!s101 -O0
+vtestfixture
+Z13 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+!i10b 1
+Z14 !s100 :nDFSHaE=YKiB0XnbU_5V3
+Z15 ImGZ0cNaF;0Ek2HNAE6lD^1
+Z16 VKBIIT=eCh7cJh[^JXBGX00
+Z17 !s105 tb_sv_unit
+S1
+R3
+Z18 w1616462404
+Z19 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv
+Z20 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv
+L0 7
+R7
+r1
+!s85 0
+31
+!s108 1678261207.625000
+!s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv|
+Z21 !s90 -reportprogress|300|-work|work|-sv|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2021_/PE_univ/spec/2021_univ_cell/2021_univ_cell/tb.sv|
+!s101 -O0
+Z22 o-work work -sv -O0

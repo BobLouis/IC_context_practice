@@ -3,9 +3,8 @@ input clk;
 input reset;
 input [9:0] X;
 input [9:0] Y;
-output valid;
+output reg valid;
 output is_inside;
-//reg valid;
 //reg is_inside;
 
 reg [2:0]state, next_state;
@@ -13,7 +12,8 @@ parameter IDLE = 3'd0,
 	  READ = 3'd1,
       SORTING = 3'd2,
 	  CAL = 3'd3,
-	  OUT = 3'd4;
+	  OUT = 3'd4,
+      BUFFF = 3'd5;
 
 reg [2:0] sort_cnt;
 reg [2:0] cnt;
@@ -21,22 +21,27 @@ reg [9:0] tmp_x[0:5];
 reg [9:0] tmp_y[0:5];
 reg [9:0] target_x;
 reg [9:0] target_y;
+reg [2:0] sort_idx;
 
-reg signed [9:0] A_x;
-reg signed [9:0] A_y;
-reg signed [9:0] B_x;
-reg signed [9:0] B_y;
+reg signed [10:0] buf1;
+reg signed [10:0] buf2;
+reg signed [21:0] tmp;
 
-reg signed [9:0] buf1;
-reg signed [9:0] buf2;
-reg signed [19:0] tmp1;
-reg signed [19:0] tmp2;
+reg [2:0] cnt_dot;
 
 reg done;
 
-wire signed [19:0]mul;
+wire signed [21:0]mul;
 
 assign mul = buf1 * buf2;
+
+reg signed [19:0]mul1;
+reg signed [19:0]mul2;
+reg [5:0] result;
+
+wire out_;
+assign out_ = (mul1 > mul2);
+assign is_inside = &result | &(~result);
 
 always@(posedge clk or posedge reset)begin
     if(reset)
@@ -57,14 +62,16 @@ always@(*)begin
                 else next_state = READ;  
             end
             SORTING:begin
-                if() next_state = CAL;
+                if(sort_idx == 0) next_state = CAL;
                 else next_state = SORTING;
             end
             CAL:begin
-                if() next_state = OUT;
+                if(cnt_dot == 6) next_state = OUT;
                 else next_state = CAL;
             end 
             OUT:
+                next_state = BUFFF;
+            BUFFF:
                 next_state = READ; 
             default:    next_state = IDLE;
         endcase
@@ -77,10 +84,14 @@ always@(posedge clk or posedge reset)begin
     if(reset)begin
         cnt <= 0;
         done <= 0;
-        sort_cnt <= 0;
+        sort_cnt <= 1;
+        sort_idx <= 4;
+        cnt_dot <= 0;
+        valid <= 0;
     end
     else begin
         if(next_state == READ) begin
+            valid <= 0;
             if(cnt == 0)begin
                 target_x <= X;
                 target_y <= Y;
@@ -97,46 +108,90 @@ always@(posedge clk or posedge reset)begin
             end
         end
         else if(next_state == SORTING)begin
+            done <= 0;
             case(cnt)
                 0:begin
-                    A_x <= tmp_x[sort_cnt+1] - tmp_x[sort_cnt];    //
-                    A_y <= tmp_y[sort_cnt+1] - tmp_y[sort_cnt];    //
-                    B_x <= tmp_x[sort_cnt+2] - tmp_x[sort_cnt];    //
-                    B_y <= tmp_y[sort_cnt+2] - tmp_y[sort_cnt];    //
+                    buf1 <= tmp_x[sort_cnt] - tmp_x[0];       
+                    buf2 <= tmp_y[sort_cnt+1] - tmp_y[0];    
                     cnt <= cnt + 1;
                 end
                 1:begin
-                    
+                    tmp <= mul;
+                    buf2 <= tmp_y[sort_cnt] - tmp_y[0];    
+                    buf1 <= tmp_x[sort_cnt+1] - tmp_x[0]; 
                     cnt <= cnt + 1;
                 end
                 2:begin
-                    buf1 <= ;
-                    buf2 <= ;
-
+                    if(tmp > mul)begin
+                        cnt <= 3;
+                    end
+                    else begin
+                        if(sort_cnt == sort_idx) begin
+                            sort_idx <= sort_idx - 1;
+                            sort_cnt <= 1;
+                        end
+                        else 
+                            sort_cnt <= sort_cnt + 1;
+                        cnt <= 0;
+                    end
                 end
                 3:begin
-                    if(tmp > mul)begin
-                        cnt <= 7;
-                    end
-                    else 
-                        cnt <= 0;
-                end
-                4:begin
-                    
-
-                end
-                4:begin
-
-
-                end
-                7:begin
                     tmp_x[sort_cnt] <= tmp_x[sort_cnt+1];
                     tmp_x[sort_cnt+1] <= tmp_x[sort_cnt];
                     tmp_y[sort_cnt] <= tmp_y[sort_cnt+1];
                     tmp_y[sort_cnt+1] <= tmp_y[sort_cnt];
-                    sort_cnt <= sort_cnt + 1;
+                    if(sort_cnt == sort_idx) begin
+                            sort_idx <= sort_idx - 1;
+                            sort_cnt <= 1;
+                    end
+                    else 
+                        sort_cnt <= sort_cnt + 1;
+                    cnt <= 0;
                 end
             endcase
+        end
+        else if(next_state == CAL)
+        begin
+
+            if(cnt == 0)
+            begin
+                buf1 <= tmp_x[cnt_dot] - target_x;
+                if(cnt_dot == 5)
+                    buf2 <= tmp_y[0] - target_y;
+                else
+                    buf2 <= tmp_y[cnt_dot+1] - target_y;
+            end
+            else if(cnt == 1)
+            begin
+                tmp <= mul;
+                if(cnt_dot == 5)
+                    buf1 <= tmp_x[0] - target_x;
+                else
+                    buf1 <= tmp_x[cnt_dot+1] - target_x;
+                buf2 <= tmp_y[cnt_dot] - target_y;
+            end
+            else if(cnt == 2)
+            begin
+                result[cnt_dot] <= (tmp > mul);
+                cnt_dot <= cnt_dot + 1;
+            end
+
+
+
+            if(cnt < 2)
+            begin
+                cnt <= cnt + 1;
+            end
+            else 
+                cnt <= 0;
+        end
+        else if(next_state == OUT)
+        begin
+            sort_idx <= 4;
+            sort_cnt <= 1;
+            cnt_dot <= 0;
+            cnt <= 0;
+            valid <= 1;
         end
     end
 end
