@@ -35,7 +35,7 @@ assign mul = buf1 * buf2;
 
 reg [5:0] result;
 
-assign is_inside = &result | &(~result);
+assign is_inside = &(~result);
 
 always@(posedge clk or posedge reset)begin
     if(reset)
@@ -164,8 +164,8 @@ always@(posedge clk or posedge reset)begin
                     tmp_y[sort_cnt] <= tmp_y[sort_cnt+1];
                     tmp_y[sort_cnt+1] <= tmp_y[sort_cnt];
                     if(sort_cnt == sort_idx) begin
-                            sort_idx <= sort_idx - 1;
-                            sort_cnt <= 1;
+                        sort_idx <= sort_idx - 1;
+                        sort_cnt <= 1;
                     end
                     else 
                         sort_cnt <= sort_cnt + 1;
@@ -176,7 +176,7 @@ always@(posedge clk or posedge reset)begin
         else if(next_state == CAL)begin
             case(cnt)
             0:begin
-                    buf1 <= tmp_x[sort_idx] - target_x;
+                buf1 <= tmp_x[sort_idx] - target_x;
             end
             1:begin
                 if(sort_idx == 5)
@@ -198,7 +198,6 @@ always@(posedge clk or posedge reset)begin
                 result[sort_idx] <= (tmp > mul);
                 sort_idx <= sort_idx + 1;
             end
-
             endcase
 
             if(cnt < 4)begin
