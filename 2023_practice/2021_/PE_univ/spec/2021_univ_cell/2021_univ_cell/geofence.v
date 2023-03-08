@@ -27,8 +27,6 @@ reg signed [10:0] buf1;
 reg signed [10:0] buf2;
 reg signed [21:0] tmp;
 
-reg [2:0] cnt_dot;
-
 reg done;
 
 wire signed [21:0]mul;
@@ -66,7 +64,7 @@ always@(*)begin
                 else next_state = SORTING;
             end
             CAL:begin
-                if(cnt_dot == 6) next_state = OUT;
+                if(sort_idx == 6) next_state = OUT;
                 else next_state = CAL;
             end 
             OUT:
@@ -86,7 +84,6 @@ always@(posedge clk or posedge reset)begin
         done <= 0;
         sort_cnt <= 1;
         sort_idx <= 4;
-        cnt_dot <= 0;
         valid <= 0;
     end
     else begin
@@ -155,25 +152,25 @@ always@(posedge clk or posedge reset)begin
             case(cnt)
             0:
                 begin
-                    buf1 <= tmp_x[cnt_dot] - target_x;
-                    if(cnt_dot == 5)
+                    buf1 <= tmp_x[sort_idx] - target_x;
+                    if(sort_idx == 5)
                         buf2 <= tmp_y[0] - target_y;
                     else
-                        buf2 <= tmp_y[cnt_dot+1] - target_y;
+                        buf2 <= tmp_y[sort_idx+1] - target_y;
                 end
             1:
                 begin
                     tmp <= mul;
-                    if(cnt_dot == 5)
+                    if(sort_idx == 5)
                         buf1 <= tmp_x[0] - target_x;
                     else
-                        buf1 <= tmp_x[cnt_dot+1] - target_x;
-                    buf2 <= tmp_y[cnt_dot] - target_y;
+                        buf1 <= tmp_x[sort_idx+1] - target_x;
+                    buf2 <= tmp_y[sort_idx] - target_y;
                 end
             2:
                 begin
-                    result[cnt_dot] <= (tmp > mul);
-                    cnt_dot <= cnt_dot + 1;
+                    result[sort_idx] <= (tmp > mul);
+                    sort_idx <= sort_idx + 1;
                 end
             endcase
             if(cnt < 2)
@@ -187,7 +184,6 @@ always@(posedge clk or posedge reset)begin
         begin
             sort_idx <= 4;
             sort_cnt <= 1;
-            cnt_dot <= 0;
             cnt <= 0;
             valid <= 1;
         end
