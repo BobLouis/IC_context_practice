@@ -89,14 +89,38 @@ always@(posedge clk or posedge reset)begin
     else begin
         if(next_state == READ) begin
             valid <= 0;
-            if(cnt == 0)begin
-                target_x <= X;
-                target_y <= Y;
-            end
-            else begin
-                tmp_x[cnt-1] <= X;
-                tmp_y[cnt-1] <= Y;
-            end
+            
+            case(cnt)
+                0:begin
+                    target_x <= X;
+                    target_y <= Y;
+                end
+                1:begin
+                    tmp_x[0] <= X;
+                    tmp_y[0] <= Y;
+                end
+                2:begin
+                    tmp_x[1] <= X;
+                    tmp_y[1] <= Y;
+                end
+                3:begin
+                    tmp_x[2] <= X;
+                    tmp_y[2] <= Y;
+                end
+                4:begin
+                    tmp_x[3] <= X;
+                    tmp_y[3] <= Y;
+                end
+                5:begin
+                    tmp_x[4] <= X;
+                    tmp_y[4] <= Y;
+                end
+                6:begin
+                    tmp_x[5] <= X;
+                    tmp_y[5] <= Y;
+                end
+            endcase
+            
             if(cnt < 6)
                 cnt <= cnt + 1;
             else begin
