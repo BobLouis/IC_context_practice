@@ -152,36 +152,38 @@ always@(posedge clk or posedge reset)begin
         end
         else if(next_state == CAL)
         begin
-            case(cnt)
-            0:
-                begin
-                    buf1 <= tmp_x[cnt_dot] - target_x;
-                    if(cnt_dot == 5)
-                        buf2 <= tmp_y[0] - target_y;
-                    else
-                        buf2 <= tmp_y[cnt_dot+1] - target_y;
-                end
-            1:
-                begin
-                    tmp <= mul;
-                    if(cnt_dot == 5)
-                        buf1 <= tmp_x[0] - target_x;
-                    else
-                        buf1 <= tmp_x[cnt_dot+1] - target_x;
-                    buf2 <= tmp_y[cnt_dot] - target_y;
-                end
-            2:
-                begin
-                    result[cnt_dot] <= (tmp > mul);
-                    cnt_dot <= cnt_dot + 1;
-                end
-            endcase
+
+            if(cnt == 0)
+            begin
+                buf1 <= tmp_x[cnt_dot] - target_x;
+                if(cnt_dot == 5)
+                    buf2 <= tmp_y[0] - target_y;
+                else
+                    buf2 <= tmp_y[cnt_dot+1] - target_y;
+            end
+            else if(cnt == 1)
+            begin
+                tmp <= mul;
+                if(cnt_dot == 5)
+                    buf1 <= tmp_x[0] - target_x;
+                else
+                    buf1 <= tmp_x[cnt_dot+1] - target_x;
+                buf2 <= tmp_y[cnt_dot] - target_y;
+            end
+            else if(cnt == 2)
+            begin
+                result[cnt_dot] <= (tmp > mul);
+                cnt_dot <= cnt_dot + 1;
+            end
+
+
+
             if(cnt < 2)
-                begin
-                    cnt <= cnt + 1;
-                end
-                else 
-                    cnt <= 0;
+            begin
+                cnt <= cnt + 1;
+            end
+            else 
+                cnt <= 0;
         end
         else if(next_state == OUT)
         begin
