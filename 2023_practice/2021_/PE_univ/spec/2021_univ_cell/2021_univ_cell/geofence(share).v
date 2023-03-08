@@ -108,25 +108,19 @@ always@(posedge clk or posedge reset)begin
             done <= 0;
             case(cnt)
                 0:begin
-                    buf1 <= tmp_x[sort_cnt] - tmp_x[0];         
-                    cnt <= cnt + 1;
-                end
-                1:begin      
+                    buf1 <= tmp_x[sort_cnt] - tmp_x[0];       
                     buf2 <= tmp_y[sort_cnt+1] - tmp_y[0];    
                     cnt <= cnt + 1;
                 end
-                2:begin
+                1:begin
                     tmp <= mul;
                     buf2 <= tmp_y[sort_cnt] - tmp_y[0];    
+                    buf1 <= tmp_x[sort_cnt+1] - tmp_x[0]; 
                     cnt <= cnt + 1;
                 end
-                3:begin
-                    buf1 <= tmp_x[sort_cnt+1] - tmp_x[0];
-                    cnt <= cnt + 1;
-                end
-                4:begin
+                2:begin
                     if(tmp > mul)begin
-                        cnt <= 5;
+                        cnt <= 3;
                     end
                     else begin
                         if(sort_cnt == sort_idx) begin
@@ -138,7 +132,7 @@ always@(posedge clk or posedge reset)begin
                         cnt <= 0;
                     end
                 end
-                5:begin
+                3:begin
                     tmp_x[sort_cnt] <= tmp_x[sort_cnt+1];
                     tmp_x[sort_cnt+1] <= tmp_x[sort_cnt];
                     tmp_y[sort_cnt] <= tmp_y[sort_cnt+1];
@@ -159,35 +153,27 @@ always@(posedge clk or posedge reset)begin
             0:
                 begin
                     buf1 <= tmp_x[sort_idx] - target_x;
-                    
-                end
-            1:begin
-                if(sort_idx == 5)
+                    if(sort_idx == 5)
                         buf2 <= tmp_y[0] - target_y;
                     else
                         buf2 <= tmp_y[sort_idx+1] - target_y;
-            end
-            2:begin
-                tmp <= mul;
-                buf2 <= tmp_y[sort_idx] - target_y;
-                
-            end
-            3:
-                begin
-
-                if(sort_idx == 5)
-                    buf1 <= tmp_x[0] - target_x;
-                else
-                    buf1 <= tmp_x[sort_idx+1] - target_x;
-                    
                 end
-            4:begin
-                result[sort_idx] <= (tmp > mul);
-                sort_idx <= sort_idx + 1;
-
-            end
+            1:
+                begin
+                    tmp <= mul;
+                    if(sort_idx == 5)
+                        buf1 <= tmp_x[0] - target_x;
+                    else
+                        buf1 <= tmp_x[sort_idx+1] - target_x;
+                    buf2 <= tmp_y[sort_idx] - target_y;
+                end
+            2:
+                begin
+                    result[sort_idx] <= (tmp > mul);
+                    sort_idx <= sort_idx + 1;
+                end
             endcase
-            if(cnt < 4)
+            if(cnt < 2)
                 begin
                     cnt <= cnt + 1;
                 end
