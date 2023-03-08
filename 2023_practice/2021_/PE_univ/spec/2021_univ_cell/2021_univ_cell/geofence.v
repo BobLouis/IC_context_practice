@@ -35,7 +35,7 @@ assign mul = buf1 * buf2;
 
 reg [5:0] result;
 
-assign is_inside = &(~result);
+assign is_inside = &result | &(~result);
 
 always@(posedge clk or posedge reset)begin
     if(reset)
