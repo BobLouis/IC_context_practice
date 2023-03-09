@@ -1,0 +1,69 @@
+m255
+K3
+13
+cModel Technology
+Z0 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2021_\PE_univ\spec\2021_univ_cell\2021_univ_cell
+vSME
+Z1 IYF:PF8MjGaa:McQR_AY0_3
+Z2 V2a]DDfid4@<dgakX:F:in0
+Z3 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2020_\B\2020_grad_cell\2020_grad_cell\2020_grad_cell
+Z4 w1678371471
+Z5 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/SME.v
+Z6 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/SME.v
+L0 1
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/SME.v|
+Z9 o-work work -O0
+Z10 n@s@m@e
+!i10b 1
+Z11 !s100 =oRBkiO8Z01lRc:P3VR`T1
+!s85 0
+Z12 !s108 1678371477.446000
+Z13 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/SME.v|
+!s101 -O0
+Xtb_sv_unit
+Z14 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+!i10b 1
+Z15 !s100 2_5UmmEo^QV1S2QgdO=eG0
+Z16 IBTMVNWNUS[[jQ9WDdYY`l3
+Z17 VBTMVNWNUS[[jQ9WDdYY`l3
+!i103 1
+S1
+R3
+Z18 w1584675846
+Z19 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/tb.sv
+Z20 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/tb.sv
+Z21 L0 209
+R7
+r1
+!s85 0
+31
+Z22 !s108 1678371477.545000
+Z23 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/tb.sv|
+Z24 !s90 -reportprogress|300|-work|work|-sv|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/tb.sv|
+!s101 -O0
+Z25 o-work work -sv -O0
+vtestfixture
+R14
+!i10b 1
+Z26 !s100 OzeR;WATdL2zK744@9Y2@0
+Z27 I=^feoPMV<;zfRY<=1>D@T2
+Z28 VKBIIT=eCh7cJh[^JXBGX00
+Z29 !s105 tb_sv_unit
+S1
+R3
+R18
+R19
+R20
+L0 6
+R7
+r1
+!s85 0
+31
+R22
+R23
+R24
+!s101 -O0
+R25
