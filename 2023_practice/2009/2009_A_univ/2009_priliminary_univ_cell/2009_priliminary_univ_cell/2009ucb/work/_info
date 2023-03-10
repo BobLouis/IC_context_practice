@@ -1,0 +1,105 @@
+m255
+K3
+13
+cModel Technology
+Z0 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2021_\PE_univ\spec\2021_univ_cell\2021_univ_cell
+vBUFFER
+!i10b 1
+Z1 !s100 93jo>MlRLI=]jh:@5;5GE0
+Z2 If[F2DfoZn;IdQ@1>24^UG3
+Z3 VO3hnc`jjB^_[T:Yk>c1@k3
+Z4 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2009\2009_A_univ\2009_priliminary_univ_cell\2009_priliminary_univ_cell\2009ucb
+Z5 w1238118597
+Z6 F./flash_u.v
+Z7 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2009/2009_A_univ/2009_priliminary_univ_cell/2009_priliminary_univ_cell/2009ucb/testfixture.v
+Z8 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2009/2009_A_univ/2009_priliminary_univ_cell/2009_priliminary_univ_cell/2009ucb/testfixture.v
+Z9 L0 1626
+Z10 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z11 !s108 1678459652.429000
+Z12 !s107 ./flash_u.v|./t13rf128x8.v|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2009/2009_A_univ/2009_priliminary_univ_cell/2009_priliminary_univ_cell/2009ucb/testfixture.v|
+Z13 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2009/2009_A_univ/2009_priliminary_univ_cell/2009_priliminary_univ_cell/2009ucb/testfixture.v|
+!s101 -O0
+Z14 o-work work -O0
+Z15 n@b@u@f@f@e@r
+vFC
+Z16 IPhne[70cS9TC<OJ>XiS<23
+Z17 V1450dnS>Q9MGHU]6UgRDH2
+R4
+Z18 w1678459646
+Z19 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2009/2009_A_univ/2009_priliminary_univ_cell/2009_priliminary_univ_cell/2009ucb/FC.v
+Z20 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2009/2009_A_univ/2009_priliminary_univ_cell/2009_priliminary_univ_cell/2009ucb/FC.v
+L0 2
+R10
+r1
+31
+Z21 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2009/2009_A_univ/2009_priliminary_univ_cell/2009_priliminary_univ_cell/2009ucb/FC.v|
+R14
+n@f@c
+!i10b 1
+Z22 !s100 24go<S`cnc3C28@3z`AHR1
+!s85 0
+Z23 !s108 1678459652.334000
+Z24 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2009/2009_A_univ/2009_priliminary_univ_cell/2009_priliminary_univ_cell/2009ucb/FC.v|
+!s101 -O0
+vflash
+!i10b 1
+Z25 !s100 HZQ0c23_QTd7CKgKiZ>Ue1
+Z26 I2N`Bi_4oD`0SjZ<EXJUWb2
+Z27 V2]oDNAcQQiZSHoc;8SLcH3
+R4
+R5
+R6
+R7
+R8
+L0 3
+R10
+r1
+!s85 0
+31
+R11
+R12
+R13
+!s101 -O0
+R14
+vt13rf128x8
+!i10b 1
+Z28 !s100 B:08[_E7^flD;5@d52;SV1
+Z29 IVB0^zknJUEbc<]]cm5O2k3
+Z30 VKiOMIAm1iOdZfL70<SiDM2
+R4
+R5
+Z31 F./t13rf128x8.v
+R7
+R8
+L0 55
+R10
+r1
+!s85 0
+31
+R11
+R12
+R13
+!s101 -O0
+R14
+vtest
+!i10b 1
+Z32 !s100 T^L0_FGM__j4658>P>[zJ1
+Z33 IO7ZPRJ_BGcOcIke5]@km;2
+Z34 V]^6BEac1g00zj_WM:hJPW2
+R4
+R5
+R7
+R8
+L0 20
+R10
+r1
+!s85 0
+31
+R11
+R12
+R13
+!s101 -O0
+R14
