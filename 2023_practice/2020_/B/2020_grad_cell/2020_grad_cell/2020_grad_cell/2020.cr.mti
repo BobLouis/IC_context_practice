@@ -1,15 +1,15 @@
-//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/SME.v {1 {vlog -work work //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/SME.v
-Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
--- Compiling module SME
-
-Top level modules:
-	SME
-
-} {} {}} //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/tb.sv {1 {vlog -work work -sv //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/tb.sv
+//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/tb.sv {1 {vlog -work work -sv //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/tb.sv
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling module testfixture
 
 Top level modules:
 	testfixture
+
+} {} {}} //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/SME.v {1 {vlog -work work //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2020_/B/2020_grad_cell/2020_grad_cell/2020_grad_cell/SME.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module SME
+
+Top level modules:
+	SME
 
 } {} {}}
