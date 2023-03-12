@@ -31,6 +31,12 @@ reg [7:0]M_D_REG;
 
 assign F_IO = (F_WEN == 1) ? F_IO_REG : 8'bz;
 assign M_D  = (M_RW == 1) ? 8'bz : F_IO;
+wire rw;
+wire [17:0]flash_addr;
+wire [6:0] memory_addr;
+wire [6:0] rw_len;
+
+assign {rw,flash_addr,memory_addr,rw_len} = cmd;
 
 always@(posedge clk or posedge rst)begin
     if(rst)
