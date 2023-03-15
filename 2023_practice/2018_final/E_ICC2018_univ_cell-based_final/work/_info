@@ -1,0 +1,44 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\user\Develop\IC_design\IC_lec_practice\IC_context_practice\2023_practice\2009\2009_A_univ\2009_priliminary_univ_cell\2009_priliminary_univ_cell\2009ucb
+vtestfixture
+Z1 !s100 ^U_Qk5E9kfPGdNShfmkYe1
+Z2 ILLMeDa453_nNSPRj[1Bn`3
+Z3 VKBIIT=eCh7cJh[^JXBGX00
+Z4 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2018_final\E_ICC2018_univ_cell-based_final
+Z5 w1525050977
+Z6 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2018_final/E_ICC2018_univ_cell-based_final/testbench.v
+Z7 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2018_final/E_ICC2018_univ_cell-based_final/testbench.v
+L0 8
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2018_final/E_ICC2018_univ_cell-based_final/testbench.v|
+Z10 o-work work -O0
+!i10b 1
+!s85 0
+Z11 !s108 1678873698.370000
+Z12 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2018_final/E_ICC2018_univ_cell-based_final/testbench.v|
+!s101 -O0
+vTPA
+!i10b 1
+!s100 X[`TReOD]BOPR=>YR>IA03
+ISOED^3C1ZoZKK1b=<z4:[1
+Z13 V;k5IFkO570OPG4d9CB4260
+R4
+w1678873696
+Z14 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2018_final/E_ICC2018_univ_cell-based_final/TPA.v
+Z15 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2018_final/E_ICC2018_univ_cell-based_final/TPA.v
+L0 1
+R8
+r1
+!s85 0
+31
+!s108 1678873698.476000
+!s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2018_final/E_ICC2018_univ_cell-based_final/TPA.v|
+Z16 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2018_final/E_ICC2018_univ_cell-based_final/TPA.v|
+!s101 -O0
+R10
+Z17 n@t@p@a
