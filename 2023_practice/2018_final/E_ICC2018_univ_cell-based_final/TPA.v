@@ -26,7 +26,7 @@ parameter IDLE = 3'd0,
 	  READ_DATA = 3'd2;
 
 reg [2:0]cnt;
-
+reg [3:0]ptr;
 
 reg [2:0]state_, next_state_; //twp
 
@@ -41,7 +41,7 @@ reg [15:0]TWP_data;
 
 wire addr_same;
 reg enable;
-wire rdata;
+reg rdata;
 assign SDA = (enable) ? rdata:1'bz ;
 assign addr_same = (TWP_addr == cfg_addr);
 
@@ -154,7 +154,7 @@ always@(*)begin
 				else next_state_ = WRITE_DATA_;
 			end
 			READ_DATA_:begin
-				if(SDA == 1 && TWP_cnt == 26) next_state_ = IDLE_;
+				if( TWP_cnt == 28) next_state_ = IDLE_;
 				else next_state_ = READ_DATA_;
 			end
             default:    next_state_ = IDLE_;
@@ -166,6 +166,7 @@ end
 always@(posedge SCL or posedge reset_n)begin
 	if(!reset_n)begin
 		TWP_cnt <= 0;
+		ptr <= 0;
     end
     else begin
 		if(next_state_ == IDLE_)begin
@@ -192,16 +193,35 @@ always@(posedge SCL or posedge reset_n)begin
 			end
 		end
 		else if(next_state_ == READ_DATA_)begin
-			if(TWP_cnt >= 0 && TWP_cnt <= 7)begin
-				TWP_addr[TWP_cnt] <= SDA;
+			if(TWP_cnt > 0 && TWP_cnt <= 8)begin
+				TWP_addr[TWP_cnt-1] <= SDA;
 				TWP_cnt <= TWP_cnt + 1;
 			end
-			else if(TWP_cnt >= 8 && TWP_cnt <= 23)begin
-				TWP_data[TWP_cnt-8] <= SDA;
+			else if(TWP_cnt == 9)begin
+				enable <= 1;
 				TWP_cnt <= TWP_cnt + 1;
+
 			end
-			else if(TWP_cnt == 24)begin
-				
+			else if(TWP_cnt == 10)begin
+				TWP_cnt <= TWP_cnt + 1;
+				rdata <= 1;
+				ptr<=0;
+			end
+			else if(TWP_cnt == 11)begin
+				TWP_cnt <= TWP_cnt + 1;
+				rdata <= 0;
+			end	
+			else if(TWP_cnt >= 12 && TWP_cnt < 28)begin
+				TWP_cnt <= TWP_cnt + 1;
+				rdata <= Register_Spaces[TWP_addr][ptr];
+				ptr <= ptr + 1;
+			end
+			else if(TWP_cnt == 28)
+			begin
+				enable <= 0;
+			end
+			else begin
+				TWP_cnt <= TWP_cnt + 1;
 			end
 		end
     end
