@@ -20,7 +20,10 @@ entity TPA is
         cfg_cmd         : in     vl_logic;
         cfg_addr        : in     vl_logic_vector(7 downto 0);
         cfg_wdata       : in     vl_logic_vector(15 downto 0);
-        cfg_rdata       : out    vl_logic_vector(15 downto 0)
+        cfg_rdata       : out    vl_logic_vector(15 downto 0);
+        state           : out    vl_logic_vector(2 downto 0);
+        \state_\        : out    vl_logic_vector(2 downto 0);
+        \next_state_\   : out    vl_logic_vector(2 downto 0)
     );
     attribute mti_svvh_generic_type : integer;
     attribute mti_svvh_generic_type of IDLE : constant is 1;

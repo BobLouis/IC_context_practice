@@ -1,6 +1,6 @@
 module TPA(clk, reset_n, 
 	   SCL, SDA, 
-	   cfg_req, cfg_rdy, cfg_cmd, cfg_addr, cfg_wdata, cfg_rdata,state, state_,next_state_);
+	   cfg_req, cfg_rdy, cfg_cmd, cfg_addr, cfg_wdata, cfg_rdata);
 input 		clk; 
 input 		reset_n;
 // Two-Wire Protocol slave interface 
@@ -14,14 +14,12 @@ input		cfg_cmd;
 input	[7:0]	cfg_addr;
 input	[15:0]	cfg_wdata;
 output	reg [15:0]  cfg_rdata;
-output reg [2:0]state;
-output reg [2:0]state_; 
-output reg [2:0]next_state_;
+
 reg	[15:0] Register_Spaces	[0:255];
 
 // ===== Coding your RTL below here ================================= 
 
-reg [2:0]next_state; //rim
+reg [2:0]state, next_state; //rim
 
 parameter IDLE = 3'd0,
 	  WRITE_DATA = 3'd1,
@@ -30,7 +28,7 @@ parameter IDLE = 3'd0,
 reg [2:0]cnt;
 reg [3:0]ptr;
 
-// reg [2:0]next_state_; //twp
+reg [2:0]state_, next_state_; //twp
 
 parameter IDLE_ = 3'd0,
 	  CHOOSE_ = 3'd1,
@@ -123,6 +121,14 @@ always@(posedge clk or negedge reset_n)begin
 			else	
 				cnt <= 0;
 		end
+
+		// if(next_state_ == WRITE_DATA_)begin
+		// 	if(TWP_cnt == 25)begin
+		// 		if(addr_same == 0)begin
+		// 			Register_Spaces[TWP_addr] <= TWP_data;
+		// 		end
+		// 	end
+		// end
     end
 end
 
@@ -169,7 +175,6 @@ always@(posedge SCL or negedge reset_n)begin
 	if(!reset_n)begin
 		TWP_cnt <= 0;
 		ptr <= 0;
-		enable <= 0;
     end
     else begin
 		if(next_state_ == IDLE_)begin
@@ -185,6 +190,12 @@ always@(posedge SCL or negedge reset_n)begin
 				TWP_data[TWP_cnt-9] <= SDA;
 				TWP_cnt <= TWP_cnt + 1;
 			end
+			// else if(TWP_cnt == 25)begin
+			// 	if(addr_same == 0)begin
+			// 		Register_Spaces[TWP_addr] <= TWP_data;
+			// 	end
+			// 	TWP_cnt <= TWP_cnt + 1;
+			// end
 			else begin
 				TWP_cnt <= TWP_cnt + 1;
 			end
@@ -224,13 +235,8 @@ always@(posedge SCL or negedge reset_n)begin
     end
 end
 
-always @(posedge clk) begin
-	if(next_state == WRITE_DATA && cnt == 1)begin
-		Register_Spaces[cfg_addr] <= cfg_wdata;
-	end
-	else if(next_state_ == WRITE_DATA_ && TWP_cnt == 25 && addr_same == 0)begin
-		Register_Spaces[TWP_addr] <= TWP_data;
-	end
+always @() begin
+	
 end
 
 
