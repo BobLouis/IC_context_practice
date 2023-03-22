@@ -94,15 +94,7 @@ always@(posedge clk or posedge rst)begin
         wcnt <= 0;
     end
     else begin
-        
-
-
-
-
-
-
-
-        
+        if(next_state == IDLE)
             cnt <= 0;
         else if(next_state == READ_A)begin
             case (cnt)
