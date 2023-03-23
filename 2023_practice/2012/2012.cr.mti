@@ -1,19 +1,4 @@
-//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/NFC.v {1 {vlog -work work {\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\NFC.v}
-Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
--- Compiling module NFC
-
-Top level modules:
-	NFC
-
-} {} {}} //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/flash_b.v {1 {vlog -work work //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/flash_b.v
-Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
--- Compiling module flash_b
--- Compiling module BUFFER
-
-Top level modules:
-	flash_b
-
-} {} {}} //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/flash_a.v {1 {vlog -work work {\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\flash_a.v}
+C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/flash_a.v {1 {vlog -work work C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/flash_a.v
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling module flash_a
 -- Compiling module BUFFER_A
@@ -22,16 +7,28 @@ Top level modules:
 	flash_a
 	BUFFER_A
 
-} {} {}} //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/tb.v {1 {vlog -work work //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/tb.v
+} {} {}} C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/tb.v {2 {vlog -work work C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/tb.v
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+** Warning: ./flash_a.v(7): (vlog-2263) Redefinition of macro: F_MEM.
+
 -- Compiling module flash_a
 -- Compiling module BUFFER_A
 -- Compiling module flash_b
 -- Compiling module BUFFER
+** Warning: C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/tb.v(15): (vlog-2263) Redefinition of macro: EXPECT.
+
 -- Compiling module test
 
 Top level modules:
 	BUFFER_A
 	test
+
+} {} {}} C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/flash_b.v {1 {vlog -work work C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/flash_b.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module flash_b
+-- Compiling module BUFFER
+
+Top level modules:
+	flash_b
 
 } {} {}}

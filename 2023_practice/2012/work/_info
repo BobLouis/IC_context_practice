@@ -2,121 +2,125 @@ m255
 K3
 13
 cModel Technology
-Z0 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2018_final\E_ICC2018_univ_cell-based_final
+Z0 dC:\altera\13.0sp1
 vBUFFER
 !i10b 1
-!s100 Qa:MGUb2ikRM@B919[Y6H2
-I==BkE?zNdMNLJ[fL94`EF3
+!s100 5?:CYZ2ok5Bf7Po:VCX5>0
+IY>>=olI279LBcoMT?^c>[0
 Z1 VO3hnc`jjB^_[T:Yk>c1@k3
-Z2 d\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012
-Z3 w1331542150
-Z4 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/flash_b.v
-Z5 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/flash_b.v
-Z6 L0 1626
-Z7 OV;L;10.1d;51
+Z2 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2012
+Z3 w1679463158
+Z4 F./flash_b.v
+Z5 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/tb.v
+Z6 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/tb.v
+Z7 L0 1626
+Z8 OV;L;10.1d;51
 r1
 !s85 0
 31
-Z8 !s108 1679409481.191000
-Z9 !s107 //wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/flash_b.v|
-Z10 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/flash_b.v|
+Z9 !s108 1679539594.894000
+Z10 !s107 ./flash_b.v|./flash_a.v|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/tb.v|
+Z11 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/tb.v|
 !s101 -O0
-Z11 o-work work -O0
-Z12 n@b@u@f@f@e@r
+Z12 o-work work -O0
+Z13 n@b@u@f@f@e@r
 vBUFFER_A
-Z13 IYg8OR6V_C3KWIO9@RNhf81
+!i10b 1
+!s100 hJJ::znbZFa]>D2]HZHKe0
+IMUh@7z4`_^lk]j2Sb[ILY1
 Z14 V1`HaB35?nPLX`ll[ane9_3
 R2
-Z15 w1679408939
-Z16 8\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\flash_a.v
-Z17 F\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\flash_a.v
-Z18 L0 1637
-R7
+Z15 w1679539041
+Z16 F./flash_a.v
+R5
+R6
+Z17 L0 1637
+R8
 r1
-31
-Z19 !s108 1679409481.023000
-Z20 !s107 \\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\flash_a.v|
-Z21 !s90 -reportprogress|300|-work|work|\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\flash_a.v|
-R11
-Z22 n@b@u@f@f@e@r_@a
-!i10b 1
-Z23 !s100 Vn2Hn[6@bizF<;CaTA=>U0
 !s85 0
+31
+R9
+R10
+R11
 !s101 -O0
+R12
+Z18 n@b@u@f@f@e@r_@a
 vflash_a
-Z24 Ijm2:HRcX6`djYFmi10:_Q2
-Z25 V@NOB>_W?^3Nz3djA>3R1g3
+!i10b 1
+!s100 dFCI^EAf3UjZ^m;7E=g:Q0
+IL;l4ggbd77VY1ATIER]Tz0
+Z19 V@NOB>_W?^3Nz3djA>3R1g3
 R2
 R15
 R16
-R17
+R5
+R6
 L0 12
-R7
+R8
 r1
-31
-R19
-R20
-R21
-R11
-!i10b 1
-Z26 !s100 5j=L4ThU]khk[8aDO^_^n3
 !s85 0
+31
+R9
+R10
+R11
 !s101 -O0
+R12
 vflash_b
 !i10b 1
-!s100 IR;okh:XmoOfD_lI44Gb01
-I99;Q=QVj]W5SQUNig9RS50
-Z27 Vzn;f4G`Om^DS1g`[W5AlY3
+!s100 Dnl<eCdj_DX<ee<aUaZ]l3
+IemUC3?63<YTLD3=<XhV@L1
+Z20 Vzn;f4G`Om^DS1g`[W5AlY3
 R2
 R3
 R4
 R5
+R6
 L0 3
-R7
+R8
 r1
 !s85 0
 31
-R8
 R9
 R10
-!s101 -O0
 R11
+!s101 -O0
+R12
 vNFC
-Z28 IZGInD3D@FjPgNEc5i:nT:1
-Z29 VKlKB4Fh5OGmEA0BWGFoQQ2
+Z21 !s100 fWj2hW8`HIS8P[7eHFN_A0
+Z22 IiGbl5eUI32b=FXmzLd_UV3
+Z23 VKlKB4Fh5OGmEA0BWGFoQQ2
 R2
-Z30 w1679409475
-Z31 8\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\NFC.v
-Z32 F\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\NFC.v
+Z24 w1679539586
+Z25 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/NFC.v
+Z26 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/NFC.v
 L0 2
-R7
+R8
 r1
 31
-Z33 !s90 -reportprogress|300|-work|work|\\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\NFC.v|
-R11
-Z34 n@n@f@c
-Z35 !s100 QHaCE4^CJf9FTXIhl<]=D0
-Z36 !s108 1679409480.630000
-Z37 !s107 \\wsl.localhost\Ubuntu-20.04\home\louis\IC_context_practice\2023_practice\2012\NFC.v|
+Z27 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/NFC.v|
+R12
+Z28 n@n@f@c
 !i10b 1
 !s85 0
+Z29 !s108 1679539594.868000
+Z30 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/NFC.v|
 !s101 -O0
 vtest
-Z38 !s100 [AGaT75QXQ`PRND_9WL_Y3
-Z39 I1TTRdTQ1l`oaeeVmb5QFF2
-Z40 V]@7J[Rhb`0K?RUJFFBYSi1
-R2
-Z41 w1331716126
-Z42 8//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/tb.v
-Z43 F//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/tb.v
-L0 19
-R7
-r1
-31
-Z44 !s108 1679409480.732000
-Z45 !s107 ./flash_b.v|./flash_a.v|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/tb.v|
-Z46 !s90 -reportprogress|300|-work|work|//wsl.localhost/Ubuntu-20.04/home/louis/IC_context_practice/2023_practice/2012/tb.v|
-R11
 !i10b 1
+Z31 !s100 ma8B4n;KIH;^GFGjH:T003
+Z32 IVXc^HXZhZVC^0YVl]GRRJ1
+Z33 V]@7J[Rhb`0K?RUJFFBYSi1
+R2
+R3
+R5
+R6
+L0 19
+R8
+r1
 !s85 0
+31
+R9
+R10
+R11
 !s101 -O0
+R12

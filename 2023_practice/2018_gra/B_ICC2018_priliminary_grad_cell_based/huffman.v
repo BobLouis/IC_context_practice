@@ -53,9 +53,9 @@ integer  i;
 
 
 always@(posedge clk or posedge reset)begin
-    // if(reset)
-    //     state <= IDLE;
-    // else
+    if(reset)
+        state <= IDLE;
+    else
         state <= next_state;
 end
 

@@ -59,13 +59,15 @@ always@(*)begin
                 next_state = READ_A;
             READ_A:begin
                 if(write_cnt == 16384) next_state = FINISH;
-                else if(read_cnt == 16) next_state = WRITE_B;
+                else if(read_cnt == 16 && cnt == 0) next_state = WRITE_B;
                 else next_state = READ_A;  
             end 
             WRITE_B:begin
-                if(cnt == 14) next_state = IDLE;
+                if(cnt == 15) next_state = IDLE;
                 else next_state = WRITE_B;
             end
+
+
             default:    next_state = IDLE;
         endcase
     end 
@@ -98,55 +100,64 @@ always@(posedge clk or posedge rst)begin
             cnt <= 0;
         else if(next_state == READ_A)begin
             case (cnt)
+                //reset
                 0:begin
+                    
+                    F_CLE_A <= 1;
+                    F_ALE_A <= 0;
+                    F_WEN_A <= 1;
+                    F_REN_A <= 1;
+                    enable_a <= 1;
+                    read_cnt <= 0;
+
+                    if(F_RB_A == 1)
+                        cnt <= cnt + 1;
+                end 
+                1:begin
                     if(write_cnt < 8191)
                         F_IO_REG_A <= 0;
                     else 
                         F_IO_REG_A <= 1;
-                    F_CLE_A <= 1;
-                    F_ALE_A <= 0;
                     F_WEN_A <= 0;
-                    F_REN_A <= 0;
-                    enable_a <= 1;
                     cnt <= cnt + 1;
-                    read_cnt <= 0;
-                end 
-                1:begin
+                end
+                2:begin
+
                     F_WEN_A <= 1;
                     cnt <= cnt + 1;
                 end
                 // cmd finish
 
-                2:begin //addr1
+                3:begin //addr1
                     F_CLE_A <= 0;
                     F_ALE_A <= 1;
                     F_WEN_A <= 0;
                     F_IO_REG_A <= addr[7:0];
                     cnt <= cnt + 1;
                 end
-                3:begin
+                4:begin
                     F_WEN_A <= 1;
                     cnt <= cnt + 1;
                 end
-                4:begin //addr2
+                5:begin //addr2
                     F_WEN_A <= 0;
                     F_IO_REG_A <= addr[16:9];
                     cnt <= cnt + 1;
                 end
-                5:begin
+                6:begin
                     F_WEN_A <= 1;
                     cnt <= cnt + 1;
                 end
-                6:begin //addr3
+                7:begin //addr3
                     F_WEN_A <= 0;
                     F_IO_REG_A <= {7'd0, addr[17]};
                     cnt <= cnt + 1;
                 end
-                7:begin
+                8:begin
                     F_WEN_A <= 1;
                     cnt <= cnt + 1;
                 end
-                8:begin
+                9:begin
                     F_WEN_A <= 0;
                     F_ALE_A <= 0;
                     if(F_RB_A == 1)begin
@@ -154,85 +165,100 @@ always@(posedge clk or posedge rst)begin
                         enable_a <= 0;
                     end
                 end
-                9:begin
+                10:begin
                     F_REN_A <= ~F_REN_A;
-                     F_WEN_A <= 1;
+                    F_WEN_A <= 1;
                     if(F_REN_A == 0)begin
-                        arr[read_cnt] <= F_IO_REG_A;
-                        if(read_cnt == 15)
-                            cnt <= 0;
+                        arr[read_cnt] <= F_IO_A;
                         read_cnt <= read_cnt + 1;
                     end
+                    if(read_cnt == 16)
+                        cnt <= 0;
                 end
             endcase
         end
         else if(next_state == WRITE_B)begin
             case(cnt)
+                //reset  
                 0:begin
-                    if(write_cnt < 8191)begin
+                    F_CLE_B <= 1;
+                    F_ALE_B <= 0;
+                    F_WEN_B <= ~F_WEN_B;
+                    F_REN_B <= 1;
+                    enable_b <= 1;
+                    wcnt <= 0;
+                    if(F_RB_B == 0)
+                        F_IO_REG_B <= 8'hff;
+                    else
+                        cnt <= cnt + 1;
+                end
+                1:begin
+                    read_cnt <= 0;
+                    if(write_cnt < 8191 )begin
                         F_IO_REG_B <= 8'h80;
                         cnt <= 3;
                     end
                     else begin 
                         F_IO_REG_B <= 8'h01;
-                        cnt <=  1;
+                        cnt <=  2;
                     end
                     enable_b <= 1;
                     F_CLE_B <= 1;
                     F_ALE_B <= 0;
                     F_WEN_B <= 0;
                 end
-                1:begin
+                2:begin
                     F_WEN_B <= 1;
                     cnt <= cnt + 1;
                 end
-                2:begin
+                3:begin
                     F_WEN_B <= 0;
                     F_IO_REG_B <= 8'h80; 
                     cnt <= cnt + 1;
                 end
-                3:begin
+                4:begin
                     F_WEN_B <= 1;
                     cnt <= cnt + 1;   
                 end
                 //cmd finish
 
-                4:begin //addr1
+                5:begin //addr1
                     F_WEN_B <= 0;
                     F_CLE_B <= 0;
                     F_ALE_B <= 1;
                     F_IO_REG_B <= addr[7:0];
                     cnt <= cnt + 1; 
                 end
-                5:begin
+                6:begin
                     F_WEN_B <= 1;
                     cnt <= cnt + 1; 
                 end
-                6:begin //addr2
+                7:begin //addr2
                     F_WEN_B <= 0;
                     F_IO_REG_B <= addr[16:9];
                     cnt <= cnt + 1;
                 end
-                7:begin
+                8:begin
                     F_WEN_B <= 1;
                     cnt <= cnt + 1;
                 end
-                8:begin //addr3
+                9:begin //addr3
                     F_WEN_B <= 0;
                     F_IO_REG_B <= {7'd0, addr[17]};
                     cnt <= cnt + 1;
                 end
-                9:begin
+                10:begin
                     F_WEN_B <= 1;    
                     cnt <= cnt + 1;
                 end
 
                 //write data
-                10:begin
+                11:begin
+                    F_ALE_B <= 0;
                     F_WEN_B <= ~F_WEN_B;
                     if(F_WEN_B == 1)begin
-                        F_IO_REG_B <= addr[wcnt];
-                        if(wcnt == 15)begin
+                        F_IO_REG_B <= arr[wcnt];
+                        if(wcnt == 16)begin
                             wcnt <= 0;
                             cnt <= cnt + 1;
                         end
@@ -240,18 +266,18 @@ always@(posedge clk or posedge rst)begin
                             wcnt <= wcnt + 1;
                     end
                 end
-                11:begin
+                12:begin
                     F_WEN_B <= 0;
                     F_ALE_B <= 0;
                     F_CLE_B <= 1;
                     F_IO_REG_B <= 8'h10;
                     cnt <= cnt + 1;
                 end
-                12:begin
+                13:begin
                     F_WEN_B <= 1;
                     cnt <= cnt + 1;
                 end
-                13:begin //check F_RB_B
+                14:begin //check F_RB_B
                     if(F_RB_B == 1)begin
                         write_cnt <= write_cnt + 1;
                         cnt <= cnt + 1;
