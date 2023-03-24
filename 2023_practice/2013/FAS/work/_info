@@ -1,0 +1,84 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2013\FFT_PE
+vFAS
+Z1 I>2R;R2DA8k14dCc@@Ile@2
+Z2 Vg_A73JTbTSz8^eke`8l:^2
+Z3 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2013\FAS
+Z4 w1679658718
+Z5 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/FAS.v
+Z6 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/FAS.v
+L0 2
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s108 1679658721.724000
+Z9 !s107 ../FFT_PE/FFT_PE.v|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/FAS.v|
+Z10 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/FAS.v|
+Z11 o-work work -O0
+Z12 n@f@a@s
+Z13 !s100 TX^C@Tdb_JOnjXUUQokK[2
+!i10b 1
+!s85 0
+!s101 -O0
+vFFT_PE
+Z14 !s100 PbBSlJd_163T5k;7SWUUK1
+Z15 I=37OI:WI^;c^Xhh:L_eBg3
+Z16 VTL2AIOL:Xmcbg6MK>UBe@0
+R3
+R4
+Z17 F../FFT_PE/FFT_PE.v
+R5
+R6
+L0 1
+R7
+r1
+31
+R8
+R9
+R10
+R11
+Z18 n@f@f@t_@p@e
+!i10b 1
+!s85 0
+!s101 -O0
+vtestfixture1
+Z19 !s100 oUN30c@W5`2eHfYT21g9k3
+Z20 I`DVf>@I5HSEeFD;a;FV@>3
+Z21 VWP0=oXMOeYWB]IV3[4WoU2
+R3
+Z22 w1363656804
+Z23 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/testfixture1.v
+Z24 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/testfixture1.v
+L0 11
+R7
+r1
+31
+Z25 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/testfixture1.v|
+R11
+!i10b 1
+!s85 0
+Z26 !s108 1679658721.758000
+Z27 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/testfixture1.v|
+!s101 -O0
+vtestfixture2
+!i10b 1
+Z28 !s100 gH:4hAb_;d7zAV<@GRaEF3
+Z29 IzWk9lje2cf`XkGHE@=8;T3
+Z30 VYcJ:XJQbR?JSh66liEmgz2
+R3
+Z31 w1363656948
+Z32 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/testfixture2.v
+Z33 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/testfixture2.v
+L0 11
+R7
+r1
+!s85 0
+31
+!s108 1679658721.786000
+!s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/testfixture2.v|
+Z34 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/testfixture2.v|
+!s101 -O0
+R11

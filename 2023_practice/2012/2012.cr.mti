@@ -23,6 +23,13 @@ Top level modules:
 	BUFFER_A
 	test
 
+} {} {}} C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/NFC.v {1 {vlog -work work C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/NFC.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module NFC
+
+Top level modules:
+	NFC
+
 } {} {}} C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/flash_b.v {1 {vlog -work work C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2012/flash_b.v
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling module flash_b
