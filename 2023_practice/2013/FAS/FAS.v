@@ -219,43 +219,43 @@ assign fft_d14 = pe_4_3_b;
 assign fft_d15 = pe_4_7_b;
 
 
-wire  signed[32:0]abs[0:15];  
+wire  [32:0]abs[0:15];  
 
-assign  abs[0] =  fft_d0[31:16]  * fft_d0[31:16]  + fft_d0[15:0]  * fft_d0[15:0]  ;
-assign  abs[1] =  fft_d1[31:16]  * fft_d1[31:16]  + fft_d1[15:0]  * fft_d1[15:0]  ;
-assign  abs[2] =  fft_d2[31:16]  * fft_d2[31:16]  + fft_d2[15:0]  * fft_d2[15:0]  ;
-assign  abs[3] =  fft_d3[31:16]  * fft_d3[31:16]  + fft_d3[15:0]  * fft_d3[15:0]  ;
-assign  abs[4] =  fft_d4[31:16]  * fft_d4[31:16]  + fft_d4[15:0]  * fft_d4[15:0]  ;
-assign  abs[5] =  fft_d5[31:16]  * fft_d5[31:16]  + fft_d5[15:0]  * fft_d5[15:0]  ;
-assign  abs[6] =  fft_d6[31:16]  * fft_d6[31:16]  + fft_d6[15:0]  * fft_d6[15:0]  ;
-assign  abs[7] =  fft_d7[31:16]  * fft_d7[31:16]  + fft_d7[15:0]  * fft_d7[15:0]  ;
-assign  abs[8] =  fft_d8[31:16]  * fft_d8[31:16]  + fft_d8[15:0]  * fft_d8[15:0]  ;
-assign  abs[9] =  fft_d9[31:16]  * fft_d9[31:16]  + fft_d9[15:0]  * fft_d9[15:0]  ;
-assign  abs[10] = fft_d10[31:16] * fft_d10[31:16] + fft_d10[15:0] * fft_d10[15:0] ;
-assign  abs[11] = fft_d11[31:16] * fft_d11[31:16] + fft_d11[15:0] * fft_d11[15:0] ;
-assign  abs[12] = fft_d12[31:16] * fft_d12[31:16] + fft_d12[15:0] * fft_d12[15:0] ;
-assign  abs[13] = fft_d13[31:16] * fft_d13[31:16] + fft_d13[15:0] * fft_d13[15:0] ;
-assign  abs[14] = fft_d14[31:16] * fft_d14[31:16] + fft_d14[15:0] * fft_d14[15:0] ;
-assign  abs[15] = fft_d15[31:16] * fft_d15[31:16] + fft_d15[15:0] * fft_d15[15:0] ;
+assign  abs[0] =  pe_4_0_a[31:16]  * pe_4_0_a[31:16]  + pe_4_0_a[15:0]  * pe_4_0_a[15:0]  ;
+assign  abs[1] =  pe_4_4_a[31:16]  * pe_4_4_a[31:16]  + pe_4_4_a[15:0]  * pe_4_4_a[15:0]  ;
+assign  abs[2] =  pe_4_2_a[31:16]  * pe_4_2_a[31:16]  + pe_4_2_a[15:0]  * pe_4_2_a[15:0]  ;
+assign  abs[3] =  pe_4_6_a[31:16]  * pe_4_6_a[31:16]  + pe_4_6_a[15:0]  * pe_4_6_a[15:0]  ;
+assign  abs[4] =  pe_4_1_a[31:16]  * pe_4_1_a[31:16]  + pe_4_1_a[15:0]  * pe_4_1_a[15:0]  ;
+assign  abs[5] =  pe_4_5_a[31:16]  * pe_4_5_a[31:16]  + pe_4_5_a[15:0]  * pe_4_5_a[15:0]  ;
+assign  abs[6] =  pe_4_3_a[31:16]  * pe_4_3_a[31:16]  + pe_4_3_a[15:0]  * pe_4_3_a[15:0]  ;
+assign  abs[7] =  pe_4_7_a[31:16]  * pe_4_7_a[31:16]  + pe_4_7_a[15:0]  * pe_4_7_a[15:0]  ;
+assign  abs[8] =  pe_4_0_b[31:16]  * pe_4_0_b[31:16]  + pe_4_0_b[15:0]  * pe_4_0_b[15:0]  ;
+assign  abs[9] =  pe_4_4_b[31:16]  * pe_4_4_b[31:16]  + pe_4_4_b[15:0]  * pe_4_4_b[15:0]  ;
+assign  abs[10] = pe_4_2_b[31:16] * pe_4_2_b[31:16] + pe_4_2_b[15:0] * pe_4_2_b[15:0] ;
+assign  abs[11] = pe_4_6_b[31:16] * pe_4_6_b[31:16] + pe_4_6_b[15:0] * pe_4_6_b[15:0] ;
+assign  abs[12] = pe_4_1_b[31:16] * pe_4_1_b[31:16] + pe_4_1_b[15:0] * pe_4_1_b[15:0] ;
+assign  abs[13] = pe_4_5_b[31:16] * pe_4_5_b[31:16] + pe_4_5_b[15:0] * pe_4_5_b[15:0] ;
+assign  abs[14] = pe_4_3_b[31:16] * pe_4_3_b[31:16] + pe_4_3_b[15:0] * pe_4_3_b[15:0] ;
+assign  abs[15] = pe_4_7_b[31:16] * pe_4_7_b[31:16] + pe_4_7_b[15:0] * pe_4_7_b[15:0] ;
 
-wire [3:0]ana_1_1 = (abs[0] > abs[1]) ? 0 : 1;
-wire [3:0]ana_1_2 = (abs[2] > abs[3]) ? 2 : 3;
-wire [3:0]ana_1_3 = (abs[4] > abs[5]) ? 4 : 5;
-wire [3:0]ana_1_4 = (abs[6] > abs[7]) ? 6 : 7;
-wire [3:0]ana_1_5 = (abs[8] > abs[9]) ? 8 : 9;
-wire [3:0]ana_1_6 = (abs[10] > abs[11]) ? 10 : 11;
-wire [3:0]ana_1_7 = (abs[12] > abs[13]) ? 12 : 13;
-wire [3:0]ana_1_8 = (abs[14] > abs[15]) ? 14 : 15;
+wire [3:0]ana_1_1 = (abs[0] >= abs[1]) ? 0 : 1;
+wire [3:0]ana_1_2 = (abs[2] >= abs[3]) ? 2 : 3;
+wire [3:0]ana_1_3 = (abs[4] >= abs[5]) ? 4 : 5;
+wire [3:0]ana_1_4 = (abs[6] >= abs[7]) ? 6 : 7;
+wire [3:0]ana_1_5 = (abs[8] >= abs[9]) ? 8 : 9;
+wire [3:0]ana_1_6 = (abs[10] >= abs[11]) ? 10 : 11;
+wire [3:0]ana_1_7 = (abs[12] >= abs[13]) ? 12 : 13;
+wire [3:0]ana_1_8 = (abs[14] >= abs[15]) ? 14 : 15;
 
-wire [3:0]ana_2_1 = (abs[ana_1_1] > abs[ana_1_2]) ? ana_1_1 : ana_1_2;
-wire [3:0]ana_2_2 = (abs[ana_1_3] > abs[ana_1_4]) ? ana_1_3 : ana_1_4;
-wire [3:0]ana_2_3 = (abs[ana_1_5] > abs[ana_1_6]) ? ana_1_5 : ana_1_6;
-wire [3:0]ana_2_4 = (abs[ana_1_7] > abs[ana_1_8]) ? ana_1_7 : ana_1_8;
+wire [3:0]ana_2_1 = (abs[ana_1_1] >= abs[ana_1_2]) ? ana_1_1 : ana_1_2;
+wire [3:0]ana_2_2 = (abs[ana_1_3] >= abs[ana_1_4]) ? ana_1_3 : ana_1_4;
+wire [3:0]ana_2_3 = (abs[ana_1_5] >= abs[ana_1_6]) ? ana_1_5 : ana_1_6;
+wire [3:0]ana_2_4 = (abs[ana_1_7] >= abs[ana_1_8]) ? ana_1_7 : ana_1_8;
 
-wire [3:0]ana_3_1 = (abs[ana_2_1] > abs[ana_2_2]) ? ana_2_1 : ana_2_2;
-wire [3:0]ana_3_2 = (abs[ana_2_3] > abs[ana_2_4]) ? ana_2_3 : ana_2_4;
+wire [3:0]ana_3_1 = (abs[ana_2_1] >= abs[ana_2_2]) ? ana_2_1 : ana_2_2;
+wire [3:0]ana_3_2 = (abs[ana_2_3] >= abs[ana_2_4]) ? ana_2_3 : ana_2_4;
 
-assign freq = (ana_3_1 > ana_3_2) ? ana_3_1 : ana_3_2;
+assign freq = (abs[ana_3_1] >= abs[ana_3_2]) ? ana_3_1 : ana_3_2;
 
 integer i;
 
