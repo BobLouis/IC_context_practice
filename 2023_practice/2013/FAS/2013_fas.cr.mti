@@ -12,4 +12,12 @@ Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 Top level modules:
 	testfixture2
 
+} {} {}} C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/FAS.v {1 {vlog -work work C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2013/FAS/FAS.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module FFT_PE
+-- Compiling module FAS
+
+Top level modules:
+	FAS
+
 } {} {}}

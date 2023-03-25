@@ -19,7 +19,7 @@ output [31:0] fft_d0,fft_d1,fft_d2,fft_d3,fft_d4,fft_d5,fft_d6,fft_d7,
               fft_d8,fft_d9,fft_d10,fft_d11,fft_d12,fft_d13,fft_d14,fft_d15;
 output reg fft_valid;
 output done;                      
-output [3:0] freq;
+output reg [3:0] freq;
 
 reg [3:0]cnt;
 reg [3:0]out_cnt;
@@ -255,7 +255,14 @@ wire [3:0]ana_2_4 = (abs[ana_1_7] >= abs[ana_1_8]) ? ana_1_7 : ana_1_8;
 wire [3:0]ana_3_1 = (abs[ana_2_1] >= abs[ana_2_2]) ? ana_2_1 : ana_2_2;
 wire [3:0]ana_3_2 = (abs[ana_2_3] >= abs[ana_2_4]) ? ana_2_3 : ana_2_4;
 
-assign freq = (abs[ana_3_1] >= abs[ana_3_2]) ? ana_3_1 : ana_3_2;
+
+always @(*) begin
+    if(!done)begin
+        freq = (abs[ana_3_1] >= abs[ana_3_2]) ? ana_3_1 : ana_3_2;
+    end
+    else
+        freq = 3;
+end
 
 integer i;
 
