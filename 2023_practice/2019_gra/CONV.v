@@ -21,12 +21,18 @@ module  CONV(
 	output	reg [2:0] 	csel
 	);
 
-reg [2:0]state, next_state;
-parameter IDLE = 3'd0,
-	  READ_L0_0 = 3'd1,
-	  READ_L0_1 = 3'd2,
-	  CAL = 3'd3,
-	  OUT = 3'd4;
+reg [3:0]state, next_state;
+parameter IDLE = 4'd0,
+	  READ_DATA = 4'd1,
+	  WRITE_L0_0 = 4'd2,
+	  WRITE_L0_1 = 4'd3,
+	  READ_L0_0 = 4'd4,
+	  READ_L0_1 = 4'd5,
+	  WRITE_L1_0 = 4'd6,
+	  WRITE_L1_1 = 4'd7,
+	  FLAT = 4'd8,
+	  FINISH = 4'd9;
+	  
 
 reg ker_sel;
 reg signed [19:0]ker;
@@ -75,7 +81,7 @@ always@(posedge clk or posedge reset)begin
 		col <= 0;
     end
     else begin
-		if(next_state == READ_L0_0)begin
+		if(next_state == READ_DATA)begin
 			case(cnt)
 				0:	iaddr <= {row-6'd1, col-6'd1};
 				1:	iaddr <= {row-6'd1, col};
@@ -87,6 +93,27 @@ always@(posedge clk or posedge reset)begin
 				7:	iaddr <= {row+6'd1, col}
 				8:  iaddr <= {row+6'd1, col+6'd1};
 			endcase
+		end
+		else if(next_state == WRITE_L0_0)begin
+
+		end
+		else if(next_state == WRITE_L0_1)begin
+			
+		end
+		else if(next_state == READ_L0_0)begin
+			
+		end
+		else if(next_state == READ_L0_1)begin
+
+		end
+		else if(next_state == WRITE_L1_0)begin
+
+		end
+		else if(next_state == WRITE_L1_1)begin
+
+		end
+		else if(next_state == FLAT)begin
+
 		end
     end
 end
