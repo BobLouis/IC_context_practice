@@ -204,14 +204,14 @@ if(check1 == 1) begin
 		if (L1_MEM1[p1] == L1_EXP1[p1]) ;
 		else begin
 			err11 = err11 + 1;
-			// begin 
-			// 	$display("WRONG! Layer 1 (Max-pooling Output) with Kernel 1 , Pixel %d is wrong!", p1);
-			// 	$display("               The output data is %h, but the expected data is %h ", L1_MEM1[p1], L1_EXP1[p1]);
-			// end
+			begin 
+				$display("WRONG! Layer 1 (Max-pooling Output) with Kernel 1 , Pixel %d is wrong!", p1);
+				$display("               The output data is %h, but the expected data is %h ", L1_MEM1[p1], L1_EXP1[p1]);
+			end
 		end
 	end
 	if (err11 == 0) $display("Layer 1 (Max-pooling Output) with Kernel 1 is correct!");
-	//else		$display("Layer 1 (Max-pooling Output) with Kernel 1 be found %d error !", err11);
+	else		$display("Layer 1 (Max-pooling Output) with Kernel 1 be found %d error !", err11);
 end
 end
 
