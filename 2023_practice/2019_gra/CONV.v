@@ -37,7 +37,7 @@ parameter IDLE = 4'd0,
 reg ker_sel;
 reg signed [19:0]ker;
 reg [5:0]row, col;
-reg [3:0]cnt;
+reg [4:0]cnt;
 reg read_done;
 reg csel_sel_flag;
 reg L0_done, L1_done;
@@ -123,17 +123,17 @@ always@(posedge clk or posedge reset)begin
 			cwr  <= 0;
 			case(cnt)
 				0:	iaddr <= {row-6'd1, col-6'd1};
-				1:	iaddr <= {row-6'd1, col};
-				2:	iaddr <= {row-6'd1, col+6'd1};
-				3:	iaddr <= {row, col-6'd1};
-				4:	iaddr <= {row, col};
-				5:	iaddr <= {row, col+6'd1};
-				6:	iaddr <= {row+6'd1, col-6'd1};
-				7:	iaddr <= {row+6'd1, col};
-				8:  iaddr <= {row+6'd1, col+6'd1};
+				2:	iaddr <= {row-6'd1, col};
+				4:	iaddr <= {row-6'd1, col+6'd1};
+				6:	iaddr <= {row, col-6'd1};
+				8:	iaddr <= {row, col};
+				10:	iaddr <= {row, col+6'd1};
+				12:	iaddr <= {row+6'd1, col-6'd1};
+				14:	iaddr <= {row+6'd1, col};
+				16:  iaddr <= {row+6'd1, col+6'd1};
 			endcase
 
-			if(cnt < 10)
+			if(cnt < 20)
 				cnt <= cnt + 1;
 			else begin
 				read_done <= 1;
@@ -247,29 +247,49 @@ end
 always@(*)begin
 	if(ker_sel == 0)begin
 		case(cnt)
+			0:	ker = 20'h0A89E;
 			1:	ker = 20'h0A89E;
-			2:	ker = 20'h092D5;
-			3:	ker = 20'h06D43;
-			4:	ker = 20'h01004;
-			5:	ker = 20'hF8F71;
-			6:	ker = 20'hF6E54;
-			7:	ker = 20'hFA6D7;
-			8:	ker = 20'hFC834;
-			9:	ker = 20'hFAC19;
+			2:	ker = 20'h0A89E;
+			3:	ker = 20'h092D5;
+			4:	ker = 20'h092D5;
+			5:	ker = 20'h06D43;
+			6:  ker = 20'h06D43;
+			7:	ker = 20'h01004;
+			8:	ker = 20'h01004;
+			9:	ker = 20'hF8F71;
+			10:	ker = 20'hF8F71;
+			11:	ker = 20'hF6E54;
+			12:	ker = 20'hF6E54;
+			13:	ker = 20'hFA6D7;
+			14:	ker = 20'hFA6D7;
+			15:	ker = 20'hFC834;
+			16:	ker = 20'hFC834;
+			17:	ker = 20'hFAC19;
+			18:	ker = 20'hFAC19;
 			default:ker = 0;
 		endcase
 	end
 	else begin
 		case(cnt)
+			0:	ker = 20'hFDB55;
 			1:	ker = 20'hFDB55;
-			2:	ker = 20'h02992;
-			3:	ker = 20'hFC994;
-			4:	ker = 20'h050FD;
-			5:	ker = 20'h02F20;
-			6:	ker = 20'h0202D;
-			7:	ker = 20'h03BD7;
-			8:	ker = 20'hFD369;
-			9:	ker = 20'h05E68;
+			2:	ker = 20'hFDB55;
+			3:	ker = 20'h02992;
+			4:	ker = 20'h02992;
+			5:	ker = 20'hFC994;
+			6:	ker = 20'hFC994;
+			7:	ker = 20'h050FD;
+			8:	ker = 20'h050FD;
+			9:	ker = 20'h02F20;
+			10:	ker = 20'h02F20;
+			11:	ker = 20'h0202D;
+			12:	ker = 20'h0202D;
+			13:	ker = 20'h03BD7;
+			14:	ker = 20'h03BD7;
+			15:	ker = 20'hFD369;
+			16:	ker = 20'hFD369;
+			17:	ker = 20'h05E68;
+			18:	ker = 20'h05E68;
 			default:ker = 0;
 		endcase
 	end
@@ -280,16 +300,16 @@ always @(posedge clk or posedge reset) begin
 	else begin
 		case (cnt)
 			0 :begin ans <= 0; end
-			1 :begin if(row != 0 && col != 0)  ans <= mul;       end
-			2 :begin if(row != 0 )             ans <= mul + ans; end
-			3 :begin if(row != 0 && col != 63) ans <= mul + ans; end
-			4 :begin if(col != 0) ans <= mul + ans;              end       
-			5 :begin ans <= mul + ans;                           end             
-			6 :begin if(col != 63 ) ans <= mul + ans;            end
-			7 :begin if(col != 0 && row != 63) ans <= mul + ans; end
-			8 :begin if(row != 63 ) ans <= mul + ans;             end
-			9 :begin if(col != 63 && row != 63) ans <= mul + ans; end
-			10:begin ans <= (ker_sel == 0) ? (ans + {$signed(20'h01310),16'd0}) : (ans + {$signed(20'hF7295),16'd0});  end
+			2 :begin if(row != 0 && col != 0)  ans <= mul;       end
+			4 :begin if(row != 0 )             ans <= mul + ans; end
+			6 :begin if(row != 0 && col != 63) ans <= mul + ans; end
+			8 :begin if(col != 0) ans <= mul + ans;              end       
+			10 :begin ans <= mul + ans;                           end             
+			12 :begin if(col != 63 ) ans <= mul + ans;            end
+			14 :begin if(col != 0 && row != 63) ans <= mul + ans; end
+			16 :begin if(row != 63 ) ans <= mul + ans;             end
+			18 :begin if(col != 63 && row != 63) ans <= mul + ans; end
+			20:begin ans <= (ker_sel == 0) ? (ans + {$signed(20'h01310),16'd0}) : (ans + {$signed(20'hF7295),16'd0});  end
 		endcase   
 	end 
 end
