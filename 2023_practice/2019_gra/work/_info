@@ -1,0 +1,44 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2009\2009_A_univ\2009_priliminary_univ_cell\2009_priliminary_univ_cell\2009ucb
+vCONV
+Z1 IKn@2Jo=6IBn?O4Eh<ib;;2
+Z2 VCef^[FdDh0MRNDn<>:jh:3
+Z3 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2019_gra
+Z4 w1679718632
+Z5 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/CONV.v
+Z6 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/CONV.v
+L0 4
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/CONV.v|
+Z9 o-work work -O0
+Z10 n@c@o@n@v
+!i10b 1
+Z11 !s100 4DDjlD<z@8_fS7RMbONSD3
+!s85 0
+Z12 !s108 1679718638.034000
+Z13 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/CONV.v|
+!s101 -O0
+vtestfixture
+!i10b 1
+Z14 !s100 g>4Yd_nE5HJ08OS:dh05N1
+Z15 I;SZeSFR^SZkZb5BJJXbg@3
+Z16 VKBIIT=eCh7cJh[^JXBGX00
+R3
+Z17 w1679717612
+Z18 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v
+Z19 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v
+L0 13
+R7
+r1
+!s85 0
+31
+!s108 1679718638.066000
+!s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v|
+Z20 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v|
+!s101 -O0
+R9
