@@ -4,41 +4,41 @@ K3
 cModel Technology
 Z0 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2009\2009_A_univ\2009_priliminary_univ_cell\2009_priliminary_univ_cell\2009ucb
 vCONV
-Z1 I2K93CQ_HUU87m<D:MMESg3
-Z2 VCef^[FdDh0MRNDn<>:jh:3
-Z3 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2019_gra
-Z4 w1679725660
-Z5 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/CONV.v
-Z6 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/CONV.v
+Z1 !s100 S]DbXSH2=kGTR4EiMo[[50
+Z2 IVeR;5KDoTjYWniU_9jNoz0
+Z3 VCef^[FdDh0MRNDn<>:jh:3
+Z4 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2019_gra
+Z5 w1679736716
+Z6 8C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2019_gra\CONV.v
+Z7 FC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2019_gra\CONV.v
 L0 4
-Z7 OV;L;10.1d;51
+Z8 OV;L;10.1d;51
 r1
 31
-Z8 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/CONV.v|
-Z9 o-work work -O0
-Z10 n@c@o@n@v
+Z9 !s90 -reportprogress|300|-work|work|C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2019_gra\CONV.v|
+Z10 o-work work -O0
+Z11 n@c@o@n@v
 !i10b 1
-Z11 !s100 M[DolIRzVjbbc:CJDPNUX2
 !s85 0
-Z12 !s108 1679725664.366000
-Z13 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/CONV.v|
+Z12 !s108 1679736726.579000
+Z13 !s107 C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2019_gra\CONV.v|
 !s101 -O0
 vtestfixture
 !i10b 1
-!s100 ]9>c=9>FH7lMoQdFWnc]e2
-IoN5c:7H5]l9:GTklZ18Ue3
-Z14 VKBIIT=eCh7cJh[^JXBGX00
-R3
-w1679725517
-Z15 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v
-Z16 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v
+Z14 !s100 JaEcKS;QNkjo?o6hzIQ];3
+Z15 IH9nh[9_[mLi?M>mV>nE591
+Z16 VKBIIT=eCh7cJh[^JXBGX00
+R4
+Z17 w1679733879
+Z18 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v
+Z19 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v
 L0 13
-R7
+R8
 r1
 !s85 0
 31
-!s108 1679725664.397000
+!s108 1679736726.611000
 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v|
-Z17 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v|
+Z20 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2019_gra/testfixture.v|
 !s101 -O0
-R9
+R10

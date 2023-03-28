@@ -1,0 +1,46 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2022\2022_univ_cell\2022_univ_cell\2022_univ_cell
+vgeofence
+Z1 I6]E@Dia:3mX1Uan4^[`Fo0
+Z2 V6ABh`5OcE4SGMjG@_CjK92
+Z3 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2021\2021_univ_cell\2021_univ_cell
+Z4 w1679999548
+Z5 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/geofence.v
+Z6 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/geofence.v
+L0 1
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/geofence.v|
+Z9 o-work work -O0
+!i10b 1
+Z10 !s100 @BSaO@XNakTG@FUU2QFdl3
+!s85 0
+Z11 !s108 1679999556.599000
+Z12 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/geofence.v|
+!s101 -O0
+vtestfixture
+Z13 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+!i10b 1
+Z14 !s100 B[X7@D3LC]l8NDdMfcJN_1
+Z15 IZ<=hT<6T;XlZa>0L^HQX;0
+Z16 VKBIIT=eCh7cJh[^JXBGX00
+Z17 !s105 tb_sv_unit
+S1
+R3
+Z18 w1616462404
+Z19 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/tb.sv
+Z20 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/tb.sv
+L0 7
+R7
+r1
+!s85 0
+31
+!s108 1679999556.625000
+!s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/tb.sv|
+Z21 !s90 -reportprogress|300|-work|work|-sv|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/tb.sv|
+!s101 -O0
+Z22 o-work work -sv -O0

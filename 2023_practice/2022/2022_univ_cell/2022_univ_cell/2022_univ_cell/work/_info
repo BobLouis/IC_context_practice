@@ -1,0 +1,47 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2019_gra
+vJAM
+Z1 Ii0gnInjTdl`<<U7G<Bj7?1
+Z2 VbBi`Ie_idLQY8k3=dDKD@0
+Z3 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2022\2022_univ_cell\2022_univ_cell\2022_univ_cell
+Z4 w1679743345
+Z5 8C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2022\2022_univ_cell\2022_univ_cell\2022_univ_cell\JAM.v
+Z6 FC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2022\2022_univ_cell\2022_univ_cell\2022_univ_cell\JAM.v
+L0 1
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -reportprogress|300|-work|work|C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2022\2022_univ_cell\2022_univ_cell\2022_univ_cell\JAM.v|
+Z9 o-work work -O0
+Z10 n@j@a@m
+!i10b 1
+Z11 !s100 0koZEge2?k>`CE]7f62gL3
+!s85 0
+Z12 !s108 1679743353.858000
+Z13 !s107 C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2022\2022_univ_cell\2022_univ_cell\2022_univ_cell\JAM.v|
+!s101 -O0
+vtestfixture
+Z14 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+!i10b 1
+Z15 !s100 VcWGVOFDUS;K_fnd9BI5k2
+Z16 Ib;bA0:`f[9gj5?QmfJeQO0
+Z17 VKBIIT=eCh7cJh[^JXBGX00
+Z18 !s105 tb_sv_unit
+S1
+R3
+Z19 w1679742392
+Z20 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2022/2022_univ_cell/2022_univ_cell/2022_univ_cell/tb.sv
+Z21 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2022/2022_univ_cell/2022_univ_cell/2022_univ_cell/tb.sv
+L0 20
+R7
+r1
+!s85 0
+31
+!s108 1679743353.889000
+!s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2022/2022_univ_cell/2022_univ_cell/2022_univ_cell/tb.sv|
+Z22 !s90 -reportprogress|300|-work|work|-sv|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2022/2022_univ_cell/2022_univ_cell/2022_univ_cell/tb.sv|
+!s101 -O0
+Z23 o-work work -sv -O0

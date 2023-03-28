@@ -1,0 +1,8 @@
+C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2022/2022_univ_cell/2022_univ_cell/2022_univ_cell/tb.sv {1 {vlog -work work -sv C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2022/2022_univ_cell/2022_univ_cell/2022_univ_cell/tb.sv
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module testfixture
+
+Top level modules:
+	testfixture
+
+} {} {}}

@@ -4,7 +4,7 @@
 module  CONV(
 	input		clk,
 	input		reset,
-	output  busy,	
+	output reg busy,	
 	input		ready,	
 			
 	output  reg [11:0]	iaddr,
@@ -44,10 +44,11 @@ reg L0_done, L1_done;
 
 wire signed[39:0] mul;
 reg  signed[43:0]ans;
-assign mul = $signed(idata) * ker;
+assign mul = $signed(idata_reg) * ker;
 reg signed[19:0]max;
 wire signed[20:0] ans_out = ans[35:15] + ans[15];  
-assign busy = !(state == FINISH || state == IDLE);
+reg [19:0] idata_reg;
+// assign busy = !(state == FINISH || state == IDLE);
 
 
 
@@ -64,7 +65,7 @@ always@(*)begin
     else begin
         case(state)
             IDLE:begin
-				if(ready) next_state = READ_DATA;
+				if(busy == 1) next_state = READ_DATA;
                 else next_state = IDLE;
 			end
 			READ_DATA:begin
@@ -117,8 +118,13 @@ always@(posedge clk or posedge reset)begin
 		cwr <= 0;
 		L0_done <= 0;
 		L1_done <= 0;
+		busy <= 0;
     end
     else begin
+		if(next_state == IDLE)begin
+			if(ready == 1)
+				busy <= 1;
+		end
 		if(next_state == READ_DATA)begin
 			cwr  <= 0;
 			case(cnt)
@@ -132,7 +138,7 @@ always@(posedge clk or posedge reset)begin
 				14:	iaddr <= {row+6'd1, col};
 				16:  iaddr <= {row+6'd1, col+6'd1};
 			endcase
-
+			idata_reg <= idata;
 			if(cnt < 20)
 				cnt <= cnt + 1;
 			else begin
@@ -240,6 +246,8 @@ always@(posedge clk or posedge reset)begin
 			
 			cnt <= 0;
 		end
+		else if(next_state == FINISH)
+			busy <= 0;
     end
 end
 
@@ -250,22 +258,23 @@ always@(*)begin
 			0:	ker = 20'h0A89E;
 			1:	ker = 20'h0A89E;
 			2:	ker = 20'h0A89E;
-			3:	ker = 20'h092D5;
+			3:	ker = 20'h0A89E;
 			4:	ker = 20'h092D5;
-			5:	ker = 20'h06D43;
-			6:  ker = 20'h06D43;
-			7:	ker = 20'h01004;
+			5:	ker = 20'h092D5;
+			6:	ker = 20'h06D43;
+			7:  ker = 20'h06D43;
 			8:	ker = 20'h01004;
-			9:	ker = 20'hF8F71;
+			9:	ker = 20'h01004;
 			10:	ker = 20'hF8F71;
-			11:	ker = 20'hF6E54;
+			11:	ker = 20'hF8F71;
 			12:	ker = 20'hF6E54;
-			13:	ker = 20'hFA6D7;
+			13:	ker = 20'hF6E54;
 			14:	ker = 20'hFA6D7;
-			15:	ker = 20'hFC834;
+			15:	ker = 20'hFA6D7;
 			16:	ker = 20'hFC834;
-			17:	ker = 20'hFAC19;
+			17:	ker = 20'hFC834;
 			18:	ker = 20'hFAC19;
+			19:	ker = 20'hFAC19;
 			default:ker = 0;
 		endcase
 	end
@@ -274,22 +283,23 @@ always@(*)begin
 			0:	ker = 20'hFDB55;
 			1:	ker = 20'hFDB55;
 			2:	ker = 20'hFDB55;
-			3:	ker = 20'h02992;
+			3:	ker = 20'hFDB55;
 			4:	ker = 20'h02992;
-			5:	ker = 20'hFC994;
+			5:	ker = 20'h02992;
 			6:	ker = 20'hFC994;
-			7:	ker = 20'h050FD;
+			7:	ker = 20'hFC994;
 			8:	ker = 20'h050FD;
-			9:	ker = 20'h02F20;
+			9:	ker = 20'h050FD;
 			10:	ker = 20'h02F20;
-			11:	ker = 20'h0202D;
+			11:	ker = 20'h02F20;
 			12:	ker = 20'h0202D;
-			13:	ker = 20'h03BD7;
+			13:	ker = 20'h0202D;
 			14:	ker = 20'h03BD7;
-			15:	ker = 20'hFD369;
+			15:	ker = 20'h03BD7;
 			16:	ker = 20'hFD369;
-			17:	ker = 20'h05E68;
+			17:	ker = 20'hFD369;
 			18:	ker = 20'h05E68;
+			19:	ker = 20'h05E68;
 			default:ker = 0;
 		endcase
 	end
