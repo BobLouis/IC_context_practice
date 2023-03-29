@@ -100,7 +100,7 @@ always@(*)begin
                 else next_state = CIR2;
             end
             TRANS2:begin
-                if(iter == 5) next_state = OUT;
+                if(iter == 3) next_state = OUT;
                 else next_state = CIR1;
             end
             OUT:

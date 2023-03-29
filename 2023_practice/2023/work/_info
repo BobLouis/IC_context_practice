@@ -4,11 +4,11 @@ K3
 cModel Technology
 Z0 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2021\2021_univ_cell\2021_univ_cell
 vLASER
-Z1 !s100 BK[A?Td5F47>H6ObnQT_82
-Z2 InPMzObhiATZk[_ad]]j_?1
+Z1 !s100 MH5Ma7eDZ33D5fUUCU4bm3
+Z2 IRF:YKe4<S>CjU`fb_TkLU1
 Z3 V7l^g_WoHG5bV6><SdclSL0
 Z4 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023
-Z5 w1680074463
+Z5 w1680074579
 Z6 8C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023\LASER.v
 Z7 FC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023\LASER.v
 L0 2
@@ -20,7 +20,7 @@ Z10 o-work work -O0
 Z11 n@l@a@s@e@r
 !i10b 1
 !s85 0
-Z12 !s108 1680074480.296000
+Z12 !s108 1680074582.018000
 Z13 !s107 C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023\LASER.v|
 !s101 -O0
 vtestfixture
@@ -40,7 +40,7 @@ R8
 r1
 !s85 0
 31
-!s108 1680074480.325000
+!s108 1680074582.047000
 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv|
 Z22 !s90 -reportprogress|300|-work|work|-sv|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv|
 !s101 -O0
