@@ -32,8 +32,7 @@ parameter IDLE = 4'd0,
       CIR2 = 4'd5,
       TRANS2 = 4'd6,
       ITER = 4'd7,
-      BF = 4'd9,
-	  OUT = 4'd10;
+	  OUT = 4'd8;
       
 
 reg [5:0]out_max;
@@ -42,14 +41,19 @@ reg C1_done, C2_done;
 
 reg [3:0] x_loc, y_loc;
 wire [7:0] loc = {y_loc, x_loc};
-reg [1:0]iter;
+reg [2:0]iter;
 
 reg [3:0] mul1, mul2;
 reg [3:0] mul3, mul4;
 wire [8:0]mul = mul1 * mul1 + mul2 * mul2;
 wire [8:0]mul_ = mul3 * mul3 + mul4 * mul4;
 
-wire in_2cir = (mul <= 16) || (mul_ <= 16);
+wire in_cir1 = (mul <= 16);
+wire in_cir2 = (mul_ <= 16);
+wire in_2cir = in_cir1 | in_cir2;
+wire inter = in_cir1 & in_cir2;
+reg [3:0] inter_cnt ;
+
 
 assign C1X = max_x1;
 assign C1Y = max_y1;
@@ -98,10 +102,9 @@ always@(*)begin
                 else next_state = CIR2;
             end
             TRANS2:begin
-                if(iter == 3) next_state = BF;
+                if(iter == 4) next_state = OUT;
                 else next_state = CIR1;
             end
-            BF: next_state = OUT;
             OUT:
                 next_state = OUT; 
             default:    next_state = IDLE;
@@ -138,6 +141,7 @@ always@(posedge CLK or posedge RST)begin
         y1_tmp <= 0;
         x2_tmp <= 0;
         y2_tmp <= 0;
+        inter_cnt <= 0;
     end
     else begin
         if(next_state == READ)begin
@@ -165,8 +169,8 @@ always@(posedge CLK or posedge RST)begin
             if(cnt == 41)begin
                 cnt <= 0;
                 dot_cnt <= 0;
-                if(dot_cnt > out_max)begin
-                    out_max <= dot_cnt;
+                if(dot_cnt  > max_cnt )begin
+                    max_cnt <= dot_cnt;
                     max_x1 <= x_loc;
                     max_y1 <= y_loc;
                 end
@@ -193,9 +197,21 @@ always@(posedge CLK or posedge RST)begin
                 
             end
             else if(cnt > 0)begin //1~40
-                if(in_2cir)begin
-                    dot_cnt <= dot_cnt + 1;
+                if(iter == 0)begin
+                    if(in_cir1)begin
+                        dot_cnt <= dot_cnt + 1;
+                    end
                 end
+                else begin
+                    if(in_2cir)begin
+                        dot_cnt <= dot_cnt + 1;
+                    end
+
+                    if(inter)begin
+                        inter_cnt <= inter_cnt + 1;
+                    end
+                end
+                
                 cnt <= cnt + 1;
             end
             else 
@@ -214,6 +230,7 @@ always@(posedge CLK or posedge RST)begin
                 if(max_y2 >= 4)
                     y_loc <= max_y2 -4;
             end
+            inter_cnt <= 0;
         end
         else if(next_state == CIR2)begin
             mul1 <= `abs(X_data[cnt], max_x1);
@@ -223,8 +240,8 @@ always@(posedge CLK or posedge RST)begin
 
             if(cnt == 41)begin
                 cnt <= 0;
-                if(dot_cnt2 > out_max)begin
-                    out_max <= dot_cnt2;
+                if(dot_cnt2 > max_cnt2)begin
+                    max_cnt2 <= dot_cnt2;
                     max_x2 <= x_loc;
                     max_y2 <= y_loc;
                 end
@@ -255,6 +272,10 @@ always@(posedge CLK or posedge RST)begin
                 if(in_2cir)begin
                     dot_cnt2 <= dot_cnt2 + 1;
                 end
+
+                if(inter)begin
+                    inter_cnt <= inter_cnt + 1;
+                end
                 cnt <= cnt + 1;
             end
             else 
@@ -278,28 +299,8 @@ always@(posedge CLK or posedge RST)begin
             y1_tmp <= max_y1;
             x2_tmp <= max_x2;
             y2_tmp <= max_y2;
+            inter_cnt <= 0;
             
-        end
-        else if(next_state == BF)begin
-            if(max_x1 == 9 && max_y1 == 6 && max_x2 == 13 && max_y2 == 0)begin
-                max_x1 <= 9;
-                max_y1 <= 9;
-                max_x2 <= 13;
-                max_y2 <= 2;
-            end
-            else if(max_x1 == 7 && max_y1 == 7 && max_x2 == 11 && max_y2 == 2)begin
-                max_x1 <= 5;
-                max_y1 <= 10;
-                max_x2 <= 10;
-                max_y2 <= 5;
-            end
-            else if(max_x1 == 5 && max_y1 == 10 && max_x2 == 11 && max_y2 == 5)begin
-                max_x1 <= 5;
-                max_y1 <= 11;
-                max_x2 <= 11;
-                max_y2 <= 6;
-            end
-
         end
         else if(next_state == OUT)begin
             DONE <= 1;
