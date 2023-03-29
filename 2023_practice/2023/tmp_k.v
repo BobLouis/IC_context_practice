@@ -211,15 +211,20 @@ always@(posedge CLK or posedge RST)begin
                 end
             end
             else if(cnt > 0)begin //1~40
-                if(iter == 0)begin
-                    if(in_cir1)begin
-                        dot_cnt <= dot_cnt + 1;
-                    end
-                end
-                else begin
-                    if(in_2cir)begin
-                        dot_cnt <= dot_cnt + 1;
-                    end
+                // if(iter == 0)begin
+                //     if(in_cir1)begin
+                //         dot_cnt <= dot_cnt + 1;
+                //     end
+                // end
+                // else begin
+                //     if(in_2cir)begin
+                //         dot_cnt <= dot_cnt + 1;
+                //     end
+                // end
+
+                
+                if(in_2cir)begin
+                    dot_cnt <= dot_cnt + 1;
                 end
                 cnt <= cnt + 1;
             end
@@ -246,10 +251,10 @@ always@(posedge CLK or posedge RST)begin
             mul3 <= `abs(X_data[cnt], x_loc); //cir2
             mul4 <= `abs(Y_data[cnt], y_loc);
 
-            mul1k <= `abs(X_data[cnt], max_x1);
-            mul2k <= `abs(Y_data[cnt], max_y1);
-            mul3k <= `abs(X_data[cnt], x_loc); //cir2
-            mul4k <= `abs(Y_data[cnt], y_loc);
+            mul1k <= `abs(X_data[cnt+1], max_x1);
+            mul2k <= `abs(Y_data[cnt+1], max_y1);
+            mul3k <= `abs(X_data[cnt+1], x_loc); //cir2
+            mul4k <= `abs(Y_data[cnt+1], y_loc);
 
             if(cnt == 41)begin
                 cnt <= 0;
