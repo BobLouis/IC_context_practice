@@ -40,7 +40,6 @@ reg [5:0]out_max;
 reg C1_done, C2_done;
 
 reg [3:0] x_loc, y_loc;
-wire [7:0] loc = {y_loc, x_loc};
 reg [2:0]iter;
 
 reg [3:0] mul1, mul2;
@@ -51,8 +50,6 @@ wire [8:0]mul_ = mul3 * mul3 + mul4 * mul4;
 wire in_cir1 = (mul <= 16);
 wire in_cir2 = (mul_ <= 16);
 wire in_2cir = in_cir1 | in_cir2;
-wire inter = in_cir1 & in_cir2;
-
 
 assign C1X = max_x1;
 assign C1Y = max_y1;
