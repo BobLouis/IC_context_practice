@@ -1,3 +1,4 @@
+`define PATH 3
 `define abs(a,b) ((a>b) ? (a-b) : (b-a))
 module LASER (
 input CLK,
@@ -35,8 +36,6 @@ parameter IDLE = 4'd0,
 	  OUT = 4'd8;
       
 
-reg [5:0]out_max;
-
 reg C1_done, C2_done;
 
 reg [3:0] x_loc, y_loc;
@@ -58,13 +57,13 @@ assign C2Y = max_y2;
 
 reg [3:0]x1_tmp, y1_tmp, x2_tmp, y2_tmp;
 
-wire [3:0]x2_li = (x2_tmp  > 11) ? 15: (x2_tmp + 4);
-wire [3:0]x1_li = (x1_tmp  > 11) ? 15: (x1_tmp + 4);
-wire [3:0]y2_li = (y2_tmp  > 11) ? 15: (y2_tmp + 5);
-wire [3:0]y1_li = (y1_tmp  > 11) ? 15: (y1_tmp + 5);
+wire [3:0]x2_li = (x2_tmp  > 11) ? 15: (x2_tmp + `PATH);
+wire [3:0]x1_li = (x1_tmp  > 11) ? 15: (x1_tmp + `PATH);
+wire [3:0]y2_li = (y2_tmp  > 11) ? 15: (y2_tmp + `PATH);
+wire [3:0]y1_li = (y1_tmp  > 11) ? 15: (y1_tmp + `PATH);
 
-wire [3:0]x2_lilo = (x2_tmp < 4) ? 0 : x2_tmp - 4;
-wire [3:0]x1_lilo = (x1_tmp < 4) ? 0 : x1_tmp - 4;
+wire [3:0]x2_lilo = (x2_tmp < `PATH) ? 0 : x2_tmp - `PATH;
+wire [3:0]x1_lilo = (x1_tmp < `PATH) ? 0 : x1_tmp - `PATH;
 
 always@(posedge CLK or posedge RST)begin
     if(RST)
@@ -129,7 +128,6 @@ always@(posedge CLK or posedge RST)begin
         mul3 <= 0;
         mul4 <= 0;
         iter <= 0;
-        out_max <= 0;
         C1_done <= 0;
         C2_done <= 0;
         x1_tmp <= 0;
@@ -157,7 +155,6 @@ always@(posedge CLK or posedge RST)begin
             mul3 <= 0;
             mul4 <= 0;
             iter <= 0;
-            out_max <= 0;
             C1_done <= 0;
             C2_done <= 0;
             x1_tmp <= 0;
@@ -242,10 +239,10 @@ always@(posedge CLK or posedge RST)begin
             C1_done <= 0;
             if(iter != 0)
             begin
-                if(max_x2 >= 4)
-                    x_loc <= max_x2 -4;
-                if(max_y2 >= 4)
-                    y_loc <= max_y2 -4;
+                if(max_x2 >= `PATH)
+                    x_loc <= max_x2 -`PATH;
+                if(max_y2 >= `PATH)
+                    y_loc <= max_y2 -`PATH;
             end
         end
         else if(next_state == CIR2)begin
@@ -303,10 +300,10 @@ always@(posedge CLK or posedge RST)begin
             iter <= iter + 1;
             C2_done <= 0;
 
-            if(max_x1 >= 4)
-                x_loc <= max_x1 -4;
-            if(max_y1 >= 4)
-                y_loc <= max_y1 -4;
+            if(max_x1 >= `PATH)
+                x_loc <= max_x1 -`PATH;
+            if(max_y1 >= `PATH)
+                y_loc <= max_y1 -`PATH;
 
             x1_tmp <= max_x1;
             y1_tmp <= max_y1;
