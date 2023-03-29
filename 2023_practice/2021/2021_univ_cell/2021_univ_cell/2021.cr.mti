@@ -1,4 +1,11 @@
-C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/tb.sv {1 {vlog -work work -sv C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/tb.sv
+C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/geofence.v {1 {vlog -work work C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/geofence.v
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module geofence
+
+Top level modules:
+	geofence
+
+} {} {}} C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/tb.sv {1 {vlog -work work -sv C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2021/2021_univ_cell/2021_univ_cell/tb.sv
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling module testfixture
 
