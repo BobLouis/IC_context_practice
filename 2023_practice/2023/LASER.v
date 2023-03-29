@@ -16,9 +16,7 @@ reg [3:0] Y_data[0:39];
 
 reg [5:0] cnt;
 reg [5:0] max_cnt;
-reg [5:0] max_cnt2;
 reg [5:0] dot_cnt;
-reg [5:0] dot_cnt2;
 reg [4:0] max_x1, max_y1, max_x2, max_y2;
 reg CIR1_flag;
 
@@ -115,9 +113,7 @@ always@(posedge CLK or posedge RST)begin
         x_loc <= 0;
         y_loc <= 0;
         max_cnt <= 0;
-        max_cnt2 <= 0;
         dot_cnt <= 0;
-        dot_cnt2 <= 0;
         CIR1_flag <= 0;
         max_x1 <= 0;
         max_y1 <= 0;
@@ -142,9 +138,7 @@ always@(posedge CLK or posedge RST)begin
             x_loc <= 0;
             y_loc <= 0;
             max_cnt <= 0;
-            max_cnt2 <= 0;
             dot_cnt <= 0;
-            dot_cnt2 <= 0;
             CIR1_flag <= 0;
             max_x1 <= 0;
             max_y1 <= 0;
@@ -253,8 +247,8 @@ always@(posedge CLK or posedge RST)begin
 
             if(cnt == 41)begin
                 cnt <= 0;
-                if(dot_cnt2 >= max_cnt2)begin
-                    max_cnt2 <= dot_cnt2;
+                if(dot_cnt >= max_cnt)begin
+                    max_cnt <= dot_cnt;
                     max_x2 <= x_loc;
                     max_y2 <= y_loc;
                 end
@@ -279,11 +273,11 @@ always@(posedge CLK or posedge RST)begin
                     end
                 end
 
-                dot_cnt2 <= 0;
+                dot_cnt <= 0;
             end
             else if(cnt > 0)begin //1~40
                 if(in_2cir)begin
-                    dot_cnt2 <= dot_cnt2 + 1;
+                    dot_cnt <= dot_cnt + 1;
                 end
 
                 cnt <= cnt + 1;
