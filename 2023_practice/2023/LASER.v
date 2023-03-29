@@ -39,14 +39,21 @@ reg C1_done, C2_done;
 reg [3:0] x_loc, y_loc;
 reg [2:0]iter;
 
-reg [3:0] mul1, mul2;
-reg [3:0] mul3, mul4;
+reg [3:0] mul1, mul2, mul3, mul4;
+reg [3:0] mul1k, mul2k, mul3k, mul4k;
 wire [8:0]mul = mul1 * mul1 + mul2 * mul2;
 wire [8:0]mul_ = mul3 * mul3 + mul4 * mul4;
+
+wire [8:0]mulk = mul1k * mul1k + mul2k * mul2k;
+wire [8:0]mul_k = mul3k * mul3k + mul4k * mul4k;
 
 wire in_cir1 = (mul <= 16);
 wire in_cir2 = (mul_ <= 16);
 wire in_2cir = in_cir1 | in_cir2;
+
+wire in_cir1k = (mulk <= 16);
+wire in_cir2k = (mul_k <= 16);
+wire in_2cirk = in_cir1k | in_cir2k;
 
 assign C1X = max_x1;
 assign C1Y = max_y1;
@@ -119,10 +126,14 @@ always@(posedge CLK or posedge RST)begin
         max_y1 <= 0;
         max_x2 <= 0;
         max_y2 <= 0;
-        mul1 <= 0;
-        mul2 <= 0;
-        mul3 <= 0;
-        mul4 <= 0;
+        // mul1 <= 0;
+        // mul2 <= 0;
+        // mul3 <= 0;
+        // mul4 <= 0;
+        mul1k <= 0;
+        mul2k <= 0;
+        mul3k <= 0;
+        mul4k <= 0;
         iter <= 0;
         C1_done <= 0;
         C2_done <= 0;
@@ -135,26 +146,12 @@ always@(posedge CLK or posedge RST)begin
         if(next_state == IDLE)begin
             DONE <=0;
             cnt <= 0;
-            x_loc <= 0;
-            y_loc <= 0;
             max_cnt <= 0;
             dot_cnt <= 0;
             CIR1_flag <= 0;
-            max_x1 <= 0;
-            max_y1 <= 0;
-            max_x2 <= 0;
-            max_y2 <= 0;
-            mul1 <= 0;
-            mul2 <= 0;
-            mul3 <= 0;
-            mul4 <= 0;
             iter <= 0;
             C1_done <= 0;
             C2_done <= 0;
-            x1_tmp <= 0;
-            y1_tmp <= 0;
-            x2_tmp <= 0;
-            y2_tmp <= 0;
         end
         else if(next_state == READ)begin
             X_data[cnt] <= X;
@@ -171,10 +168,17 @@ always@(posedge CLK or posedge RST)begin
         end
         else if(next_state == CIR1)begin
 
-            mul1 <= `abs(X_data[cnt], x_loc);
-            mul2 <= `abs(Y_data[cnt], y_loc);
-            mul3 <= `abs(X_data[cnt], max_x2); //cir2
-            mul4 <= `abs(Y_data[cnt], max_y2);
+            // mul1 <= `abs(X_data[cnt], x_loc);
+            // mul2 <= `abs(Y_data[cnt], y_loc);
+            // mul3 <= `abs(X_data[cnt], max_x2); //cir2
+            // mul4 <= `abs(Y_data[cnt], max_y2);
+
+            // mul1k <= `abs(X_data[cnt+1], x_loc);
+            // mul2k <= `abs(Y_data[cnt+1], y_loc);
+            // mul3k <= `abs(X_data[cnt+1], max_x2); //cir2
+            // mul4k <= `abs(Y_data[cnt+1], max_y2);
+
+
 
 
             if(cnt == 41)begin
@@ -205,7 +209,6 @@ always@(posedge CLK or posedge RST)begin
                         x_loc <= x_loc + 1;
                     end
                 end
-                
             end
             else if(cnt > 0)begin //1~40
                 if(iter == 0)begin
@@ -217,9 +220,7 @@ always@(posedge CLK or posedge RST)begin
                     if(in_2cir)begin
                         dot_cnt <= dot_cnt + 1;
                     end
-
                 end
-                
                 cnt <= cnt + 1;
             end
             else 
@@ -240,10 +241,15 @@ always@(posedge CLK or posedge RST)begin
             end
         end
         else if(next_state == CIR2)begin
-            mul1 <= `abs(X_data[cnt], max_x1);
-            mul2 <= `abs(Y_data[cnt], max_y1);
-            mul3 <= `abs(X_data[cnt], x_loc); //cir2
-            mul4 <= `abs(Y_data[cnt], y_loc);
+            // mul1 <= `abs(X_data[cnt], max_x1);
+            // mul2 <= `abs(Y_data[cnt], max_y1);
+            // mul3 <= `abs(X_data[cnt], x_loc); //cir2
+            // mul4 <= `abs(Y_data[cnt], y_loc);
+
+            // mul1k <= `abs(X_data[cnt], max_x1);
+            // mul2k <= `abs(Y_data[cnt], max_y1);
+            // mul3k <= `abs(X_data[cnt], x_loc); //cir2
+            // mul4k <= `abs(Y_data[cnt], y_loc);
 
             if(cnt == 41)begin
                 cnt <= 0;
@@ -310,6 +316,27 @@ always@(posedge CLK or posedge RST)begin
             cnt <= 0;
             
         end
+    end
+end
+
+wire [3:0]abs1 = (next_state == CIR1)?x_loc:max_x1;
+wire [3:0]abs2 = (next_state == CIR1)?y_loc:max_y1;
+wire [3:0]abs3 = (next_state == CIR1)?max_x2:x_loc;
+wire [3:0]abs4 = (next_state == CIR1)?max_y2:y_loc;
+
+always @(posedge CLK or posedge RST) begin
+    if(RST)begin
+        mul1 <= 0;
+        mul2 <= 0;
+        mul3 <= 0;
+        mul4 <= 0;
+    end
+    else begin
+
+        mul1 <= `abs(X_data[cnt], abs1);
+        mul2 <= `abs(Y_data[cnt], abs2);
+        mul3 <= `abs(X_data[cnt], abs3); //cir2
+        mul4 <= `abs(Y_data[cnt], abs4);
     end
 end
 

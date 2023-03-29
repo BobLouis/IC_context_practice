@@ -130,6 +130,10 @@ always@(posedge CLK or posedge RST)begin
         mul2 <= 0;
         mul3 <= 0;
         mul4 <= 0;
+        mul1k <= 0;
+        mul2k <= 0;
+        mul3k <= 0;
+        mul4k <= 0;
         iter <= 0;
         C1_done <= 0;
         C2_done <= 0;
@@ -168,6 +172,13 @@ always@(posedge CLK or posedge RST)begin
             mul2 <= `abs(Y_data[cnt], y_loc);
             mul3 <= `abs(X_data[cnt], max_x2); //cir2
             mul4 <= `abs(Y_data[cnt], max_y2);
+
+            mul1k <= `abs(X_data[cnt+1], x_loc);
+            mul2k <= `abs(Y_data[cnt+1], y_loc);
+            mul3k <= `abs(X_data[cnt+1], max_x2); //cir2
+            mul4k <= `abs(Y_data[cnt+1], max_y2);
+
+
 
 
             if(cnt == 41)begin
@@ -234,6 +245,11 @@ always@(posedge CLK or posedge RST)begin
             mul2 <= `abs(Y_data[cnt], max_y1);
             mul3 <= `abs(X_data[cnt], x_loc); //cir2
             mul4 <= `abs(Y_data[cnt], y_loc);
+
+            mul1k <= `abs(X_data[cnt], max_x1);
+            mul2k <= `abs(Y_data[cnt], max_y1);
+            mul3k <= `abs(X_data[cnt], x_loc); //cir2
+            mul4k <= `abs(Y_data[cnt], y_loc);
 
             if(cnt == 41)begin
                 cnt <= 0;
