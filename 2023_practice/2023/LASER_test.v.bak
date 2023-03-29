@@ -1,0 +1,946 @@
+module LASER (
+input CLK,
+input RST,
+input [3:0] X,
+input [3:0] Y,
+output reg [3:0] C1X,
+output reg [3:0] C1Y,
+output reg [3:0] C2X,
+output reg [3:0] C2Y,
+output DONE);
+
+//state change
+reg [3:0] state;
+reg [3:0] next_state;
+
+//state control
+parameter
+PATTERN_READ=4'd0,
+FIRST_CIRCLE_CALCULATE=4'd1,
+FIRST_CIRCLE_COMPARE=4'd2,
+CIRCLE2_CALCULATE=4'd3,
+CIRCLE2_COMPARE=4'd4,
+REFLASH_CIRCLE1_CALCULATE=4'd5,
+REFLASH_CIRCLE1_COMPARE=4'd6,
+REFLASH_CIRCLE2_CALCULATE=4'd7,
+REFLASH_CIRCLE2_COMPARE=4'd8,
+RESULT_OUTPUT=4'd9;
+
+//read counter
+reg [5:0] read_counter;
+
+//pattern X axis
+reg [3:0] pattern_X_axis [0:39];
+
+//pattern Y axis
+reg [3:0] pattern_Y_axis [0:39];
+
+//calculate counter
+reg [5:0] calculate_counter;
+
+//compare X axis
+reg [5:0] compare_X_axis;
+
+//compare Y axis
+reg [5:0] compare_Y_axis;
+
+//distance X input
+reg [3:0] distance_X_input;
+
+//distance X calculate
+wire [7:0] distance_X_calculate=distance_X_input*distance_X_input;
+
+//distance Y input
+reg [3:0] distance_Y_input;
+
+//distance Y calculate
+wire [7:0] distance_Y_calculate=distance_Y_input*distance_Y_input;
+
+//tmp max cover
+reg [5:0] tmp_max_cover;
+
+//tmp cover
+reg [39:0] tmp_cover;
+
+//max cover counter pattern
+reg [5:0] max_cover_counter_pattern;
+
+//compare cover
+reg [39:0] compare_cover;
+
+//real cover
+reg [5:0] real_cover;
+
+//overlap
+reg [5:0] overlap;
+
+//X axis offset
+reg [2:0] X_axis_offset;
+
+//Y axis offset
+reg [2:0] Y_axis_offset;
+
+//round
+reg [1:0] round;
+
+//DONE
+reg DONE;
+
+//state change
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		state<=PATTERN_READ;
+	end
+	else
+	begin
+		state<=next_state;
+	end	
+end
+
+//state control
+always@(*)
+begin
+	case(state)
+	PATTERN_READ:
+	begin
+		if(read_counter==6'd39)
+		begin
+			next_state=FIRST_CIRCLE_CALCULATE;
+		end
+		else
+		begin
+			next_state=PATTERN_READ;
+		end		
+	end
+	FIRST_CIRCLE_CALCULATE:
+	begin
+		if(calculate_counter==6'd39)
+		begin
+			next_state=FIRST_CIRCLE_COMPARE;
+		end
+		else
+		begin
+			next_state=FIRST_CIRCLE_CALCULATE;
+		end
+	end
+	FIRST_CIRCLE_COMPARE:
+	begin
+		if( (compare_X_axis==4'd15) && (compare_Y_axis==4'd15) )
+		begin
+			next_state=CIRCLE2_CALCULATE;
+		end
+		else
+		begin
+			next_state=FIRST_CIRCLE_CALCULATE;
+		end
+	end
+	CIRCLE2_CALCULATE:
+	begin
+		if(calculate_counter==6'd39)
+		begin
+			next_state=CIRCLE2_COMPARE;
+		end
+		else
+		begin
+			next_state=CIRCLE2_CALCULATE;
+		end
+	end
+	CIRCLE2_COMPARE:
+	begin
+		if( (compare_X_axis==4'd15) && (compare_Y_axis==4'd15) )
+		begin
+			next_state=REFLASH_CIRCLE1_CALCULATE;
+		end
+		else
+		begin
+			next_state=CIRCLE2_CALCULATE;
+		end
+	end
+	REFLASH_CIRCLE1_CALCULATE:
+	begin
+		if(calculate_counter==6'd39)
+		begin
+			next_state=REFLASH_CIRCLE1_COMPARE;
+		end
+		else
+		begin
+			next_state=REFLASH_CIRCLE1_CALCULATE;
+		end
+	end
+	REFLASH_CIRCLE1_COMPARE:
+	begin
+		if(X_axis_offset==3'd5)
+		begin
+			if(Y_axis_offset==3'd5)
+			begin
+				if(round==2'd3)
+				begin
+					next_state=RESULT_OUTPUT;
+				end
+				else
+				begin
+					next_state=REFLASH_CIRCLE2_CALCULATE;
+				end
+			end
+			else
+			begin
+				next_state=REFLASH_CIRCLE1_CALCULATE;
+			end
+		end
+		else
+		begin
+			next_state=REFLASH_CIRCLE1_CALCULATE;
+		end
+	end
+	REFLASH_CIRCLE2_CALCULATE:
+	begin
+		if(calculate_counter==6'd39)
+		begin
+			next_state=REFLASH_CIRCLE2_COMPARE;
+		end
+		else
+		begin
+			next_state=REFLASH_CIRCLE2_CALCULATE;
+		end
+	end
+	REFLASH_CIRCLE2_COMPARE:
+	begin
+		if(X_axis_offset==3'd5)
+		begin
+			if(Y_axis_offset==3'd5)
+			begin
+				next_state=REFLASH_CIRCLE1_CALCULATE;
+			end
+			else
+			begin
+				next_state=REFLASH_CIRCLE2_CALCULATE;
+			end
+		end
+		else
+		begin
+			next_state=REFLASH_CIRCLE2_CALCULATE;
+		end
+	end
+	endcase
+end
+
+//read counter
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		read_counter<=6'd0;
+	end
+	else
+	begin
+		case(state)
+		PATTERN_READ:
+		begin
+			if(read_counter==6'd39)
+			begin
+				read_counter<=6'd0;
+			end
+			else
+			begin
+				read_counter<=read_counter+6'd1;
+			end
+		end
+		endcase
+	end
+end
+
+//pattern X axis , pattern Y axis
+always@(posedge CLK)
+begin
+	case(state)
+	PATTERN_READ:
+	begin
+		pattern_X_axis[read_counter]<=X;
+		pattern_Y_axis[read_counter]<=Y;
+	end
+	endcase
+end
+
+//calculate counter
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		calculate_counter<=6'd0;
+	end
+	else
+	begin
+		case(state)
+		FIRST_CIRCLE_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				calculate_counter<=6'd0;
+			end
+			else
+			begin
+				calculate_counter<=calculate_counter+6'd1;
+			end
+		end
+		CIRCLE2_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				calculate_counter<=6'd0;
+			end
+			else
+			begin
+				calculate_counter<=calculate_counter+6'd1;
+			end
+		end
+		REFLASH_CIRCLE1_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				calculate_counter<=6'd0;
+			end
+			else
+			begin
+				calculate_counter<=calculate_counter+6'd1;
+			end
+		end
+		REFLASH_CIRCLE2_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				calculate_counter<=6'd0;
+			end
+			else
+			begin
+				calculate_counter<=calculate_counter+6'd1;
+			end
+		end
+		endcase
+	end
+end
+
+//compare X axis
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		compare_X_axis<=4'd0;
+	end
+	else
+	begin
+		case(state)
+		FIRST_CIRCLE_COMPARE:
+		begin
+			compare_X_axis<=compare_X_axis+4'd1;
+		end
+		CIRCLE2_COMPARE:
+		begin
+			compare_X_axis<=compare_X_axis+4'd1;
+		end
+		endcase
+	end
+end
+
+//compare Y axis
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		compare_Y_axis<=4'd0;
+	end
+	else
+	begin
+		case(state)
+		FIRST_CIRCLE_COMPARE:
+		begin
+			if(compare_X_axis==4'd15)
+			begin
+				compare_Y_axis<=compare_Y_axis+4'd1;
+			end
+		end
+		CIRCLE2_COMPARE:
+		begin
+			if(compare_X_axis==4'd15)
+			begin
+				compare_Y_axis<=compare_Y_axis+4'd1;
+			end
+		end
+		endcase
+	end
+end
+
+//distance X input
+always@(*)
+begin
+	case(state)
+	FIRST_CIRCLE_CALCULATE:
+	begin
+		if(compare_X_axis>=pattern_X_axis[calculate_counter])
+		begin
+			distance_X_input=compare_X_axis-pattern_X_axis[calculate_counter];
+		end
+		else
+		begin
+			distance_X_input=pattern_X_axis[calculate_counter]-compare_X_axis;
+		end	
+	end
+	CIRCLE2_CALCULATE:
+	begin
+		if(compare_X_axis>=pattern_X_axis[calculate_counter])
+		begin
+			distance_X_input=compare_X_axis-pattern_X_axis[calculate_counter];
+		end
+		else
+		begin
+			distance_X_input=pattern_X_axis[calculate_counter]-compare_X_axis;
+		end	
+	end
+	REFLASH_CIRCLE1_CALCULATE:
+	begin
+		case(X_axis_offset)
+		3'd0:
+		begin
+			if( (C2X-3'd2) >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= (C2X-3'd2)-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-(C2X-3'd2);
+			end
+		end
+		3'd1:
+		begin
+			if( (C2X-3'd1) >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= (C2X-3'd1)-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-(C2X-3'd1);
+			end
+		end
+		3'd2:
+		begin
+			if( C2X >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= C2X-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-C2X;
+			end
+		end
+		3'd3:
+		begin
+			if( (C2X+3'd1) >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= (C2X+3'd1)-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-(C2X+3'd1);
+			end
+		end
+		3'd4:
+		begin
+			if( (C2X+3'd2) >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= (C2X+3'd2)-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-(C2X+3'd2);
+			end
+		end
+		endcase
+	end
+	REFLASH_CIRCLE2_CALCULATE:
+	begin
+		case(X_axis_offset)
+		3'd0:
+		begin
+			if( (C1X-3'd2) >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= (C1X-3'd2)-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-(C1X-3'd2);
+			end
+		end
+		3'd1:
+		begin
+			if( (C1X-3'd1) >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= (C1X-3'd1)-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-(C1X-3'd1);
+			end
+		end
+		3'd2:
+		begin
+			if( C1X >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= C1X-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-C1X;
+			end
+		end
+		3'd3:
+		begin
+			if( (C1X+3'd1) >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= (C1X+3'd1)-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-(C1X+3'd1);
+			end
+		end
+		3'd4:
+		begin
+			if( (C1X+3'd2) >=pattern_X_axis[calculate_counter])
+			begin
+				distance_X_input= (C1X+3'd2)-pattern_X_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_X_input= pattern_X_axis[calculate_counter]-(C1X+3'd2);
+			end
+		end
+		endcase
+	end
+	endcase
+end
+
+//distance Y input
+always@(*)
+begin
+	case(state)
+	FIRST_CIRCLE_CALCULATE:
+	begin
+		if(compare_Y_axis>=pattern_Y_axis[calculate_counter])
+		begin
+			distance_Y_input=compare_Y_axis-pattern_Y_axis[calculate_counter];
+		end
+		else
+		begin
+			distance_Y_input=pattern_Y_axis[calculate_counter]-compare_Y_axis;
+		end	
+	end
+	CIRCLE2_CALCULATE:
+	begin	
+		if(compare_Y_axis>=pattern_Y_axis[calculate_counter])
+		begin
+			distance_Y_input=compare_Y_axis-pattern_Y_axis[calculate_counter];
+		end
+		else
+		begin
+			distance_Y_input=pattern_Y_axis[calculate_counter]-compare_Y_axis;
+		end	
+	end
+	REFLASH_CIRCLE1_CALCULATE:
+	begin
+		case(Y_axis_offset)
+		3'd0:
+		begin
+			if( (C2Y-3'd2) >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= (C2Y-3'd2)-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-(C2Y-3'd2);
+			end
+		end
+		3'd1:
+		begin
+			if( (C2Y-3'd1) >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= (C2Y-3'd1)-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-(C2Y-3'd1);
+			end
+		end
+		3'd2:
+		begin
+			if( C2Y >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= C2Y-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-C2Y;
+			end
+		end
+		3'd3:
+		begin
+			if( (C2Y+3'd1) >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= (C2Y+3'd1)-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]+(C2Y+3'd1);
+			end
+		end
+		3'd4:
+		begin
+			if( (C2Y+3'd2) >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= (C2Y+3'd2)-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-(C2Y+3'd2);
+			end
+		end
+		endcase
+	end
+	REFLASH_CIRCLE2_CALCULATE:
+	begin
+		case(Y_axis_offset)
+		3'd0:
+		begin
+			if( (C1Y-3'd2) >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= (C1Y-3'd2)-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-(C1Y-3'd2);
+			end
+		end
+		3'd1:
+		begin
+			if( (C1Y-3'd1) >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= (C1Y-3'd1)-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-(C1Y-3'd1);
+			end
+		end
+		3'd2:
+		begin
+			if( C1Y >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= C1Y-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-C1Y;
+			end
+		end
+		3'd3:
+		begin
+			if( (C1Y+3'd1) >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= (C1Y+3'd1)-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-(C1Y+3'd1);
+			end
+		end
+		3'd4:
+		begin
+			if( (C1Y+3'd2) >=pattern_Y_axis[calculate_counter])
+			begin
+				distance_Y_input= (C1Y+3'd2)-pattern_Y_axis[calculate_counter];
+			end
+			else
+			begin
+				distance_Y_input= pattern_Y_axis[calculate_counter]-(C1Y+3'd2);
+			end
+		end
+		endcase
+	end
+	endcase
+end
+
+//C1X , C1Y , C2X , C2Y ,tmp max cover , max_cover_counter_pattern ,tmp cover
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		C1X<=4'd0;
+		C1Y<=4'd0;
+		C2X<=4'd0;
+		C2Y<=4'd0;		
+		tmp_max_cover<=6'd0;
+		max_cover_counter_pattern<=6'd0;
+		tmp_cover<=40'd0;
+		compare_cover<=40'd0;
+		overlap<=6'd0;
+		real_cover<=6'd0;
+	end
+	else
+	begin
+		case(state)
+		PATTERN_READ:
+		begin
+			C1X<=4'd0;
+			C1Y<=4'd0;
+			C2X<=4'd0;
+			C2Y<=4'd0;		
+			tmp_max_cover<=6'd0;
+			tmp_cover<=40'd0;
+			max_cover_counter_pattern<=6'd0;
+			compare_cover<=40'd0;
+			overlap<=6'd0;
+			real_cover<=6'd0;
+		end
+		FIRST_CIRCLE_CALCULATE:
+		begin
+			if( (distance_X_calculate+distance_Y_calculate) <= 9'd16 )
+			begin
+				tmp_max_cover<=tmp_max_cover+6'd1;
+				tmp_cover[calculate_counter]<=1'd1;
+			end
+		end
+		FIRST_CIRCLE_COMPARE:
+		begin
+			tmp_max_cover<=6'd0;
+			tmp_cover<=40'd0;
+
+			if(tmp_max_cover>=max_cover_counter_pattern)
+			begin
+				C1X<=compare_X_axis;
+				C1Y<=compare_Y_axis;
+				max_cover_counter_pattern<=tmp_max_cover;
+				compare_cover<=tmp_cover;
+			end
+		end
+		CIRCLE2_CALCULATE:
+		begin
+			if( (distance_X_calculate+distance_Y_calculate) <= 9'd16 )
+			begin
+				tmp_cover[calculate_counter]<=1'd1;
+
+				if(compare_cover[calculate_counter]==1'd0)
+				begin
+					tmp_max_cover<=tmp_max_cover+6'd1;
+				end
+				else
+				begin
+					overlap<=overlap+6'd1;
+				end
+			end
+		end
+		CIRCLE2_COMPARE:
+		begin
+			tmp_max_cover<=6'd0;
+			tmp_cover<=40'd0;
+
+			if( (tmp_max_cover+max_cover_counter_pattern) >= max_cover_counter_pattern)
+			begin
+				real_cover<=tmp_max_cover+overlap;
+				C2X<=compare_X_axis;
+				C2Y<=compare_Y_axis;
+				max_cover_counter_pattern<=tmp_max_cover+max_cover_counter_pattern;
+				compare_cover<=tmp_cover;
+			end
+		end
+		REFLASH_CIRCLE1_CALCULATE:
+		begin
+			if( (distance_X_calculate+distance_Y_calculate) <= 9'd16 )
+			begin
+				tmp_cover[calculate_counter]<=1'd1;
+
+				if(compare_cover[calculate_counter]==1'd0)
+				begin
+					tmp_max_cover<=tmp_max_cover+6'd1;
+				end
+				else
+				begin
+					overlap<=overlap+6'd1;
+				end
+			end
+		end
+		REFLASH_CIRCLE1_COMPARE:
+		begin
+			tmp_max_cover<=6'd0;
+			tmp_cover<=40'd0;
+
+			if( (tmp_max_cover+real_cover) >= max_cover_counter_pattern)
+			begin
+				real_cover<=tmp_max_cover+overlap;
+				C2X<=compare_X_axis;
+				C2Y<=compare_Y_axis;
+				max_cover_counter_pattern<=tmp_max_cover+max_cover_counter_pattern;
+				compare_cover<=tmp_cover;
+			end
+		end
+		REFLASH_CIRCLE2_CALCULATE:
+		begin
+			if( (distance_X_calculate+distance_Y_calculate) <= 9'd16 )
+			begin
+				tmp_cover[calculate_counter]<=1'd1;
+
+				if(compare_cover[calculate_counter]==1'd0)
+				begin
+					tmp_max_cover<=tmp_max_cover+6'd1;
+				end
+				else
+				begin
+					overlap<=overlap+6'd1;
+				end
+			end
+		end
+		endcase
+	end
+end
+
+//X axis offset
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		X_axis_offset<=3'd0;
+	end
+	else
+	begin
+		case(state)
+		REFLASH_CIRCLE1_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				if(X_axis_offset==3'd5)
+				begin
+					X_axis_offset<=3'd0;
+				end
+				else
+				begin
+					X_axis_offset<=X_axis_offset+3'd1;
+				end
+			end
+		end
+		REFLASH_CIRCLE2_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				if(X_axis_offset==3'd5)
+				begin
+					X_axis_offset<=3'd0;
+				end
+				else
+				begin
+					X_axis_offset<=X_axis_offset+3'd1;
+				end
+			end
+		end
+		endcase
+	end
+end
+
+//Y axis offset
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		Y_axis_offset<=3'd0;
+	end
+	else
+	begin
+		case(state)
+		REFLASH_CIRCLE1_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				if(X_axis_offset==3'd5)
+				begin
+					if(Y_axis_offset==3'd5)
+					begin
+						Y_axis_offset<=3'd0;
+					end
+					else
+					begin
+						Y_axis_offset<=Y_axis_offset+3'd1;
+					end
+				end
+			end
+		end
+		REFLASH_CIRCLE2_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				if(X_axis_offset==3'd5)
+				begin
+					if(Y_axis_offset==3'd5)
+					begin
+						Y_axis_offset<=3'd0;
+					end
+					else
+					begin
+						Y_axis_offset<=Y_axis_offset+3'd1;
+					end
+				end
+			end
+		end
+		endcase
+	end
+end
+
+//round
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		round<=2'd0;
+	end
+	else
+	begin
+		case(state)
+		REFLASH_CIRCLE1_CALCULATE:
+		begin
+			if(calculate_counter==6'd39)
+			begin
+				if(X_axis_offset==3'd5)
+				begin
+					if(Y_axis_offset==3'd5)
+					begin
+						round<=round+2'd1;
+					end
+				end
+			end
+		end
+		endcase
+	end
+end
+
+//DONE
+always@(posedge CLK or posedge RST)
+begin
+	if(RST)
+	begin
+		DONE<=1'd0;
+	end
+	else
+	begin
+		case(state)
+		PATTERN_READ:
+		begin
+			DONE<=1'd0;
+		end
+		RESULT_OUTPUT:
+		begin		
+			DONE<=1'd1;
+		end
+		endcase
+	end
+end
+
+endmodule
+
+

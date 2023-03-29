@@ -91,13 +91,15 @@ always@(*)begin
             TRANS_READ: next_state = CIR1;
             CIR1:begin
                 if(C1_done)next_state = TRANS;
-                else if(x_loc == 0 && y_loc == 0 && CIR1_flag == 1)next_state= TRANS;
+                // else if(x_loc == 0 && y_loc == 0 && CIR1_flag == 1)next_state= TRANS;
+                else if(x_loc == 11 && y_loc == 11)next_state= TRANS;
                 else next_state = CIR1;
             end
             TRANS:  next_state = CIR2;
             CIR2:begin
                 if(C2_done)next_state = TRANS2;
-                else if(x_loc == 0 && y_loc == 0 && CIR1_flag == 1 )next_state= TRANS2;
+                // else if(x_loc == 0 && y_loc == 0 && CIR1_flag == 1 )next_state= TRANS2;
+                else if(x_loc == 11 && y_loc == 11)next_state= TRANS2;
                 else next_state = CIR2;
             end
             TRANS2:begin
@@ -211,18 +213,6 @@ always@(posedge CLK or posedge RST)begin
                 end
             end
             else if(cnt > 0)begin //1~40
-                // if(iter == 0)begin
-                //     if(in_cir1)begin
-                //         dot_cnt <= dot_cnt + 1;
-                //     end
-                // end
-                // else begin
-                //     if(in_2cir)begin
-                //         dot_cnt <= dot_cnt + 1;
-                //     end
-                // end
-
-
                 if(in_2cir & in_2cirk)begin
                     dot_cnt <= dot_cnt + 2;
                 end
