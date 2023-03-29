@@ -32,8 +32,7 @@ parameter IDLE = 4'd0,
       CIR2 = 4'd5,
       TRANS2 = 4'd6,
       ITER = 4'd7,
-	  OUT = 4'd8,
-      BF = 4'd9;
+	  OUT = 4'd8;
       
 
 reg [5:0]out_max;
@@ -108,12 +107,11 @@ always@(*)begin
                 else next_state = CIR2;
             end
             TRANS2:begin
-                if(iter == 2) next_state = BF;
+                if(iter == 5) next_state = OUT;
                 else next_state = CIR1;
             end
-            BF: next_state = OUT;
             OUT:
-                next_state = OUT; 
+                next_state = IDLE; 
             default:    next_state = IDLE;
         endcase
     end 
@@ -151,8 +149,35 @@ always@(posedge CLK or posedge RST)begin
         inter_cnt <= 0;
     end
     else begin
-        if(next_state == READ)begin
-            DONE <= 0;
+        if(next_state == IDLE)begin
+            DONE <=0;
+            cnt <= 0;
+            x_loc <= 0;
+            y_loc <= 0;
+            max_cnt <= 0;
+            max_cnt2 <= 0;
+            dot_cnt <= 0;
+            dot_cnt2 <= 0;
+            CIR1_flag <= 0;
+            max_x1 <= 0;
+            max_y1 <= 0;
+            max_x2 <= 0;
+            max_y2 <= 0;
+            mul1 <= 0;
+            mul2 <= 0;
+            mul3 <= 0;
+            mul4 <= 0;
+            iter <= 0;
+            out_max <= 0;
+            C1_done <= 0;
+            C2_done <= 0;
+            x1_tmp <= 0;
+            y1_tmp <= 0;
+            x2_tmp <= 0;
+            y2_tmp <= 0;
+            inter_cnt <= 0;
+        end
+        else if(next_state == READ)begin
             X_data[cnt] <= X;
             Y_data[cnt] <= Y;
             cnt <= cnt + 1;
@@ -176,7 +201,7 @@ always@(posedge CLK or posedge RST)begin
             if(cnt == 41)begin
                 cnt <= 0;
                 dot_cnt <= 0;
-                if(dot_cnt  > max_cnt )begin
+                if(dot_cnt  >= max_cnt )begin
                     max_cnt <= dot_cnt;
                     max_x1 <= x_loc;
                     max_y1 <= y_loc;
@@ -247,7 +272,7 @@ always@(posedge CLK or posedge RST)begin
 
             if(cnt == 41)begin
                 cnt <= 0;
-                if(dot_cnt2 > max_cnt2)begin
+                if(dot_cnt2 >= max_cnt2)begin
                     max_cnt2 <= dot_cnt2;
                     max_x2 <= x_loc;
                     max_y2 <= y_loc;
@@ -309,30 +334,9 @@ always@(posedge CLK or posedge RST)begin
             inter_cnt <= 0;
             
         end
-        else if(next_state == BF)begin
-            if(max_x1 == 9 && max_y1 == 6 && max_x2 == 13 && max_y2 == 0)begin
-                max_x1 <= 9;
-                max_y1 <= 9;
-                max_x2 <= 13;
-                max_y2 <= 2;
-            end
-            else if(max_x1 == 7 && max_y1 == 7 && max_x2 == 11 && max_y2 == 2)begin
-                max_x1 <= 5;
-                max_y1 <= 10;
-                max_x2 <= 10;
-                max_y2 <= 5;
-            end
-            else if(max_x1 == 5 && max_y1 == 10 && max_x2 == 11 && max_y2 == 5)begin
-                max_x1 <= 5;
-                max_y1 <= 11;
-                max_x2 <= 11;
-                max_y2 <= 6;
-            end
-
-        end
         else if(next_state == OUT)begin
             DONE <= 1;
-            cnt <= 63;
+            cnt <= 0;
             
         end
     end

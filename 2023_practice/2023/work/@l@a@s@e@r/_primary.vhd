@@ -10,8 +10,7 @@ entity LASER is
         CIR2            : vl_logic_vector(0 to 3) := (Hi0, Hi1, Hi0, Hi1);
         TRANS2          : vl_logic_vector(0 to 3) := (Hi0, Hi1, Hi1, Hi0);
         ITER            : vl_logic_vector(0 to 3) := (Hi0, Hi1, Hi1, Hi1);
-        \OUT\           : vl_logic_vector(0 to 3) := (Hi1, Hi0, Hi0, Hi0);
-        BF              : vl_logic_vector(0 to 3) := (Hi1, Hi0, Hi0, Hi1)
+        \OUT\           : vl_logic_vector(0 to 3) := (Hi1, Hi0, Hi0, Hi0)
     );
     port(
         CLK             : in     vl_logic;
@@ -34,5 +33,4 @@ entity LASER is
     attribute mti_svvh_generic_type of TRANS2 : constant is 1;
     attribute mti_svvh_generic_type of ITER : constant is 1;
     attribute mti_svvh_generic_type of \OUT\ : constant is 1;
-    attribute mti_svvh_generic_type of BF : constant is 1;
 end LASER;

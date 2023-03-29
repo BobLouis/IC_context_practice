@@ -2,7 +2,7 @@ library verilog;
 use verilog.vl_types.all;
 entity testfixture is
     generic(
-        pat_number      : integer := 1;
+        pat_number      : integer := 6;
         ST_RESET        : integer := 0;
         ST_PATTERN      : integer := 1;
         ST_RUN          : integer := 2;

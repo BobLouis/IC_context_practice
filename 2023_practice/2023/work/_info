@@ -4,44 +4,44 @@ K3
 cModel Technology
 Z0 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2021\2021_univ_cell\2021_univ_cell
 vLASER
-Z1 !s100 ;ZXAzV5Gi2SJR6<P16MFl0
-Z2 IdG?k_mbmMWOfVJ0l2@f<02
-Z3 VWGH>1HQ4h[R5h;:VLkaD_2
+Z1 !s100 PF:iI^Q>ajbT3L5EY5ZHf0
+Z2 IbQ[JVc>A:V]GaJ1zjTdMB1
+Z3 V7l^g_WoHG5bV6><SdclSL0
 Z4 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023
-Z5 w1680069170
-Z6 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/LASER.v
-Z7 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/LASER.v
+Z5 w1680073340
+Z6 8C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023\LASER.v
+Z7 FC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023\LASER.v
 L0 2
 Z8 OV;L;10.1d;51
 r1
 31
-Z9 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/LASER.v|
+Z9 !s90 -reportprogress|300|-work|work|C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023\LASER.v|
 Z10 o-work work -O0
 Z11 n@l@a@s@e@r
 !i10b 1
 !s85 0
-Z12 !s108 1680069216.991000
-Z13 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/LASER.v|
+Z12 !s108 1680073341.029000
+Z13 !s107 C:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023\LASER.v|
 !s101 -O0
 vtestfixture
 Z14 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
 !i10b 1
-!s100 VY[Q28C<WDzmbG`W[9PKH1
-I>:D_GXfCAlfHm`zA1mQVf2
-Z15 VZ1VbE6Z:MA_5l]?EMDz4Y2
-Z16 !s105 tb_sv_unit
+Z15 !s100 m>FPeT_P>9=>TQD:01Zkc3
+Z16 I_n7<g8o:z8i<31NR<?^`S0
+Z17 VUh@K>ein@b7N;Ua<lQ2kU0
+Z18 !s105 tb_sv_unit
 S1
 R4
-w1680069215
-Z17 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv
-Z18 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv
+Z19 w1680073301
+Z20 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv
+Z21 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv
 L0 9
 R8
 r1
 !s85 0
 31
-!s108 1680069217.021000
+!s108 1680073341.057000
 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv|
-Z19 !s90 -reportprogress|300|-work|work|-sv|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv|
+Z22 !s90 -reportprogress|300|-work|work|-sv|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv|
 !s101 -O0
-Z20 o-work work -sv -O0
+Z23 o-work work -sv -O0
