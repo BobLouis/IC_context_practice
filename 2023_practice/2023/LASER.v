@@ -52,7 +52,6 @@ wire in_cir1 = (mul <= 16);
 wire in_cir2 = (mul_ <= 16);
 wire in_2cir = in_cir1 | in_cir2;
 wire inter = in_cir1 & in_cir2;
-reg [3:0] inter_cnt ;
 
 
 assign C1X = max_x1;
@@ -60,21 +59,15 @@ assign C1Y = max_y1;
 assign C2X = max_x2;
 assign C2Y = max_y2;
 
-wire [3:0] tmp_x4 = max_x1 + 4;
-
-
-
 reg [3:0]x1_tmp, y1_tmp, x2_tmp, y2_tmp;
 
-wire [3:0]x2_li = (x2_tmp + 4 > 5'd15) ? 15: (x2_tmp + 4);
-wire [3:0]x1_li = (x1_tmp + 4 > 5'd15) ? 15: (x1_tmp + 4);
-wire [3:0]y2_li = (y2_tmp + 5 > 5'd15) ? 15: (y2_tmp + 5);
-wire [3:0]y1_li = (y1_tmp + 5 > 5'd15) ? 15: (y1_tmp + 5);
+wire [3:0]x2_li = (x2_tmp  > 11) ? 15: (x2_tmp + 4);
+wire [3:0]x1_li = (x1_tmp  > 11) ? 15: (x1_tmp + 4);
+wire [3:0]y2_li = (y2_tmp  > 11) ? 15: (y2_tmp + 5);
+wire [3:0]y1_li = (y1_tmp  > 11) ? 15: (y1_tmp + 5);
 
 wire [3:0]x2_lilo = (x2_tmp < 4) ? 0 : x2_tmp - 4;
 wire [3:0]x1_lilo = (x1_tmp < 4) ? 0 : x1_tmp - 4;
-wire [3:0]y2_lilo = (y2_tmp < 4) ? 0 : y2_tmp - 4;
-wire [3:0]y1_lilo = (y1_tmp < 4) ? 0 : y1_tmp - 4;
 
 always@(posedge CLK or posedge RST)begin
     if(RST)
@@ -146,7 +139,6 @@ always@(posedge CLK or posedge RST)begin
         y1_tmp <= 0;
         x2_tmp <= 0;
         y2_tmp <= 0;
-        inter_cnt <= 0;
     end
     else begin
         if(next_state == IDLE)begin
@@ -175,7 +167,6 @@ always@(posedge CLK or posedge RST)begin
             y1_tmp <= 0;
             x2_tmp <= 0;
             y2_tmp <= 0;
-            inter_cnt <= 0;
         end
         else if(next_state == READ)begin
             X_data[cnt] <= X;
@@ -239,9 +230,6 @@ always@(posedge CLK or posedge RST)begin
                         dot_cnt <= dot_cnt + 1;
                     end
 
-                    if(inter)begin
-                        inter_cnt <= inter_cnt + 1;
-                    end
                 end
                 
                 cnt <= cnt + 1;
@@ -262,7 +250,6 @@ always@(posedge CLK or posedge RST)begin
                 if(max_y2 >= 4)
                     y_loc <= max_y2 -4;
             end
-            inter_cnt <= 0;
         end
         else if(next_state == CIR2)begin
             mul1 <= `abs(X_data[cnt], max_x1);
@@ -305,9 +292,6 @@ always@(posedge CLK or posedge RST)begin
                     dot_cnt2 <= dot_cnt2 + 1;
                 end
 
-                if(inter)begin
-                    inter_cnt <= inter_cnt + 1;
-                end
                 cnt <= cnt + 1;
             end
             else 
@@ -331,7 +315,6 @@ always@(posedge CLK or posedge RST)begin
             y1_tmp <= max_y1;
             x2_tmp <= max_x2;
             y2_tmp <= max_y2;
-            inter_cnt <= 0;
             
         end
         else if(next_state == OUT)begin
