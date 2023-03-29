@@ -2,4 +2,46 @@ m255
 K3
 13
 cModel Technology
-dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2021\2021_univ_cell\2021_univ_cell
+Z0 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2021\2021_univ_cell\2021_univ_cell
+vLASER
+Z1 IJZIJ7`BAR?X@1@d`f6N[V3
+Z2 VGL;8B0j<W9E]Z]0eNJBMG0
+Z3 dC:\Users\user\Develop\IC_design\IC_context_practice\2023_practice\2023
+Z4 w1680054474
+Z5 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/LASER.v
+Z6 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/LASER.v
+L0 2
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s90 -reportprogress|300|-work|work|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/LASER.v|
+Z9 o-work work -O0
+Z10 n@l@a@s@e@r
+!i10b 1
+Z11 !s100 YYZM@7BG_Xo56Z?O^XX<U3
+!s85 0
+Z12 !s108 1680054478.554000
+Z13 !s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/LASER.v|
+!s101 -O0
+vtestfixture
+Z14 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+!i10b 1
+Z15 !s100 3Wm^ZW9bX>;OQZ7:PB5[j3
+Z16 IA6B@T@[CdA8ZjlE1z1U:C1
+Z17 VZ1VbE6Z:MA_5l]?EMDz4Y2
+Z18 !s105 tb_sv_unit
+S1
+R3
+Z19 w1680052630
+Z20 8C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv
+Z21 FC:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv
+L0 9
+R7
+r1
+!s85 0
+31
+!s108 1680054478.584000
+!s107 C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv|
+Z22 !s90 -reportprogress|300|-work|work|-sv|C:/Users/user/Develop/IC_design/IC_context_practice/2023_practice/2023/tb.sv|
+!s101 -O0
+Z23 o-work work -sv -O0
