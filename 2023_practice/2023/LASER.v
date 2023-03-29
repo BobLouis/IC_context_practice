@@ -67,10 +67,10 @@ wire [3:0] tmp_x4 = max_x1 + 4;
 
 reg [3:0]x1_tmp, y1_tmp, x2_tmp, y2_tmp;
 
-wire [3:0]x2_li = (x2_tmp + 4 > 5'd15) ? 15:4'(x2_tmp + 4);
-wire [3:0]x1_li = (x1_tmp + 4 > 5'd15) ? 15:4'(x1_tmp + 4);
-wire [3:0]y2_li = (y2_tmp + 5 > 5'd15) ? 15:4'(y2_tmp + 5);
-wire [3:0]y1_li = (y1_tmp + 5 > 5'd15) ? 15:4'(y1_tmp + 5);
+wire [3:0]x2_li = (x2_tmp + 4 > 5'd15) ? 15: (x2_tmp + 4);
+wire [3:0]x1_li = (x1_tmp + 4 > 5'd15) ? 15: (x1_tmp + 4);
+wire [3:0]y2_li = (y2_tmp + 5 > 5'd15) ? 15: (y2_tmp + 5);
+wire [3:0]y1_li = (y1_tmp + 5 > 5'd15) ? 15: (y1_tmp + 5);
 
 wire [3:0]x2_lilo = (x2_tmp < 4) ? 0 : x2_tmp - 4;
 wire [3:0]x1_lilo = (x1_tmp < 4) ? 0 : x1_tmp - 4;
